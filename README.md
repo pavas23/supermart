@@ -7,7 +7,7 @@ customers can register and order items.
 
 ## Installation
 
-Install my-project with npm
+Install my-project with npm for frontend
 
 ```bash
   npm install
