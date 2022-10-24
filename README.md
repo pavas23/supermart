@@ -7,17 +7,14 @@ customers can register and order items.
 
 ## Installation
 
-<<<<<<< HEAD
-Install my-project with npm for frontend .....
-=======
 Install my-project with npm for frontend part
->>>>>>> origin/master
 
 ```bash
   npm install
   cd my-app
   npm start
 ```
+
     
 ## Tech Stack
 - HTML
