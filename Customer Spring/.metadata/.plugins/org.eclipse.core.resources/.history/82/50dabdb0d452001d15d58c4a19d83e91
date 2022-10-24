@@ -1,0 +1,59 @@
+package com.example.demo.Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Customer;
+import com.example.demo.repository.*;
+@Service
+public  class CustomerServiceImpl implements CustomerService {
+		@Autowired
+		public CustomerRepository customerRepo;
+		
+	@Override
+	public Customer saveCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		return  customerRepo.save(customer);
+	}
+
+	@Override
+	public List<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return customerRepo.findAll();
+	}
+
+	@Override
+	public Customer getCustomer(int id) {
+		// TODO Auto-generated method stub
+		return customerRepo.getReferenceById(id);
+	}
+
+	@Override
+	public void deleteCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		int id = -1;
+		List <Customer> customers = this.getAllCustomers();
+		for (Customer obj : customers) {
+			if(customer.getEmail().equals(obj.getEmail())) {
+				 id = obj.getId();
+				 if(id >0) {
+						
+						customerRepo.deleteById(id);
+					}
+			}
+		}
+		
+	}
+
+	@Override
+	public void updateCustomer(Customer customer) {
+		if (customer.getName()!=null || customer.getEmail()!=null)
+		{customerRepo.save(customer);}
+		else {
+			return;
+		}	
+	}
+	
+}

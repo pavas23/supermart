@@ -1,0 +1,19 @@
+.navbar{
+    height: 100%;
+    background-color: brown !important;
+}
+.container-fluid a{
+    color: white;
+}
+.collapse ul li a{ 
+    color: white !important;
+}
+.collapse ul{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: flex-start;
+}
+.collapse ul li{
+    margin-left: 1.5vw;
+}
