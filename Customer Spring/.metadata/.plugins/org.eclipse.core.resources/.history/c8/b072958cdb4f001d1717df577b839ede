@@ -1,7 +1,0 @@
-package com.example.demo.Service;
-
-import com.example.demo.model.Customer;
-
-public interface CustomerService {
-	public Customer saveCustomer(Customer customer);
-}
