@@ -5,6 +5,9 @@ This is a web based application for an online supermarket. Through
 which 
 customers can register and order items.
 
+## Overview
+https://prezi.com/view/sFuMp9wlno5v0vB5dnL5/
+
 ## Installation
 
 Install my-project with npm for frontend part
