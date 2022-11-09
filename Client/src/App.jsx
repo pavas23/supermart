@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../src/css/app.css";
+import Dropdown from "./components/Dropdown";
 import Home from './components/Home';
 import Login from "./components/Login";
 import Navbar from './components/Navbar';
@@ -12,6 +13,9 @@ function App() {
         <BrowserRouter>
           <div id="navbar">
             <Navbar />
+          </div>
+          <div id = "dropdown">
+            <Dropdown/>
           </div>
           <div id="home">
             <Routes>

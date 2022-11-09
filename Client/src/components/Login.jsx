@@ -4,7 +4,7 @@ export default function Login() {
         <>
             <div id="login">
                 <h1>Login to Online Supermarket</h1>
-                <form method="POST" action="http://127.0.0.1:5000/user/login/submit">
+                <form method="POST" action="http://127.0.0.1:5000/Login/">
                     <input type="text" name="name" id="input_name" placeholder="Enter your name" />
                     <input type="text" name="email" id="input_email" placeholder="Enter your user ID" />
                     <input type="password" name="password" id="input_password" placeholder="Enter your password" />
@@ -16,3 +16,4 @@ export default function Login() {
 }
 
 
+  

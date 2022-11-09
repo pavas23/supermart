@@ -4,33 +4,39 @@ import "../css/home.css";
 export default function Home() {
     const items = [
         {
-            price: 1,
-            name: "Watch",
+            id:1,
+            price: 10,
+            name: "Watermelon",
             picNo: 1,
         },
         {
-            price: 2,
-            name: "Laptop",
-            picNo: 6
+            id:2,
+            price: 20,
+            name: "Pepsi",
+            picNo: 2,
         },
         {
-            price: 3,
-            name: "Apple",
+            id:3,
+            price: 28,
+            name: "Medimix",
             picNo: 3,
         },
         {
-            price: 4,
-            name: "Earphone",
+            id:4,
+            price: 20,
+            name: "Lays",
             picNo: 4,
         },
         {
-            price: 5,
-            name: "EFNWEJF",
-            picNo: 1,
+            id:5,
+            price: 35,
+            name: "CloseUp",
+            picNo: 5,
         },
         {
-            price: 6,
-            name: "EFNWEJF",
+            id:6,
+            price: 46,
+            name: "All in One",
             picNo: 6,
         },
     ];
@@ -41,13 +47,13 @@ export default function Home() {
             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item">
-                        <img src={require("../Images/pcic10.jpg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
+                        <img src={require("../Images/img4.jpeg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
                     </div>
                     <div className="carousel-item">
-                        <img src={require("../Images/pic8.jpeg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
+                        <img src={require("../Images/img2.jpeg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
                     </div>
                     <div className="carousel-item active">
-                        <img src={require("../Images/pic3.jpeg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
+                        <img src={require("../Images/img3.jpg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -60,30 +66,34 @@ export default function Home() {
                 </button>
             </div>
 
+            {/* horizontal div for images */}
+            <div id="slider">
+                <div id="slider-heading">Our Catalogue</div>
+                <div id="slider-images">
+                    <span><img src={require("../Images/img5.jpeg")} alt="img" /><br />Fruits</span>
+                    <span><img src={require("../Images/img6.webp")} alt="img" /><br />Vegetables</span>
+                    <span><img src={require("../Images/img7.jpeg")} alt="img" /><br />Dairy and Bakery</span>
+                    <span><img src={require("../Images/img8.jpeg")} alt="img" /><br />Snacks</span>
+                    <span> <img src={require("../Images/img9.jpeg")} alt="img" /><br />Beverages</span>
+                    <span> <img src={require("../Images/img10.jpeg")} alt="img" /><br />Personal Care</span>
+                </div>
+            </div>
+
             {/* for displaying the cards */}
+
             <div id="home-cards">
                 {items.map((item) => {
-                    return <div className="one-card"> <Card 
-                    key={item.price}
-                    price={item.price}
-                    name={item.name}
-                    picNo={item.picNo} 
+                    return <div className="one-card"> <Card
+                        key={item.id}
+                        price={item.price}
+                        name={item.name}
+                        picNo={item.picNo}
                     /> </div>
                 })}
             </div>
 
-            {/* horizontal div for images */}
-            <div id="slider">
-                <div id="slider-heading">Upto 60% off | Upgrade to Smart Devices</div>
-                <div id="slider-images">
-                    <img src ={require("../Images/Slider/img1.jpeg")} alt ="img"/>
-                    <img src ={require("../Images/Slider/img2.jpeg")} alt ="img"/>
-                    <img src ={require("../Images/Slider/img3.jpeg")} alt ="img"/>
-                    <img src ={require("../Images/Slider/img4.jpeg")} alt ="img"/>
-                </div>
-            </div>
-            </>
-            );
+        </>
+    );
 }
 
 

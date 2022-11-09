@@ -3,15 +3,22 @@
     padding: 0px;
 }
 main{
-    width: 100vw;
+    width: 100vw !important;
     display: flex;
     flex-direction: column;
 }
 #navbar{
-    height: 8vh;
+    height: 9vh;
     width: 100vw;
     position: fixed;
     top:0;
+    z-index: 2;
+}
+#dropdown{
+    height: 5vh;
+    width: 100vw;
+    position: fixed;
+    top:9vh;
     z-index: 2;
 }
 #home{
