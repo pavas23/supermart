@@ -32,7 +32,8 @@ customers can register and order items.
 https://prezi.com/view/sFuMp9wlno5v0vB5dnL5/
 
 ## Screenshots
-<img width="1425" alt="Screenshot 2022-11-14 at 2 29 58 AM" src="https://user-images.githubusercontent.com/97559428/201544349-659e5a3c-b456-4705-ac9d-bc0e61b0f0b2.png">
+<img width="1423" alt="Screenshot 2022-11-14 at 2 36 36 AM" src="https://user-images.githubusercontent.com/97559428/201544597-22a3d7b3-3ec4-4f4c-8b81-79405c28c6da.png">
+
 
 ## Installation
 
