@@ -1,47 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
 
 #login{
-    margin-top: 8vh;
-    height: 90vh;
+    margin-top: 14vh;
+    height: 86vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image:url("../Images/img1.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: white;
     overflow-x: hidden !important;
 }
 h1{
-    margin-top: 2%;
+    margin-top: 8vh;
     text-align: center;
-    height: 8%;
+    height: 8vh;
     width: 100%;
     font-family: 'Libre Baskerville', serif;
-    color: white;
+    color: black;
 }
-form{
-    padding-top: 5%;
-    margin-top: 5%;
-    height: 60%;
-    width: 50%;
+#login-form{
+    margin-top: 4vh;
+    height: 50vh;
+    width: 50vw;
+    margin-bottom: 6vh;
+    margin-left: 25vw;
+    margin-right: 25vw;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    padding-top: 1vh;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    border-radius: 15px;
+    font-family: 'Libre Baskerville', serif;
 }
-input{
-    width: 50%;
-    margin: 2vh;
+#login-form input{
+    width: 70%;
+    margin: 3vh;
     height: 6vh;
     border: none;
     border-bottom: 1px solid black;
-    border-radius: 5px;
     text-align: center;
     outline: none;
 }
 #login-btn{
-    width: 25%;
+    width: 35% !important;
 }

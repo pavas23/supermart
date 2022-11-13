@@ -6,6 +6,9 @@ main{
     width: 100vw !important;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    height: auto;
+    overflow-x: hidden !important;
 }
 #navbar{
     height: 9vh;
@@ -24,8 +27,10 @@ main{
 #home{
     width: 100vw;
     background-color: whitesmoke;
-    height: 500vh;
 }
-
+#footer{
+    width: 100vw;
+    height: 15vh;
+}
 
 

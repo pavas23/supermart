@@ -39,6 +39,24 @@ export default function Home() {
             name: "All in One",
             picNo: 6,
         },
+        {
+            id:5,
+            price: 20,
+            name: "Lays",
+            picNo: 4,
+        },
+        {
+            id:6,
+            price: 20,
+            name: "Lays",
+            picNo: 4,
+        },
+        {
+            id:7,
+            price: 20,
+            name: "Lays",
+            picNo: 4,
+        },
     ];
     return (
         <>
@@ -47,13 +65,13 @@ export default function Home() {
             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item">
-                        <img src={require("../Images/img4.jpeg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
+                        <img src={require("../Images/img11.jpeg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
                     </div>
                     <div className="carousel-item">
                         <img src={require("../Images/img2.jpeg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
                     </div>
                     <div className="carousel-item active">
-                        <img src={require("../Images/img3.jpg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
+                        <img src={require("../Images/img4.jpeg")} style={{ height: 50 + "vh" }} className="d-block w-100" alt="..." />
                     </div>
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

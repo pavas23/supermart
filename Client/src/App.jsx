@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../src/css/app.css";
 import Dropdown from "./components/Dropdown";
+import Footer from "./components/Footer";
 import Home from './components/Home';
 import Login from "./components/Login";
 import Navbar from './components/Navbar';
@@ -22,6 +23,9 @@ function App() {
               <Route path="/" element={<Home key="1"/>}/>
               <Route path="/user/login" element={<Login key="2"/>}/>
             </Routes>
+          </div>
+          <div id = "footer">
+            <Footer/>
           </div>
         </BrowserRouter>
       </main>
