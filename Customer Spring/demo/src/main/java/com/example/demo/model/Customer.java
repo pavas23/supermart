@@ -41,6 +41,11 @@ public class Customer {
 	public void setCredit(int credit) {
 		this.credit = credit;
 	}
-	
-	
+	public void setPassword(String password){
+		this.password = password;
+	}
+	public String getPassword(){
+		return password;
+	}
+
 }

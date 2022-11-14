@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.model.Customer;
 import com.example.demo.repository.CustomerRepository;
+@CrossOrigin
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
