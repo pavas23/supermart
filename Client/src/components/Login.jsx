@@ -26,13 +26,23 @@ export default function Login() {
                 password:credentials.password,
             }),
         });
+
         const json  = await response.json();
-        // const authtoken = jwt.sign(json.id,JWTsecret);
+
+        // const data = {
+        //     user:{
+        //         id:json.id,
+        //     }
+        // }
+       
+        // const authtoken = jwt.sign(data,JWTsecret);
         console.log(json);
+
         if(json.email){
             // save auth token and redirect to homepage
             navigate("/", { replace: true });
-            // localStorage.setItem("token",authtoken);
+            // TODO: AUTHTOKEN
+            localStorage.setItem("token","pavas123");
         }
         else{
             navigate("/user/login",{replace:true});

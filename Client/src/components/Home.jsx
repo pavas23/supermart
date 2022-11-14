@@ -1,7 +1,22 @@
+import { useEffect } from "react";
+import {useNavigate } from "react-router";
 import Card from '../components/Card';
 import "../css/home.css";
 
 export default function Home() {
+
+    let navigate = useNavigate();
+
+    // as soon as this component is mounted this useEffect hook will be fire this callback function
+    useEffect(()=>{
+        if(localStorage.getItem("token")){
+            navigate("/",{replace:true});
+        }
+        else{
+            navigate("/user/login",{replace:true});
+        }
+    },[]) // [] this will only run this function once
+
     const items = [
         {
             id:1,
