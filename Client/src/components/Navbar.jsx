@@ -12,13 +12,13 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav col-4">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/"><i className="fa-sharp fa-solid fa-location-dot"></i>&nbsp;&nbsp;Location</Link>
+                <Link className="nav-link active" aria-current="page" to="#"><i className="fa-sharp fa-solid fa-location-dot"></i>&nbsp;&nbsp;Location</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/user/login"><i className="fa-solid fa-user"></i>&nbsp;&nbsp;Login</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Sign Up</a>
+                <Link className="nav-link active" aria-current="page" to="/user/SignUp">Sign Up</Link>
               </li>
             </ul>
             <form className="d-flex" role="search">

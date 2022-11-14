@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Home from './components/Home';
 import Login from "./components/Login";
 import Navbar from './components/Navbar';
+import SignUp from "./components/SignUp";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home key="1"/>}/>
               <Route path="/user/login" element={<Login key="2"/>}/>
+              <Route path = "/user/SignUp" element={<SignUp key = "3"/>}/>
             </Routes>
           </div>
           <div id = "footer">

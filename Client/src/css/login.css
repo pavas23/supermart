@@ -30,14 +30,14 @@ h1{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 1vh;
+    padding-top: 2vh;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
     border-radius: 15px;
     font-family: 'Libre Baskerville', serif;
 }
 #login-form input{
     width: 70%;
-    margin: 3vh;
+    margin: 4vh;
     height: 6vh;
     border: none;
     border-bottom: 1px solid black;

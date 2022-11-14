@@ -1,12 +1,15 @@
 import { useState } from "react";
 import {useNavigate } from "react-router";
 import "../css/login.css";
+
 export default function Login() {
+
+    // const jwt = require("jsonwebtoken");
+    // const JWTsecret = "@#$$adbjdb1234";
 
     let navigate = useNavigate();
 
     const [credentials,setCredentials] = useState({
-        name:"",
         email:"",
         password:"",
     });
@@ -19,17 +22,19 @@ export default function Login() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name:credentials.name,
                 email:credentials.email,
                 password:credentials.password,
             }),
         });
         const json  = await response.json();
-        if(json == true){
+        // const authtoken = jwt.sign(json.id,JWTsecret);
+        console.log(json);
+        if(json.email){
+            // save auth token and redirect to homepage
             navigate("/", { replace: true });
+            // localStorage.setItem("token",authtoken);
         }
         else{
-            console.log(json);
             navigate("/user/login",{replace:true});
             window.alert("Invalid Credentials");
         }
@@ -47,8 +52,7 @@ export default function Login() {
             <div id="login">
                 <h1>Login to Online Supermarket</h1>
                 <form method="POST" onSubmit={handleSubmit} autoComplete="off" id="login-form">
-                    <input type="text" name="name" id="input_name" required  onChange={onChange}  value={credentials.name} placeholder="Enter your name" />
-                    <input type="text" name="email" id="input_email" value={credentials.email}  onChange={onChange} required placeholder="Enter your user ID" />
+                    <input type="email" name="email" id="input_email" value={credentials.email}  onChange={onChange} required placeholder="Enter your user ID" />
                     <input type="password" name="password" id="input_password" value={credentials.password}  onChange={onChange}  required placeholder="Enter your password" />
                     <input type="submit" value="Login" id="login-btn" />
                 </form>
