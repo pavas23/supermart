@@ -35,11 +35,14 @@ export default function Navbar() {
               <button className="btn btn-outline-white text-white" type="submit"><i className="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;Search</button>
             </form>
             <ul className="navbar-nav me-auto mb-2 mb-lg-0" id="cart-ul">
-            <li className="nav-item">
+            <li className="nav-item" id="cart-li">
                 <Link className={`nav-link active ${!localStorage.getItem("token")?"disabled":" "}`}  aria-current="page" onClick={handleLogout} to ="/user/login">Logout</Link>
               </li>
+              <li className="nav-item" id="cart-li">
+                <Link className={`nav-link active ${!localStorage.getItem("token")?"disabled":" "}`}  aria-current="page" to ="/user/profile">Profile</Link>
+              </li>
             <li className="nav-item" id="cart-li">
-         <a className="nav-link active" aria-current="page" href="#">   <i className="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;Cart</a>
+         <a className="nav-link active" aria-current="page" href="#"><i className="fa-solid fa-cart-shopping"></i>&nbsp;&nbsp;Cart</a>
               </li>
             </ul>
           </div>

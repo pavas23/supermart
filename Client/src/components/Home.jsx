@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import {useNavigate } from "react-router";
 import Card from '../components/Card';
 import "../css/home.css";
+import Slider from "./Slider";
+
 
 export default function Home() {
 
@@ -22,7 +24,7 @@ export default function Home() {
             id:1,
             price: 10,
             name: "Watermelon",
-            picNo: 1,
+            picNo: 4,
         },
         {
             id:2,
@@ -52,7 +54,7 @@ export default function Home() {
             id:6,
             price: 46,
             name: "All in One",
-            picNo: 6,
+            picNo: 4,
         },
         {
             id:5,
@@ -68,6 +70,60 @@ export default function Home() {
         },
         {
             id:7,
+            price: 20,
+            name: "Lays",
+            picNo: 4,
+        },
+        {
+            id:8,
+            price: 20,
+            name: "Pepsi",
+            picNo: 2,
+        },
+        {
+            id:9,
+            price: 28,
+            name: "Medimix",
+            picNo: 3,
+        },
+        {
+            id:10,
+            price: 20,
+            name: "Lays",
+            picNo: 4,
+        },
+        {
+            id:11,
+            price: 20,
+            name: "Pepsi",
+            picNo: 2,
+        },
+        {
+            id:12,
+            price: 28,
+            name: "Medimix",
+            picNo: 3,
+        },
+        {
+            id:13,
+            price: 20,
+            name: "Lays",
+            picNo: 4,
+        },
+        {
+            id:14,
+            price: 20,
+            name: "Pepsi",
+            picNo: 2,
+        },
+        {
+            id:15,
+            price: 28,
+            name: "Medimix",
+            picNo: 3,
+        },
+        {
+            id:16,
             price: 20,
             name: "Lays",
             picNo: 4,
@@ -101,16 +157,19 @@ export default function Home() {
 
             {/* horizontal div for images */}
             <div id="slider">
-                <div id="slider-heading">Our Catalogue</div>
+                <div id="slider-heading" className="text-base font-semibold text-gray-900">Our Catalogue</div>
                 <div id="slider-images">
-                    <span><img src={require("../Images/img5.jpeg")} alt="img" /><br />Fruits</span>
-                    <span><img src={require("../Images/img6.webp")} alt="img" /><br />Vegetables</span>
-                    <span><img src={require("../Images/img7.jpeg")} alt="img" /><br />Dairy and Bakery</span>
+                    <span><img src={require("../Images/img5.jpeg")} alt="img" className="h-full w-full object-cover object-center"/><br />
+                    <p className="text-base font-semibold text-gray-900">Fruits</p>
+                    </span>
+                    <span><img src={require("../Images/img6.webp")} alt="img" /><br />  <p className="text-base font-semibold text-gray-900">Vegetables</p></span>
+                    <span><img src={require("../Images/img7.jpeg")} alt="img" /><br />  <p className="text-base font-semibold text-gray-900">Dairy and Bakery</p></span>
                     <span><img src={require("../Images/img8.jpeg")} alt="img" /><br />Snacks</span>
-                    <span> <img src={require("../Images/img9.jpeg")} alt="img" /><br />Beverages</span>
-                    <span> <img src={require("../Images/img10.jpeg")} alt="img" /><br />Personal Care</span>
+                    <span> <img src={require("../Images/img9.jpeg")} alt="img" /><br />  <p className="text-base font-semibold text-gray-900">Beverages</p></span>
+                    <span> <img src={require("../Images/img10.jpeg")} alt="img" /><br />  <p className="text-base font-semibold text-gray-900">Personal Care</p></span>
                 </div>
             </div>
+
 
             {/* for displaying the cards */}
 
@@ -124,6 +183,9 @@ export default function Home() {
                     /> </div>
                 })}
             </div>
+
+
+            
 
         </>
     );

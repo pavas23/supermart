@@ -1,6 +1,8 @@
 #carouselExampleControls{
-    margin-top: 14vh;
+    /* margin-top: 10vh; */
+    /* padding-top: 0; */
     height: 50vh;
+    width: 100%;
 }
 #home-cards{
     height: auto;
@@ -11,8 +13,8 @@
     align-items: center;
 }
 .one-card{
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
     height: 55vh;
     width: 26vw;
 }
@@ -23,7 +25,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: #FCD02C;
+    background-color: rgb(234 179 8);;
 }
 #slider-heading{
     margin-top: 2%;
@@ -35,6 +37,7 @@
     font-family: cursive;
 }
 #slider-images{
+    margin-top: -2%;
     height: 78%;
     width: 100%;
     display: flex;
