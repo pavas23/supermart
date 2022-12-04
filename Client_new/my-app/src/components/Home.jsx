@@ -1,4 +1,4 @@
-import "../css/Home.css";
+import "../css/bootstrap.min.css";
 import "swiper";
 import { Link } from "react-router-dom";
 
@@ -15,15 +15,15 @@ export default function Home() {
 
                 <nav className="navbar2">
                     <Link to="/">Home</Link>
-                    <a href="#features2">features</a>
-                    <a href="#products2">products</a>
-                    <a href="#categories2">categories</a>
-                    <Link to="/review"><a>review</a></Link>
+                    <a href="#features2">Features</a>
+                    <a href="#products2">Products</a>
+                    <a href="#categories2">Categories</a>
+                    <Link to="/review"><a>Review</a></Link>
                 </nav>
 
                 <div className="icons">
                     <div className="fas fa-search" id="search-btn"></div>
-                    <div className="fas fa-shopping-cart" id="cart-btn"></div>
+                    <Link to="/checkout"><div className="fas fa-shopping-cart" id="cart-btn"></div></Link>
                     <Link to="/products"><div className="fas fa-plus" id="add-btn"></div></Link>
                     <Link to="/login"><div className="fas fa-user" id="login-btn"></div></Link>
                 </div>
@@ -43,7 +43,7 @@ export default function Home() {
             <section className="home2" id="home2">
 
                 <div className="content2">
-                    <h3>fresh and <span>organic</span> products for your home</h3>
+                    <h3><b>fresh and</b><p><b> organic </b></p><b>Products for your home</b></h3>
                     <a href="#" className="btn2">shop now</a>
                 </div>
 
@@ -51,35 +51,42 @@ export default function Home() {
 
             <section className="features2" id="features2">
 
-                <h1 className="heading2"> our <span>features</span> </h1>
+                <h1 className="heading3"> <b>our</b> <p>features</p> </h1>
 
-                <div className="box-container2">
+   
+                <div className="swiper feature-slider">
+                    <div className="swiper-wrapper">
 
-                    <div className="box2">
+                        <div className="swiper-slide box">
+                   
                         <img src={require("../image/feature-img-1.png")} alt="" />
                         <h3>Fresh and organic</h3>
                         <p>All our products are organically grown with no genetic modification!</p>
+                    
                     </div>
-
-                    <div className="box2">
+                    <div className="swiper-slide box" id="exception">
+                    
                         <img src={require("../image/feature-img-2.png")} alt="" />
                         <h3>free delivery</h3>
                         <p>No delivery charges on orders over Rs.200</p>
+                    
                     </div>
-
-                    <div className="box2">
+                    <div className="swiper-slide box">
+                    
                         <img src={require("../image/feature-img-3.png")} alt="" />
                         <h3>easy payments</h3>
                         <p>Innovative credit system that allows you to top up occassionally and spend endlessly!</p>
                     </div>
+                    </div>
+                    </div>
 
-                </div>
+         
 
             </section>
 
             <section className="categories2" id="categories2">
 
-                <h1 className="heading2"> product <span>categories</span> </h1>
+                <h1 className="heading2"> product <p>categories</p> </h1>
                 <div className="swiper product-slider">
                     <div className="swiper-wrapper">
 
@@ -100,6 +107,13 @@ export default function Home() {
                             <h3>dairy products</h3>
                             <a href="#" className="btn2">shop now</a>
                         </div>
+
+                        <div class="swiper-slide box">
+                            <img src={require("../image/cat-4.png")} alt=""/>
+                            <h3>fresh meat</h3>
+                            <a href="#" class="btn2">shop now</a>
+                        </div>
+
                     </div>
                 </div>
 
@@ -107,7 +121,7 @@ export default function Home() {
 
             <section className="review2" id="review2">
 
-                <h1 className="heading2"> customer's <span>review</span> </h1>
+                <h1 className="heading2"> customer's <p>review</p> </h1>
 
                 <div className="swiper review-slider">
 
@@ -151,8 +165,21 @@ export default function Home() {
                                 <i className="fas fa-star-half-alt"></i>
                             </div>
                         </div>
-                    </div>
 
+                        <div class="swiper-slide box">
+                            <img src={require("../image/pic-4.png")} alt=""/>
+                            <p>I want to bleach my eyes</p>
+                            <h3>Saksham Bajaj</h3>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+
+                </div>
                 </div>
 
             </section>
@@ -199,7 +226,7 @@ export default function Home() {
 
                 </div>
 
-                <div className="credit2"> created by <span> Group 1 </span> </div>
+                <div className="credit2"> created by <p> Group 1 </p> </div>
 
             </section>
 

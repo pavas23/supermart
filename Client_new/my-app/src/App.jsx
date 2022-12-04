@@ -13,6 +13,9 @@ import ManagerLogin from "./components/ManagerLogin";
 import Forgot from "./components/Forgot";
 import Review from "./components/Review";
 import Profile from "./components/Profile";
+import Payment from "./components/Payment";
+import Checkout from "./components/Checkout";
+import Wallet from "./components/Wallet";
 
 export default function App() {
   return (
@@ -32,6 +35,9 @@ export default function App() {
           <Route path = "/admin_log" element = {<AdminLogin key = "11"/>}/>
           <Route path = "/review" element = {<Review key = "12"/>}/>
           <Route path = "/profile" element = {<Profile key = "13"/>}/>
+          <Route path = "/pay" element = {<Payment key = "14"/>}/>
+          <Route path = "/checkout" element = {<Checkout key = "15"/>}/>
+          <Route path = "/wallet" element = {<Wallet key = "16"/>}/>
         </Routes>
       </BrowserRouter>
     </>
