@@ -1,4 +1,5 @@
 import "../css/bootstrap.min.css";
+import "../css/bootstrap-grid.css";
 import "../css/fontawesome.min.css";
 import "../css/templatemo-style.css";
 import { Link } from "react-router-dom";

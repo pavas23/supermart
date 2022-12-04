@@ -8364,6 +8364,17 @@ a.text-dark:hover {
   outline: none;
   border-radius: 30px;
 }
+.submit-btn5{
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: 1vh auto;
+  background: linear-gradient(to right, #22db15, #fbff00);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+}
 .check-box4{
   margin: 6% 1% 30px;
 }
@@ -8405,6 +8416,27 @@ span{
   font-size: 11px;
   top: 265px;
   position: absolute;
+}
+.user_log5{
+  color: #777;
+  font-size: 1rem;
+  margin-top: 20vh;
+  position: absolute;
+  margin-left: -14vh;
+}
+.user_log6{
+  color: #777;
+  font-size: 1rem;
+  margin-top: 20vh;
+  position: absolute;
+  margin-left: -17vh;
+}
+.admin_log5{
+  color: #777;
+  font-size: 1rem;
+  position: absolute;
+  margin-top: 20vh;
+  margin-left: -38vh;
 }
 #eye{
   position:absolute;
@@ -8537,7 +8569,39 @@ span{
   cursor: pointer;
   background: none;
 }
-
+.btn3{
+  margin-top: .5rem;
+  display: inline-block;
+  padding:.5rem;
+  font-size: .8rem;
+  border-radius: .5rem;
+  border:.1rem solid var(--black);
+  color:var(--black);
+  background: none;
+}
+.btn5{
+  margin-top: .5rem;
+  display: inline-block;
+  padding:.5rem;
+  font-size: .8rem;
+  border-radius: .5rem;
+  border:.1rem solid var(--black);
+  color:var(--black);
+  background: none;
+  margin-left: 21vh;
+}
+.btn6{
+  display: inline-block;
+  margin-left: 38%;
+  margin-top: -10%;
+  margin-bottom: 6%;
+  padding:.5rem;
+  font-size: .8rem;
+  border-radius: .5rem;
+  border:.1rem solid var(--black);
+  color:var(--black);
+  background: none;
+}
 .home2 .content2 a{
   color:var(--black);
   font-size: 1.2rem;
