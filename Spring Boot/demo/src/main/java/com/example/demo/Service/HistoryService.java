@@ -10,4 +10,5 @@ public interface HistoryService {
     public List<History> getFullHistory(); 
     public List<History> getCustomerHistory(int id);
     public List<History> getProductHistory(int id);
+    public List<History> monthlyReportGenerator(int month);
 }

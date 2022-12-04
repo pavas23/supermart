@@ -16,12 +16,12 @@ import com.example.demo.repository.*;
 public  class CustomerServiceImpl implements CustomerService {
 		@Autowired
 		public CustomerRepository customerRepo;
-		
+		 BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		
 	@Override
 	public Customer saveCustomer(Customer customer) {
 		// TODO Auto-generated method stub
-	    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+	     
 	    customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
 		return  customerRepo.save(customer);
 	}
@@ -37,14 +37,14 @@ public  class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		return (Customer) customerRepo.findById(id).get();
 	}
-
+	
 	@Override
 	public void deleteCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 		int id = -1;
 		List <Customer> customers = this.getAllCustomers();
 		for (Customer obj : customers) {
-			if((customer.getEmail().equals(obj.getEmail())) && customer.getPassword().equals(obj.getPassword())) {
+			if((customer.getEmail().equals(obj.getEmail())) &&  bCryptPasswordEncoder.matches(customer.getPassword(), obj.getPassword())) {
 				 id = obj.getId();
 				 if(id >0) {
 						
@@ -57,8 +57,8 @@ public  class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void updateCustomer(Customer customer) {
-		//updates customer with all the passed attributes but nulls all the ones that aren't passed.
-	    //int id= -1;
+		
+	    
 	    List <Customer> list = this.getAllCustomers();
 	    for (Customer obj: list) {
 	        if(obj.getId() == customer.getId()) {
@@ -72,6 +72,15 @@ public  class CustomerServiceImpl implements CustomerService {
 	            if(customer.getPassword()!=null) {
 	                obj.setPassword(customer.getPassword());
 	            }
+	            if(customer.getAddress()!=null) {
+	                obj.setAddress(customer.getAddress());
+	            }
+	            if(customer.getMobileNumber()!=null) {
+	                obj.setMobileNumber(customer.getMobileNumber());
+	            }
+	            if(customer.getCredit()!=0) {
+	                obj.setCredit(customer.getCredit());
+	            }
 	            this.saveCustomer(obj);
 	            return;
 	        }
@@ -83,7 +92,7 @@ public  class CustomerServiceImpl implements CustomerService {
 		int id = -1;
 		List <Customer> customers = this.getAllCustomers();
 		for (Customer obj : customers) {
-			if(customer.getEmail().equals(obj.getEmail()) && obj.getPassword().equals(customer.getPassword())) {
+			if(customer.getEmail().equals(obj.getEmail()) && bCryptPasswordEncoder.matches(customer.getPassword(), obj.getPassword())) {
 				 id = obj.getId();
 				 if(id >0) {
 						Customer updatedCustomer = new Customer();
@@ -109,6 +118,12 @@ public  class CustomerServiceImpl implements CustomerService {
         }
         
         return customer.getPassword() + "if failed";
+    }
+
+    @Override
+    public void deleteById(Customer customer) {
+        // TODO Auto-generated method stub
+        customerRepo.deleteById(customer.getId());
     }
 
  

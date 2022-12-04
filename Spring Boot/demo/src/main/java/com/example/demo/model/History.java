@@ -1,11 +1,21 @@
 package com.example.demo.model;
 
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.repository.ProductRepository;
 
 @Entity
 public class History {
@@ -15,12 +25,27 @@ public class History {
     private int CustomerID;
     @Transient
     private Customer customer;
-    
+   
     private int ProductID;
     @Transient
     private Product product;
+    @Transient
+    public List<Order> productList = new ArrayList<Order>();
     private int quantity;
-    private String address; //address it was ordered to.    
+    private int price;
+    private String address; //address it was ordered to.   
+    private String date;
+    public boolean express;
+    private String expected_date;
+    private Date dateTime;
+   private int totalCost;
+    public History(){
+        LocalDate ld = LocalDate.now();
+        setDate(ld.toString());
+      dateTime = Date.valueOf(ld);
+       this.setTotalCost(this.getQuantity()*this.getPrice());
+       
+    }
     public int getId() {
         return id;
     }
@@ -62,5 +87,29 @@ public class History {
     }
     public void setProduct(Product product) {
         this.product = product;
+    }
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
+    public String getExpected_date() {
+        return expected_date;
+    }
+    public void setExpected_date(String expected_date) {
+        this.expected_date = expected_date;
+    }
+    public int getTotalCost() {
+        return totalCost;
+    }
+    public void setTotalCost(int totalCost) {
+        this.totalCost = totalCost;
+    }
+    public int getPrice() {
+        return price;
+    }
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

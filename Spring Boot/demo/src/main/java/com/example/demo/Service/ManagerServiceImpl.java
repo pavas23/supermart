@@ -3,6 +3,7 @@ package com.example.demo.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Manager;
@@ -13,9 +14,10 @@ public class ManagerServiceImpl implements ManagerService{
     
     @Autowired
     ManagerRepository managerRepo;
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     @Override
     public Manager saveManager(Manager manager) {
-        
+        manager.setPassword(bCryptPasswordEncoder.encode(manager.getPassword()));
         return managerRepo.save(manager);
     }
 
@@ -53,7 +55,12 @@ public class ManagerServiceImpl implements ManagerService{
                if(manager.getPassword()!=null) {
                    obj.setPassword(manager.getPassword());
                }
-               
+               if(manager.getAddress()!=null) {
+                   obj.setAddress(manager.getAddress());
+               }
+               if(manager.getMobileNumber()!=null) {
+                   obj.setMobileNumber(manager.getMobileNumber());
+               }
                this.saveManager(obj);
                return;
            }

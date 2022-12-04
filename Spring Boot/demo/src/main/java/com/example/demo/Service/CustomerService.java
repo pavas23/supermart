@@ -13,4 +13,5 @@ public interface CustomerService {
 	public void updateCustomer(Customer customer);
 	public void addCredit(Customer customer);
 	public String  isPresent(Customer customer);
+	public void deleteById(Customer customer);
 }

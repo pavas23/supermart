@@ -20,5 +20,11 @@ public interface HistoryRepository extends JpaRepository<History,Integer> {
                 )
         public List<History> getbyProductID(@Param("ProductId") int id);
         
+        @Query(
+                value = "SELECT*FROM History where MONTH(date_time) = :month",
+                nativeQuery = true
+                )
+        public List<History> getMonthlyHistory(@Param("month") int month);
+        
         
 }
