@@ -1,7 +1,7 @@
 import "../css/bootstrap.min.css";
 import "../css/fontawesome.min.css";
 import "../css/templatemo-style.css";
-
+import { Link } from "react-router-dom";
 export default function Product() {
   // $(function() {
   //     $(".tm-product-name").on("click", function() {
@@ -20,9 +20,9 @@ export default function Product() {
           style={{ backgroundColor: "#0e511e" }}
         >
           <div className="container h-100">
-            <a className="navbar-brand" href="dashboard.html">
+          <Link to="/dashboard"><a className="navbar-brand">
               <h1 className="tm-site-title mb-0">Admin Dashboard</h1>
-            </a>
+            </a></Link>
             <button
               className="navbar-toggler ml-auto mr-0"
               type="button"
@@ -34,41 +34,40 @@ export default function Product() {
             >
               <i className="fas fa-bars tm-nav-icon"></i>
             </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav mx-auto h-100">
-                <li className="nav-item">
-                  <a className="nav-link" href="dashboard.html">
-                    <i className="fas fa-tachometer-alt"></i> Dashboard
-                    <span className="sr-only">(current)</span>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active" href="products.html">
-                    <i className="fas fa-shopping-cart"></i> Products
-                  </a>
-                </li>
-
-                <li className="nav-item">
-                  <a className="nav-link" href="accounts.html">
-                    <i className="far fa-user"></i> Accounts
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="settings.html">
-                    <i className="fas fa-cog"></i>
-                    <span> Settings </span>
-                  </a>
-                </li>
-              </ul>
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link d-block" href="login.html">
-                    <h6>Logout</h6>
-                  </a>
-                </li>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mx-auto h-100">
+              <li className="nav-item">
+              <Link to="/dashboard"><a className="nav-link">
+                  <i className="fas fa-tachometer-alt"></i> Dashboard
+                  <span className="sr-only">(current)</span>
+                </a></Link>
+              </li>
+              <li className="nav-item">
+              <Link to="/products"><a className="nav-link active">
+                  <i className="fas fa-shopping-cart"></i> Products
+                </a></Link>
+              </li>
+  
+              <li className="nav-item">
+              <Link to="/accounts"><a className="nav-link">
+                  <i className="far fa-user"></i> Accounts
+                </a></Link>
+              </li>
+              <li className="nav-item">
+              <Link to="/settings"><a
+                  className="nav-link"
+                  >
+                  <i className="fas fa-cog"></i>
+                  <span> Settings </span>
+                </a></Link>
+              </li>
+            </ul>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+              <Link to="/login"><a className="nav-link d-block">
+                  <h6>Logout</h6>
+                </a></Link>
+              </li>
               </ul>
             </div>
           </div>
@@ -292,12 +291,11 @@ export default function Product() {
                     </tbody>
                   </table>
                 </div>
-                <a
-                  href="add-product.html"
+                <Link to="/add_prod"><a
                   className="btn btn-primary btn-block text-uppercase mb-3"
                 >
                   Add new product
-                </a>
+                </a></Link>
                 <button className="btn btn-primary btn-block text-uppercase">
                   Delete selected products
                 </button>

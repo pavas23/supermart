@@ -1,40 +1,40 @@
-
+import { Link } from "react-router-dom";
 
 export default function Review(){
     const btn = document.querySelector("button");
     const post = document.querySelector(".post");
     const widget = document.querySelector(".star-widget");
-    btn.onclick = ()=>{
+    const onclick = ()=>{
       widget.style.display = "none";
       post.style.display = "block";
       return false;
     }
     return(
         <>
-            <div class="bg"></div>
-        <div class="container">
-            <div class="post">
-              <div class="text">Thanks for rating us!</div>
-              <a href="../index.html"><div class="home">HOME</div></a>
+            <div className="bg3"></div>
+        <div className="container3">
+            <div className="post3">
+              <div className="text3">Thanks for rating us!</div>
+              <Link to="/"><div className="home3">HOME</div></Link>
             </div>
-            <div class="star-widget">
+            <div className="star-widget">
               <input type="radio" name="rate" id="rate-5"/>
-              <label for="rate-5" class="fas fa-star"></label>
+              <label htmlFor="rate-5" className="fas fa-star"></label>
               <input type="radio" name="rate" id="rate-4"/>
-              <label for="rate-4" class="fas fa-star"></label>
+              <label htmlFor="rate-4" className="fas fa-star"></label>
               <input type="radio" name="rate" id="rate-3"/>
-              <label for="rate-3" class="fas fa-star"></label>
+              <label htmlFor="rate-3" className="fas fa-star"></label>
               <input type="radio" name="rate" id="rate-2"/>
-              <label for="rate-2" class="fas fa-star"></label>
+              <label htmlFor="rate-2" className="fas fa-star"></label>
               <input type="radio" name="rate" id="rate-1"/>
-              <label for="rate-1" class="fas fa-star"></label>
+              <label htmlFor="rate-1" className="fas fa-star"></label>
               <form action="#">
                 <header></header>
-                <div class="textarea">
+                <div className="textarea3">
                   <textarea cols="30" placeholder="Describe your experience.."></textarea>
                 </div>
-                <div class="btn">
-                  <button type="submit">Post</button>
+                <div className="btn3">
+                  <button type="submit" onClick = {onclick}>Post</button>
                 </div>
               </form>
             </div>

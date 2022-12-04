@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 export default function Profile(){
     <>
@@ -10,7 +10,7 @@ export default function Profile(){
                 </div>
                 <form id = "login" class="input-group1">
                     <input type = "text" class="input-field1" placeholder="Enter EmailID" required/>
-                    <a href="login.html" class="link-log">Or log in?</a>
+                    <Link to="/login"><a href="login.html" class="link-log">Or log in?</a></Link>
                     <button type="submit" class = "submit-btn1">Send Email</button>
                 </form>
             </div>

@@ -8286,4 +8286,218 @@ a.text-dark:hover {
     border-color: #dee2e6;
   }
 }
-/*# sourceMappingURL=bootstrap.min.css.map */
+.login_page4{
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)),url(../image/bg.jpg);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+}
+.form-box4{
+  width: 380px;
+  height: 480px;
+  position: relative;
+  margin: 6% auto;
+  background: #fff;
+  padding: 5px;
+  overflow: hidden;
+}
+.button-box4{
+  width: 220px;
+  margin: 35px auto;
+  position: relative;
+  border-radius: 30px;
+}
+.toggle-btn4{
+  padding: 10px 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+}
+#btn4{
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 110px;
+  height: 50%;
+  background: linear-gradient(to right, #22db15, #fbff00);
+  border-radius: 30px;
+  transition: 0.5s;
+}
+.input-group4{
+  top: 180px;
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
+}
+.input-field4{
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #999;
+  outline: none;
+  background: transparent;
+}
+.submit-btn4{
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: linear-gradient(to right, #22db15, #fbff00);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+}
+.check-box4{
+  margin: 6% 1% 30px;
+}
+span{
+  color: #777;
+  font-size: 11px;
+  bottom: 83px;
+  position: absolute;
+}
+#login4{
+  left: 50px;
+}
+#register4{
+  left: 450px;
+}
+.forgot4{
+  color: #777;
+  font-size: 11px;
+  bottom: 83px;
+  position: absolute;
+  margin-left: 140px;
+}
+.man_log4{
+  color: #777;
+  font-size: 11px;
+  top: 265px;
+  position: absolute;
+  margin-left: 120px;
+}
+.user_log4{
+  color: #777;
+  font-size: 11px;
+  top: 265px;
+  position: absolute;
+  margin-left: 140px;
+}
+.admin_log4{
+  color: #777;
+  font-size: 11px;
+  top: 265px;
+  position: absolute;
+}
+#eye{
+  position:absolute;
+  right: 15px;
+  transform: translate(0,-50%);
+  top: 43%;
+  cursor: pointer;
+  font-size: 15px;
+}
+#btn1{
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(to right, #22db15, #fbff00);
+  border-radius: 30px;
+  transition: 0.5s;
+}
+.button-box1{
+  top: 8%;
+  width: 120px;
+  margin: 35px auto;
+  position: relative;
+  border-radius: 30px;
+}
+#btn2{
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 195px;
+  height: 100%;
+  background: linear-gradient(to right, #22db15, #fbff00);
+  border-radius: 30px;
+  transition: 0.5s;
+}
+.button-box2{
+  top: 5%;
+  width: 195px;
+  margin: 35px auto;
+  position: relative;
+  border-radius: 30px;
+}
+.toggle-btn1{
+  padding: 10px 30px;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+}
+.submit-btn1{
+  width: 48%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: 17px auto;
+  background: linear-gradient(to right, #22db15, #fbff00);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+}
+.form-box5{
+  width: 380px;
+  height: 280px;
+  position: relative;
+  margin: 13% auto;
+  background: #fff;
+  padding: 5px;
+}
+
+.input-field5{
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #999;
+  outline: none;
+  background: transparent;
+}
+.input-group5{
+  top: 180px;
+  position: absolute;
+  left: 13%;
+  width: 280px;
+  transition: 0.5s;
+}
+.link-log{
+  color: #777;
+  font-size: 12px;
+  margin-left: 220px;
+  position: relative;
+}
+.submit-btn2{
+  width: 55%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: 15% auto;
+  background: linear-gradient(to right, #22db15, #fbff00);
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+}

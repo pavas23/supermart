@@ -18,14 +18,14 @@ export default function Home() {
                     <a href="#features2">features</a>
                     <a href="#products2">products</a>
                     <a href="#categories2">categories</a>
-                    <a href="pages/review.html">review</a>
+                    <Link to="/review"><a>review</a></Link>
                 </nav>
 
                 <div className="icons">
                     <div className="fas fa-search" id="search-btn"></div>
                     <div className="fas fa-shopping-cart" id="cart-btn"></div>
-                    <div className="fas fa-plus" id="add-btn"></div>
-                    <div className="fas fa-user" id="login-btn"></div>
+                    <Link to="/products"><div className="fas fa-plus" id="add-btn"></div></Link>
+                    <Link to="/login"><div className="fas fa-user" id="login-btn"></div></Link>
                 </div>
 
                 <form action="" className="search-form">
@@ -186,7 +186,7 @@ export default function Home() {
                         <a href="#features" className="links"> <i className="fas fa-arrow-right"></i> features </a>
                         <a href="#" className="links"> <i className="fas fa-arrow-right"></i> products </a>
                         <a href="#categories" className="links"> <i className="fas fa-arrow-right"></i> categories </a>
-                        <a href="pages/review.html" className="links"> <i className="fas fa-arrow-right"></i> write a review </a>
+                        <Link to="/review"><a className="links"> <i className="fas fa-arrow-right"></i> write a review </a></Link>
                     </div>
 
                     <div className="box2">
