@@ -34,23 +34,8 @@ export default function Accounts() {
                 </a></Link>
               </li>
               <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i className="far fa-file-alt"></i>
-                  <span> Reports <i className="fas fa-angle-down"></i> </span>
-                </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">Daily Report</a>
-                  <a className="dropdown-item" href="#">Weekly Report</a>
-                  <a className="dropdown-item" href="#">Yearly Report</a>
-                </div>
+              
+                
               </li>
               <li className="nav-item">
               <Link to="/products"><a className="nav-link">
@@ -161,53 +146,22 @@ export default function Accounts() {
                   />
                 </div>
                 <div className="form-group col-lg-6">
-                  <label for="password2" style={{"color":"black"}}>Change Password</label>
-                  <input
-                    id="password2"
-                    name="password2"
-                    type="password"
-                    className="form-control validate"
-                  />
+                  <label className="tm-hide-sm">&nbsp;</label>
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-block text-uppercase"
+                    style={{"color":"black"}}
+                  >
+                    Reset Password
+                  </button>
                 </div>
-                <div className="form-group col-lg-6">
-                  <label for="phone" style={{"color":"black"}}>Credits</label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    className="form-control validate"
-                  />
                 
-                  
-                  
-                  
-
-                </div>
-                <div className="form-group col-lg-6">
-                  <label className="tm-hide-sm">&nbsp;</label>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block text-uppercase"
-                    style={{"color":"black"}}
-                  >
-                    Add Credits 
-                  </button>
-                </div>
-                <div className="form-group col-lg-6">
-                  <label className="tm-hide-sm">&nbsp;</label>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block text-uppercase"
-                    style={{"color":"black"}}
-                  >
-                    Update Your Profile
-                  </button>
-                </div>
+                
                 <div className="col-12">
                   <button
                     type="submit"
                     className="btn btn-primary btn-block text-uppercase"
-                    style={{"color":"black"}}
+                    style={{"color":"black","width":"fit-content","margin-left":"24vh"}}
                   >
                     Delete Your Account
                   </button>
