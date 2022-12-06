@@ -103,11 +103,12 @@ export default function Product() {
                     <tbody>
                       <tr>
                         <th scope="row">
-                          <input type="checkbox" />
+                          <Link to = "/add_prod"><input type="checkbox" /></Link>
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 1
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,450</td>
                         <td>550</td>
@@ -120,11 +121,12 @@ export default function Product() {
                       </tr>
                       <tr>
                         <th scope="row">
-                          <input type="checkbox" />
+                        <Link to = "/add_prod"><input type="checkbox" /></Link>
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 2
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,250</td>
                         <td>750</td>
@@ -137,11 +139,12 @@ export default function Product() {
                       </tr>
                       <tr>
                         <th scope="row">
-                          <input type="checkbox" />
+                        <Link to = "/add_prod"><input type="checkbox" /></Link>
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 3
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,100</td>
                         <td>900</td>
@@ -154,11 +157,12 @@ export default function Product() {
                       </tr>
                       <tr>
                         <th scope="row">
-                          <input type="checkbox" />
+                        <Link to = "/add_prod"><input type="checkbox" /></Link>
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 4
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,400</td>
                         <td>600</td>
@@ -171,11 +175,12 @@ export default function Product() {
                       </tr>
                       <tr>
                         <th scope="row">
-                          <input type="checkbox" />
+                        <Link to = "/add_prod"><input type="checkbox" /></Link>
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 5
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,800</td>
                         <td>200</td>
@@ -188,11 +193,12 @@ export default function Product() {
                       </tr>
                       <tr>
                         <th scope="row">
-                          <input type="checkbox" />
+                        <Link to = "/add_prod"><input type="checkbox" /></Link>
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 6
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,000</td>
                         <td>1,000</td>
@@ -207,9 +213,10 @@ export default function Product() {
                         <th scope="row">
                           <input type="checkbox" />
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
                           Lorem Ipsum Product 7
-                        </td>
+                        </td></Link>
                         <td>200</td>
                         <td>500</td>
                         <td>100</td>
@@ -224,9 +231,10 @@ export default function Product() {
                         <th scope="row">
                           <input type="checkbox" />
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 8
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,000</td>
                         <td>600</td>
@@ -241,9 +249,10 @@ export default function Product() {
                         <th scope="row">
                           <input type="checkbox" />
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 9
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,200</td>
                         <td>800</td>
@@ -258,9 +267,10 @@ export default function Product() {
                         <th scope="row">
                           <input type="checkbox" />
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 10
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>1,600</td>
                         <td>400</td>
@@ -275,9 +285,10 @@ export default function Product() {
                         <th scope="row">
                           <input type="checkbox" />
                         </th>
+                        <Link to = "/edit_prod">
                         <td className="tm-product-name">
-                          Lorem Ipsum Product 11
-                        </td>
+                          Lorem Ipsum Product 7
+                        </td></Link>
                         <td>200</td>
                         <td>2,000</td>
                         <td>400</td>
