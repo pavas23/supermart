@@ -224,7 +224,7 @@ export default function Settings() {
           </div>
         </div>
         <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-          <div className="tm-bg-primary-dark tm-block }}tm-block-products" style={{"backgroundColor": "white"}}>
+          <div className="tm-bg-primary-dark tm-block tm-block-products" style={{"backgroundColor": "white"}}>
             <h2 className="tm-block-title" style={{"color":"rgb(54, 39, 17)"}}>Customers</h2>
             <div className="tm-product-table-container">
               <table className="table table-hover tm-table-small tm-product-table">

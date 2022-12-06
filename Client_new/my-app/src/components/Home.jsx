@@ -108,11 +108,11 @@ export default function Home() {
                             <a href="#" className="btn2">shop now</a>
                         </div>
 
-                        <div class="swiper-slide box">
+                        {/* <div class="swiper-slide box">
                             <img src={require("../image/cat-4.png")} alt=""/>
                             <h3>fresh meat</h3>
                             <a href="#" class="btn2">shop now</a>
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>
@@ -126,19 +126,6 @@ export default function Home() {
                 <div className="swiper review-slider">
 
                     <div className="swiper-wrapper">
-
-                        <div className="swiper-slide box">
-                            <img src={require("../image/pic-1.png")} alt="" />
-                            <p>Pavas is so hot</p>
-                            <h3>No one</h3>
-                            <div className="stars">
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star"></i>
-                                <i className="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
 
                         <div className="swiper-slide box">
                             <img src={require("../image/pic-2.png")} alt="" />
