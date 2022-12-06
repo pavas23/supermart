@@ -7,9 +7,9 @@ export default function Login(){
              <div class="login_page4">
             <div class="form-box4">
                 <div class="button-box4">
-                    <div id="btn4"></div>
-                    <button type="button4" class="toggle-btn4" onclick="login()">Log in</button>
-                    <button type="button4" class="toggle-btn4" onclick="register()">Register</button>
+                    <div id="btn4" style={{"margin-left":"7vh"}}></div>
+                    <button type="button4" class="toggle-btn4" onclick="login()" style={{"margin-left":"8vh"}}>Log in</button>
+                    <button type="button4" class="toggle-btn4" onclick="register()" style={{"margin-left":"7vh"}}>Register</button>
                 </div>
                 <form id = "login4" class="input-group4">
                     <input type = "text4" class="input-field4" placeholder="UserID" required/>

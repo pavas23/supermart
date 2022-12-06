@@ -66,7 +66,7 @@ export default function AddProd() {
     <div className="container tm-mt-small tm-mb-big">
       <div className="row">
         <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-          <div className="tm-bg-primary-light tm-block tm-block-h-auto" style={{"backgroundColor":"#2e613a","opacity":"0.94"}}>
+          <div className="tm-bg-primary-light tm-block tm-block-h-auto" style={{"backgroundColor":"#2e613a","opacity":"0.94","margin-left":"12vh"}}>
             <div className="row">
               <div className="col-12">
                 <h2 className="tm-block-title d-inline-block">Add Product</h2>
@@ -77,10 +77,10 @@ export default function AddProd() {
                 <form action="" className="tm-edit-product-form">
                   <div className="form-group mb-3">
                     <label
-                      htmlFor="name"
+                      htmlFor="name" style={{"margin-left":"22vh"}}
                       >Product Name
                     </label>
-                    <input style={{"backgroundColor":"rgb(244, 243, 243)","color": "black"}}
+                    <input style={{"backgroundColor":"rgb(244, 243, 243)","color": "black","margin-left":"22vh"}}
                       id="name"
                       name="name"
                       type="text"
@@ -90,10 +90,10 @@ export default function AddProd() {
                   </div>
                   <div className="form-group mb-3">
                     <label
-                      htmlFor="price"
+                      htmlFor="price" style={{"margin-left":"22vh"}}
                       >Price</label
                     >
-                    <input style={{"backgroundColor":"rgb(244, 243, 243)","color": "black"}}
+                    <input style={{"backgroundColor":"rgb(244, 243, 243)","color": "black","margin-left":"22vh"}}
                     id="price"
                     name="price"
                     type="text"
@@ -103,10 +103,10 @@ export default function AddProd() {
                   </div>
                   <div className="form-group mb-3">
                     <label
-                      htmlFor="category"
+                      htmlFor="category" style={{"margin-left":"22vh"}}
                       >Category</label
                     >
-                    <select style={{"backgroundColor":"rgb(244, 243, 243)","color": "black"}}
+                    <select style={{"backgroundColor":"rgb(244, 243, 243)","color": "black","margin-left":"22vh"}}
                       className="custom-select tm-select-accounts"
                       id="category"
                     >
@@ -121,10 +121,10 @@ export default function AddProd() {
                   <div className="row">
                       <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <label
-                            htmlFor="expire_date"
+                            htmlFor="expire_date" style={{"margin-left":"22vh"}}
                             >Expiry Date
                           </label>
-                          <input style={{"backgroundColor":"rgb(244, 243, 243)","color": "black"}}
+                          <input style={{"backgroundColor":"rgb(244, 243, 243)","color": "black","margin-left":"22vh"}}
                             id="expire_date"
                             name="expire_date"
                             type="text"
@@ -134,10 +134,10 @@ export default function AddProd() {
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <label
-                            htmlFor="stock"
-                            >Units In Stock
+                            htmlFor="stock" style={{"margin-left":"22vh"}}
+                            >Units InStock
                           </label>
-                          <input style={{"backgroundColor":"rgb(244, 243, 243)","color": "black"}}
+                          <input style={{"backgroundColor":"rgb(244, 243, 243)","color": "black","margin-left":"22vh"}}
                             id="stock"
                             name="stock"
                             type="text"
@@ -147,25 +147,24 @@ export default function AddProd() {
                         </div>
                   </div>
               <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                <div className="tm-product-img-dummy mx-auto" style={{"backgroundColor":"rgb(244, 243, 243)"}}>
+                <div className="tm-product-img-dummy mx-auto" style={{"backgroundColor":"rgb(244, 243, 243)","width":"1000px"}}>
                   <i
                     className="fas fa-cloud-upload-alt tm-upload-icon"
                     onclick="document.getElementById('fileInput').click();"
                   ></i>
                 </div>
-                <div className="custom-file mt-3 mb-3">
-                  <input id="fileInput" type="file" style={{"display":"none"}} />
+                {/* <div className="custom-file mt-3 mb-3"> */}
                   <input
                     type="button"
                     className="btn btn-primary btn-block mx-auto"
-                    value="UPLOAD PRODUCT IMAGE"
+                    value="UPLOAD PRODUCT IMAGE" style={{"max-width":"fit-content","width":"fit-content","margin-left":"22vh"}}
                     onclick="document.getElementById('fileInput').click();"
                     required
                   />
-                </div>
+                {/* </div> */}
               </div>
               <div className="col-12">
-                <button type="submit" className="btn btn-primary btn-block text-uppercase">Add Product Now</button>
+                <button type="submit" className="btn btn-primary btn-block text-uppercase" style={{"margin-left":"22vh"}}>Add Product Now</button>
               </div>
             </form>
             </div>
