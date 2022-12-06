@@ -55,8 +55,15 @@ public class AdminController {
     }
     
     @PostMapping("/addManager")
-    public Manager addManager(@RequestBody Manager manager) {
-        return managerService.saveManager(manager);
+    public String addManager(@RequestBody Manager manager) {
+        
+        Manager m = managerService.saveManager(manager);
+        if(m.getName()==null) {
+            return "Invalid Email";
+        }
+        else {
+            return "New manager added";
+        }
     }
     @GetMapping("/allManagers")
     public List<Manager> getAllManagers(){

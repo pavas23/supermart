@@ -1,8 +1,8 @@
 package com.example.demo.Service;
 
 import java.util.List;
-
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,10 +21,27 @@ public  class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer saveCustomer(Customer customer) {
 		// TODO Auto-generated method stub
-	     
+	     Pattern pattern = Pattern.compile("f20[0-9]{6}(@hyderabad.bits-pilani.ac.in)");
+	     Matcher m = pattern.matcher(customer.getEmail());
+	     if(!m.matches()) {
 	    customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
 		return  customerRepo.save(customer);
 	}
+	     else {
+	         return new Customer();
+	     }
+	}
+	
+	public Customer findByMail(Customer customer) {
+	    List<Customer> list = customerRepo.findAll();
+	    for(Customer obj : list) {
+	        if(obj.getEmail().equals(customer.getEmail())) {
+	            return customerRepo.findById(obj.getId()).get();
+	        }
+	    }
+	    return new Customer();
+	}
+	
 
 	@Override
 	public List<Customer> getAllCustomers() {
@@ -80,6 +97,9 @@ public  class CustomerServiceImpl implements CustomerService {
 	            }
 	            if(customer.getCredit()!=0) {
 	                obj.setCredit(customer.getCredit());
+	            }
+	            if(customer.getReset_code()!=null) {
+	                obj.setReset_code(customer.getReset_code());
 	            }
 	            this.saveCustomer(obj);
 	            return;

@@ -6,8 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import java.util.List;
-
-
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +21,16 @@ import com.example.demo.model.Order;
 import com.example.demo.model.Product;
 import com.example.demo.springmail.EmailDetails;
 import com.example.demo.springmail.EmailService;
-
+class Reset{
+    String email;
+    int number;
+}
     
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
+    private String resetToken;
+    private Customer c;
 	@Autowired
 	private CustomerService customerService;
 	@Autowired
@@ -37,8 +41,11 @@ public class CustomerController {
 	private EmailService emailService;
 		@PostMapping("/add")
 	public String add(@RequestBody Customer customer) {
-		customerService.saveCustomer(customer);
-		return "New Customer Added";
+	Customer c= 	customerService.saveCustomer(customer);
+	if(c.getId()==0) {
+	   return "Invalid Email. You must have an Email of BITS HYD University";
+	}
+		return "New Customer Added"+ c.getId()+c.getEmail()+c.getName();
 		
 	}
 	@GetMapping("/getAll")
@@ -139,4 +146,44 @@ public class CustomerController {
 	            return "INSUFFICIENT FUNDS";
 	        }
 	}
+	@PostMapping("/forgotPassword")
+	public String sendResetMail(@RequestBody Customer customer) {
+	     c = customerService.findByMail(customer);
+	    if(c.getName()==null) {
+	        return "Customer DNE";
+	    }else {
+	        Random rand = new Random();
+	         resetToken = Integer.toString((rand.nextInt((99999 - 100) + 1) + 10));
+	      //  customer.setReset_code(resetToken);
+	      //  customer.setName("hii");
+	        
+	     //   customerService.updateCustomer(customer);
+	        EmailDetails ed = new EmailDetails();
+	        ed.setRecipient(customer.getEmail());
+	        ed.setSubject("BBB SuperMart : Reset Password");
+	        ed.setMsgBody("Reset Code is : "+resetToken);
+	        emailService.sendSimpleMail(ed);
+	        return "Mail with Reset Code sent "+c.getId()+" "+resetToken;
+	    }
+	    
+	}
+	@PostMapping("/reset")
+public String resetPassword(@RequestBody Customer customer) {
+  
+    if(resetToken.equals(customer.getReset_code())) {
+        Random rand = new Random();
+         resetToken = Integer.toString((rand.nextInt((99999 - 100) + 1) + 10));
+        c.setPassword(customer.getPassword());
+        c.setReset_code(resetToken);
+        customerService.updateCustomer(c);
+        return "Password Updated Successfully";
+                
+    }
+    else {
+        Random rand = new Random();
+        String resetToken = Integer.toString((rand.nextInt((99999 - 100) + 1) + 10));
+        c.setReset_code(resetToken);
+       return "Incorect Reset Code";
+    }
+}
 }

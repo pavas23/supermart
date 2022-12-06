@@ -23,10 +23,10 @@ public class Customer {
 	private String password;
 	private String address;
 	private String mobileNumber;
-	 
+	private String reset_code; 
 	
 	public Customer(){
-	    
+	    reset_code = "-1";
 		credit=1000;
 	}
 	public String getName() {
@@ -74,6 +74,12 @@ public class Customer {
     }
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+    public String getReset_code() {
+        return reset_code;
+    }
+    public void setReset_code(String reset_code) {
+        this.reset_code = reset_code;
     }
 	
 	
