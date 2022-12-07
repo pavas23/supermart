@@ -21,7 +21,7 @@ public class ManagerServiceImpl implements ManagerService{
     public Manager saveManager(Manager manager) {
         Pattern pattern = Pattern.compile("f20[0-9]{6}(@hyderabad.bits-pilani.ac.in)");
         Matcher m = pattern.matcher(manager.getEmail());
-        if(m.matches()) {
+        if(!m.matches()) {
         manager.setPassword(bCryptPasswordEncoder.encode(manager.getPassword()));
         return managerRepo.save(manager);
     }

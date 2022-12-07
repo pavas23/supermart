@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.HistoryService;
 import com.example.demo.Service.ManagerService;
+import com.example.demo.Service.OrderService;
 import com.example.demo.Service.ProductService;
 import com.example.demo.model.Customer;
 import com.example.demo.model.History;
 import com.example.demo.model.Manager;
+import com.example.demo.model.Order;
+import com.example.demo.model.OrderList;
 import com.example.demo.model.Product;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -30,6 +34,8 @@ public class AdminController {
     CustomerService customerService;
     @Autowired
     HistoryService historyService;
+    @Autowired
+    OrderService orderService;
     
     @GetMapping("/allCustomers")
     public List<Customer> getAllCustomers(){
@@ -81,6 +87,10 @@ public class AdminController {
         return productService.getAllProducts();   
         
     }
+    @DeleteMapping("/deleteManager")
+    public void deleteManager(@RequestBody Manager manager) {
+        managerService.deleteManager(manager);
+    }
     
     @DeleteMapping("/deleteProduct")
     public String deleteProduct(@RequestBody Product product) {
@@ -118,5 +128,9 @@ public class AdminController {
             revenue += obj.getTotalCost();
         }
         return revenue;
+    }
+    @GetMapping("/orders")
+    public List<OrderList> getOrders(){
+        return orderService.getAllOrders();
     }
 }

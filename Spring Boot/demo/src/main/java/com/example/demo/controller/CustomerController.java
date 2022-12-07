@@ -11,13 +11,17 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.Service.CartService;
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.HistoryService;
+import com.example.demo.Service.OrderService;
 import com.example.demo.Service.ProductService;
+import com.example.demo.model.Cart;
 import com.example.demo.model.Customer;
 
 import com.example.demo.model.History;
 import com.example.demo.model.Order;
+import com.example.demo.model.OrderList;
 import com.example.demo.model.Product;
 import com.example.demo.springmail.EmailDetails;
 import com.example.demo.springmail.EmailService;
@@ -25,7 +29,7 @@ class Reset{
     String email;
     int number;
 }
-    
+@CrossOrigin  
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -39,13 +43,17 @@ public class CustomerController {
 	private ProductService productService;
 	@Autowired
 	private EmailService emailService;
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private CartService cartService;
 		@PostMapping("/add")
-	public String add(@RequestBody Customer customer) {
+	public boolean add(@RequestBody Customer customer) {
 	Customer c= 	customerService.saveCustomer(customer);
 	if(c.getId()==0) {
-	   return "Invalid Email. You must have an Email of BITS HYD University";
+	   return false;
 	}
-		return "New Customer Added"+ c.getId()+c.getEmail()+c.getName();
+		return true;
 		
 	}
 	@GetMapping("/getAll")
@@ -125,12 +133,22 @@ public class CustomerController {
 	        Product p = productService.getProduct(obj.getProductID());
 	        
 	        p.setquantity(p.getquantity()-obj.getquantity());
-	       
+	        p.setUnits_sold(obj.getquantity());
 	        productService.saveProduct(p);
 	        
 	        historyList.add(h);
 	    }
 	    historyService.addList(historyList);
+	    OrderList order = new OrderList();
+	    order.setAddress(list.get(0).getAddress());
+	    order.setCustomerID(list.get(0).getCustomerID());
+	    order.setDate(ldt.format(myFormatObj));
+	    order.setExpress(list.get(0).isExpress());
+	    order.setTotal_cost(total_cost);
+	    order.setExpected_date(ldt.plusHours(4).format(myFormatObj));
+	    order.setName(customerService.getCustomer(list.get(0).getCustomerID()).getName());
+	    
+	    orderService.saveOrder(order);
 	    EmailDetails ed = new EmailDetails();
 	    ed.setRecipient(customerService.getCustomer(historyList.get(0).getCustomerID()).getEmail());
 	    if(list.get(0).isExpress()) {
@@ -186,4 +204,18 @@ public String resetPassword(@RequestBody Customer customer) {
        return "Incorect Reset Code";
     }
 }
+	@GetMapping("/getCart")
+public List<Cart> getCartElements(@RequestBody Integer id){
+        return cartService.getCart(id);
+}
+	@DeleteMapping("/deleteCart")
+	public void deleteCart(@RequestBody Integer id) {
+	        cartService.deleteCart(id);
+	        
+	}
+	@PostMapping("/setCart")
+	public void setCart(@RequestBody List<Cart> list) {
+	    cartService.setCart(list);
+	}
+	
 }

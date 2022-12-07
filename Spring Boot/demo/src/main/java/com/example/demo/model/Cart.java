@@ -1,50 +1,39 @@
 package com.example.demo.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Product {
+public class Cart {
     @Id
-    // will set the variable below this annotation to primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // generated value will give a unique id for every object
     private int id;
     private int price;
     private int quantity;
     private String name;
     private String src;
     private int units_sold;
-    public Product(){
-        price = 0;
-        quantity = 0;
-    }
-    public String getName(){
-        return name;
-    }
-    public void setName(String name){
-        this.name =  name;
-    }
-    public int getPrice(){
+    private int customerID;
+    private int productID;
+    public int getPrice() {
         return price;
     }
-    public void setPrice(int price){
+    public void setPrice(int price) {
         this.price = price;
     }
-    public int getquantity(){
+    public int getQuantity() {
         return quantity;
     }
-    public void setquantity(int quantity){
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    public int getId(){
-        return this.id;
+    public String getName() {
+        return name;
     }
-    public void setId(int id){
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
     public String getSrc() {
         return src;
@@ -57,5 +46,17 @@ public class Product {
     }
     public void setUnits_sold(int units_sold) {
         this.units_sold = units_sold;
+    }
+    public int getCustomerID() {
+        return customerID;
+    }
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+    public int getProductID() {
+        return productID;
+    }
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 }

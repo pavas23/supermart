@@ -8,7 +8,7 @@ import com.example.demo.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/product")
 public class ProductController {
