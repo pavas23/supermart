@@ -46,6 +46,7 @@ public class ProductController {
     }
     @PostMapping("/changePrice")
     public String updatePrice(@RequestBody Product product){
+        if(product.getPrice()<0)return "negative price not allowed";
         productService.changePrice(product);
         return "New price is " + product.getPrice();
     }

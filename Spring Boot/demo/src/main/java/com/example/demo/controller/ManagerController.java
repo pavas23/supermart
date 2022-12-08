@@ -21,17 +21,25 @@ public class ManagerController {
     ProductService productService;
     @PostMapping("/addProduct")
     public String addProduct(@RequestBody Product product) {
+        if(product.getquantity()<=0 || product.getPrice()<=0) return "Cant enter negative value";
         productService.saveProduct(product);
         return "Product added";
          }
     @PostMapping("/updateProduct")
     public String updateProduct(@RequestBody Product product) {
+        if(product.getquantity()<0 || product.getPrice()<0) return "Cant enter negative value";
             productService.updateProduct(product);
         return "Product with id : " + product.getId()+ " has been updated" ;
     }
     @DeleteMapping("/deleteProduct")
     public String deleteProduct(@RequestBody Product product) {
-        productService.deleteProduct(product);
+        try {
+            productService.deleteProduct(product);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         return "Product with id : " + product.getId()+ " has been updated" ;
     }
     @GetMapping("/getAllProducts")

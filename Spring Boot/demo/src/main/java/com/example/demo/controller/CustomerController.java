@@ -34,6 +34,7 @@ class Reset{
 @RequestMapping("/customer")
 public class CustomerController {
     private String resetToken;
+    String verifyotp;
     private Customer c;
 	@Autowired
 	private CustomerService customerService;
@@ -181,10 +182,28 @@ public class CustomerController {
 	        ed.setSubject("BBB SuperMart : Reset Password");
 	        ed.setMsgBody("Reset Code is : "+resetToken);
 	        emailService.sendSimpleMail(ed);
-	        return "Mail with Reset Code sent "+c.getId()+" "+resetToken;
+	        return resetToken;
 	    }
 	    
 	}
+	@PostMapping("/sendOTP")
+    public String sendVerifyOTP(@RequestBody Customer customer) {
+      
+                    Random rand = new Random();
+             verifyotp = Integer.toString((rand.nextInt((99999 - 100) + 1) + 10));
+          //  customer.setReset_code(resetToken);
+          //  customer.setName("hii");
+            
+         //   customerService.updateCustomer(customer);
+            EmailDetails ed = new EmailDetails();
+            ed.setRecipient(customer.getEmail());
+            ed.setSubject("BBB SuperMart : Reset Password");
+            ed.setMsgBody("Reset Code is : "+verifyotp);
+            emailService.sendSimpleMail(ed);
+            return "Mail with Reset Code sent "+c.getId()+" "+verifyotp;
+        
+        
+    }
 	@PostMapping("/reset")
 public String resetPassword(@RequestBody Customer customer) {
   
@@ -204,6 +223,12 @@ public String resetPassword(@RequestBody Customer customer) {
        return "Incorect Reset Code";
     }
 }
+	@PostMapping("/verify")
+	public void verifyCustomer(@RequestBody Customer customer) {
+	  Customer c = customerService.findByMail(customer);
+	    c.setVerify(customer.isVerify());
+	    customerService.saveCustomer(c);
+	}
 	@GetMapping("/getCart")
 public List<Cart> getCartElements(@RequestBody Integer id){
         return cartService.getCart(id);

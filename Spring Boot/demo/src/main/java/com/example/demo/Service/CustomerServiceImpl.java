@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import java.util.List;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +13,16 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Customer;
 
 import com.example.demo.repository.*;
+class CustomerException extends Exception{
+    String str;
+    CustomerException(String message){
+        str=message;
+    }
+    @Override
+    public String toString() {
+        return str;
+    }
+}
 @Service
 public  class CustomerServiceImpl implements CustomerService {
 		@Autowired
@@ -21,11 +32,24 @@ public  class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer saveCustomer(Customer customer) {
 		// TODO Auto-generated method stub
+	    Customer c =new Customer();
+	    List <Customer> list = customerRepo.findAll();
+	    for(Customer obj : list) {
+	        if(obj.getEmail().equals(customer.getEmail())) {
+	            return new Customer();
+	        }
+	    }
 	     Pattern pattern = Pattern.compile("f20[0-9]{6}(@hyderabad.bits-pilani.ac.in)");
 	     Matcher m = pattern.matcher(customer.getEmail());
 	     if(!m.matches()) {
 	    customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
-		return  customerRepo.save(customer);
+	    try {
+	         c=  customerRepo.save(customer);
+	        if(c.getName()==null) throw new CustomerException("Error in creating customer");
+	    }catch(CustomerException e) {  
+	       System.out.println(e);
+	    }  
+	    return c;
 	}
 	     else {
 	         return new Customer();
@@ -52,6 +76,7 @@ public  class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer getCustomer(int id) {
 		// TODO Auto-generated method stub
+	    
 		return (Customer) customerRepo.findById(id).get();
 	}
 	
@@ -75,7 +100,12 @@ public  class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void updateCustomer(Customer customer) {
 		
-	    
+	    List <Customer> list1 = customerRepo.findAll();
+        for(Customer obj : list1) {
+            if(obj.getEmail().equals(customer.getEmail())) {
+                return;
+            }
+        }
 	    List <Customer> list = this.getAllCustomers();
 	    for (Customer obj: list) {
 	        if(obj.getId() == customer.getId()) {
@@ -95,7 +125,7 @@ public  class CustomerServiceImpl implements CustomerService {
 	            if(customer.getMobileNumber()!=null) {
 	                obj.setMobileNumber(customer.getMobileNumber());
 	            }
-	            if(customer.getCredit()!=0) {
+	            if(customer.getCredit()>0) {
 	                obj.setCredit(customer.getCredit());
 	            }
 	            if(customer.getReset_code()!=null) {
@@ -110,6 +140,7 @@ public  class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void addCredit(Customer customer) {
 		int id = -1;
+		if(customer.getCredit()<0)return;
 		List <Customer> customers = this.getAllCustomers();
 		for (Customer obj : customers) {
 			if(customer.getEmail().equals(obj.getEmail()) && bCryptPasswordEncoder.matches(customer.getPassword(), obj.getPassword())) {
