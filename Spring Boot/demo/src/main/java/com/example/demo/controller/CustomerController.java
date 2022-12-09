@@ -50,12 +50,7 @@ public class CustomerController {
 	private CartService cartService;
 		@PostMapping("/add")
 	public boolean add(@RequestBody Customer customer) {
-	Customer c= 	customerService.saveCustomer(customer);
-	if(c.getId()==0) {
-	   return false;
-	}
-		return true;
-		
+	return	customerService.saveCustomer(customer);
 	}
 	@GetMapping("/getAll")
 	public List<Customer> getAllCustomers(){
@@ -69,7 +64,7 @@ public class CustomerController {
 		customerService.deleteCustomer(customer);
 		return "Customer has been deleted";
 	}
-	@GetMapping("/getCustomer")
+	@PostMapping("/getCustomer")
 	public Customer getCustomerDetails(@RequestBody Customer customer) {
 		return customerService.getCustomer(customer.getId());
 		}
@@ -87,12 +82,12 @@ public class CustomerController {
 	}
 	
 	
-	@GetMapping("/history")
+	@PostMapping("/history")
 	public List<History> getHistory(@RequestBody Customer customer){
 	    return historyService.getCustomerHistory(customer.getId());
 	}
 	@PostMapping(value = "/placeOrder" )
-	public String placeOrder(@RequestBody List<Order> list) {
+	public boolean placeOrder(@RequestBody List<Order> list) {
 	    LocalDateTime ldt = LocalDateTime.now();
 	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 	    List <History> historyList = new ArrayList<History>();
@@ -100,7 +95,7 @@ public class CustomerController {
 	    String orders = "";
 	    for(Order obj : list) {
 	        Product p = productService.getProduct(obj.getProductID());
-	        if(obj.getquantity()>p.getquantity()) return "OUT OF STOCK";
+	        if(obj.getquantity()>p.getquantity()) return false;
 	        total_cost += (obj.getPrice() * obj.getquantity());
 	        if(obj.getquantity()>0)
 	        orders += "Product: "+ obj.getName()+" Price: \u20B9"+obj.getPrice()+" Quantity Ordered: "+obj.getquantity()+"\n";
@@ -160,9 +155,10 @@ public class CustomerController {
 	    }
 	   
 	    ed.setSubject("Tax invoice for "+ historyList.get(0).getDate());
-	    return "Order Placed, TotalCost: "+ total_cost + " "+ list.toString() +" "+  emailService.sendSimpleMail(ed);}
+				emailService.sendSimpleMail(ed);
+	    return  true;}
 	        else {
-	            return "INSUFFICIENT FUNDS";
+	            return false;
 	        }
 	}
 	@PostMapping("/forgotPassword")
@@ -205,42 +201,39 @@ public class CustomerController {
         
     }
 	@PostMapping("/reset")
-public String resetPassword(@RequestBody Customer customer) {
-  
-    if(resetToken.equals(customer.getReset_code())) {
-        Random rand = new Random();
-         resetToken = Integer.toString((rand.nextInt((99999 - 100) + 1) + 10));
-        c.setPassword(customer.getPassword());
-        c.setReset_code(resetToken);
-        customerService.updateCustomer(c);
-        return "Password Updated Successfully";
-                
-    }
-    else {
-        Random rand = new Random();
-        String resetToken = Integer.toString((rand.nextInt((99999 - 100) + 1) + 10));
-        c.setReset_code(resetToken);
-       return "Incorect Reset Code";
-    }
+public boolean resetPassword(@RequestBody Customer customer) {
+
+		Customer c = customerService.findByMail(customer);
+		c.setPassword(customer.getPassword());
+		customerService.updateCustomer(c);
+		return true;
 }
 	@PostMapping("/verify")
 	public void verifyCustomer(@RequestBody Customer customer) {
 	  Customer c = customerService.findByMail(customer);
 	    c.setVerify(customer.isVerify());
-	    customerService.saveCustomer(c);
+	    customerService.updateCustomer(c);
 	}
-	@GetMapping("/getCart")
+	@PostMapping("/getCart")
 public List<Cart> getCartElements(@RequestBody Integer id){
         return cartService.getCart(id);
 }
 	@DeleteMapping("/deleteCart")
-	public void deleteCart(@RequestBody Integer id) {
-	        cartService.deleteCart(id);
+	public String deleteCart() {
+	        cartService.deleteCart();
+			return "deleted products";
 	        
 	}
 	@PostMapping("/setCart")
-	public void setCart(@RequestBody List<Cart> list) {
+	public String setCart(@RequestBody List<Cart> list) {
 	    cartService.setCart(list);
+		return "product added to cart";
+	}
+	@PostMapping("/deleteCartOne")
+	public String deleteCartById(@RequestBody Cart cart) {
+		// TODO Auto-generated method stub
+		cartService.deleteOneItem(cart);
+		return "Deleted";
 	}
 	
 }

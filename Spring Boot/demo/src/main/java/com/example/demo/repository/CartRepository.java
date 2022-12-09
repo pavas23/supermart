@@ -18,7 +18,7 @@ public interface CartRepository extends JpaRepository<Cart,Integer>{
             )
     public List<Cart> getbyCustomerID(@Param("CustomerId") int id);
     @Query(
-            value ="DELETE FROM cats\r\n WHERE id= : CustomerId",
+            value ="DELETE FROM cats\r\n WHERE id= :CustomerId",
                     
             nativeQuery= true
             )

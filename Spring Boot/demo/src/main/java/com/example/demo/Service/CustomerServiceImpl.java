@@ -30,29 +30,28 @@ public  class CustomerServiceImpl implements CustomerService {
 		 BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		
 	@Override
-	public Customer saveCustomer(Customer customer) {
+	public boolean saveCustomer(Customer customer) {
 		// TODO Auto-generated method stub
 	    Customer c =new Customer();
 	    List <Customer> list = customerRepo.findAll();
 	    for(Customer obj : list) {
-	        if(obj.getEmail().equals(customer.getEmail())) {
-	            return new Customer();
+	        if(obj.getEmail().equals(customer.getEmail()) && (obj.isVerify())) {
+				return false;
 	        }
 	    }
 	     Pattern pattern = Pattern.compile("f20[0-9]{6}(@hyderabad.bits-pilani.ac.in)");
 	     Matcher m = pattern.matcher(customer.getEmail());
-	     if(!m.matches()) {
+	     if(m.matches()) {
 	    customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
-	    try {
+
 	         c=  customerRepo.save(customer);
-	        if(c.getName()==null) throw new CustomerException("Error in creating customer");
-	    }catch(CustomerException e) {  
-	       System.out.println(e);
-	    }  
-	    return c;
+	       // if(c.getName()==null) throw new CustomerException("Error in creating customer");
+
+
+	    return true;
 	}
 	     else {
-	         return new Customer();
+	         return false;
 	     }
 	}
 	
@@ -100,12 +99,7 @@ public  class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void updateCustomer(Customer customer) {
 		
-	    List <Customer> list1 = customerRepo.findAll();
-        for(Customer obj : list1) {
-            if(obj.getEmail().equals(customer.getEmail())) {
-                return;
-            }
-        }
+
 	    List <Customer> list = this.getAllCustomers();
 	    for (Customer obj: list) {
 	        if(obj.getId() == customer.getId()) {
@@ -117,7 +111,8 @@ public  class CustomerServiceImpl implements CustomerService {
 	                obj.setEmail(customer.getEmail());
 	            }
 	            if(customer.getPassword()!=null) {
-	                obj.setPassword(customer.getPassword());
+
+	                obj.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
 	            }
 	            if(customer.getAddress()!=null) {
 	                obj.setAddress(customer.getAddress());
@@ -131,10 +126,45 @@ public  class CustomerServiceImpl implements CustomerService {
 	            if(customer.getReset_code()!=null) {
 	                obj.setReset_code(customer.getReset_code());
 	            }
-	            this.saveCustomer(obj);
+				obj.setVerify(customer.isVerify());
+	            customerRepo.save(obj);
 	            return;
 	        }
 	    }
+	}
+	@Override
+	public void updateCustomerByMail(Customer customer) {
+
+
+		List <Customer> list = this.getAllCustomers();
+		for (Customer obj: list) {
+			if(obj.getId() == customer.getId()) {
+
+				if(customer.getName()!=null) {
+					obj.setName(customer.getName());
+				}
+				if(customer.getEmail()!=null) {
+					obj.setEmail(customer.getEmail());
+				}
+				if(customer.getPassword()!=null) {
+					obj.setPassword(customer.getPassword());
+				}
+				if(customer.getAddress()!=null) {
+					obj.setAddress(customer.getAddress());
+				}
+				if(customer.getMobileNumber()!=null) {
+					obj.setMobileNumber(customer.getMobileNumber());
+				}
+				if(customer.getCredit()>0) {
+					obj.setCredit(customer.getCredit());
+				}
+				if(customer.getReset_code()!=null) {
+					obj.setReset_code(customer.getReset_code());
+				}
+				this.saveCustomer(obj);
+				return;
+			}
+		}
 	}
 
 	@Override

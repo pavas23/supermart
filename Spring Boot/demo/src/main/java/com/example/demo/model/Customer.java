@@ -27,6 +27,7 @@ public class Customer extends User{
 	public Customer(){
 	    reset_code = "-1";
 		credit=1000;
+
 	}
 	
 	public int getId() {
@@ -35,6 +36,9 @@ public class Customer extends User{
 	public void setId(int id) {
 		this.id = id;
 	}
+//	public String getPassword() {
+//		return super.getPassword();
+//	}
 	public int getCredit() {
 		return credit;
 	}

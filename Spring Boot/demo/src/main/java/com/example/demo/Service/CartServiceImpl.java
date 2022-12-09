@@ -17,8 +17,8 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public void deleteCart(int id) {
-     cartRepo.deleteByCustomerID(id);
+    public void deleteCart() {
+     cartRepo.deleteAll();
         
     }
 
@@ -26,6 +26,10 @@ public class CartServiceImpl implements CartService{
     public void setCart(List<Cart> list) {
         cartRepo.saveAll(list);
         
+    }
+
+    @Override
+    public void deleteOneItem(Cart cart) {  cartRepo.deleteById(cart.getId());
     }
 
 }

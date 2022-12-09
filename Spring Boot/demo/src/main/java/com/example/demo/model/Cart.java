@@ -23,6 +23,12 @@ public class Cart {
     public void setPrice(int price) {
         this.price = price;
     }
+    public int getId() {
+        return id;
+    }
+    public void setId() {
+        this.id = id;
+    }
     public int getQuantity() {
         return quantity;
     }

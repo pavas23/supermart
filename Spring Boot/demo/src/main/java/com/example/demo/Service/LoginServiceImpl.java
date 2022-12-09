@@ -22,12 +22,12 @@ public class LoginServiceImpl implements LoginAuthService{
     @Autowired
     AdminRepository adminRepo;
    
-    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    CustomerServiceImpl c = new CustomerServiceImpl();
     @Override
     public Customer verifyCustomer(Customer customer) {
         List <Customer> list = customerRepo.findAll();
         for(Customer obj:list) {
-            if(obj.getEmail().equals(customer.getEmail()) && bCryptPasswordEncoder.matches(customer.getPassword(), obj.getPassword())) {
+            if(obj.getEmail().equals(customer.getEmail()) && c.bCryptPasswordEncoder.matches(customer.getPassword(), obj.getPassword())) {
                 return obj;
             }
         }
@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginAuthService{
         // TODO Auto-generated method stub
         List <Manager> list = managerRepo.findAll();
         for(Manager obj:list) {
-            if(obj.getEmail().equals(manager.getEmail()) && bCryptPasswordEncoder.matches(manager.getPassword(), obj.getPassword())) {
+            if(obj.getEmail().equals(manager.getEmail()) && c.bCryptPasswordEncoder.matches(manager.getPassword(), obj.getPassword())) {
                 return obj;
             }
         }
@@ -51,7 +51,7 @@ public class LoginServiceImpl implements LoginAuthService{
     public Admin verifyAdmin(Admin admin) {
         List <Admin> list = adminRepo.findAll();
         for(Admin obj:list) {
-            if(obj.getEmail().equals(admin.getEmail()) && bCryptPasswordEncoder.matches(admin.getPassword(), obj.getPassword())) {
+            if(obj.getEmail().equals(admin.getEmail()) && c.bCryptPasswordEncoder.matches(admin.getPassword(), obj.getPassword())) {
                 return obj;
             }
         }
