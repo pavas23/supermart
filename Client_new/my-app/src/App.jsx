@@ -16,8 +16,31 @@ import Profile from "./components/Profile";
 import Payment from "./components/Payment";
 import Checkout from "./components/Checkout";
 import Wallet from "./components/Wallet";
+import MainProducts from "./components/MainProducts";
+import Register from "./components/Register";
+import { useState } from "react";
+import OtpSignUp from "./components/OtpSignUp";
+import Reset from "./components/Reset";
+import MyProfile from "./components/MyProfile";
 
 export default function App() {
+
+  const[selectedProducts,setSelectedProductsFromApp] = useState([]);
+  const selectedProductsFunction = (selectedProductsArgument)=>{
+    console.log("app.jsx");
+    setSelectedProductsFromApp(selectedProductsArgument);
+    console.log(selectedProducts);
+  }
+
+  const[email,setEmail] =useState("");
+  const setEmailFunction = (email)=>{
+    setEmail(email);
+  }
+
+  const[otpApp,setOtp] =  useState("");
+  const setOtpFunction= (OtpArg) =>{
+    setOtp(OtpArg);
+  }
   return (
     <>
       <BrowserRouter>
@@ -30,14 +53,20 @@ export default function App() {
           <Route path = "/dashboard" element= {<Dashboard key = "6"/>}/>
           <Route path = "/edit_prod" element = {<EditProd key = "7"/>}/>
           <Route path = "/login" element = {<Login key = "8"/>}/>
-          <Route path = "/forgot" element = {<Forgot key = "9"/>}/>
+          <Route path = "/forgot" element = {<Forgot key = "9" setEmailFunction={setEmailFunction} setOtpFunction={setOtpFunction}/>}/>
           <Route path = "/man_log" element = {<ManagerLogin key = "10"/>}/>
           <Route path = "/admin_log" element = {<AdminLogin key = "11"/>}/>
           <Route path = "/review" element = {<Review key = "12"/>}/>
           <Route path = "/profile" element = {<Profile key = "13"/>}/>
           <Route path = "/pay" element = {<Payment key = "14"/>}/>
-          <Route path = "/checkout" element = {<Checkout key = "15"/>}/>
+          <Route path = "/checkout" element = {<Checkout key = "15" selectedProducts={selectedProducts}/>}/>
           <Route path = "/wallet" element = {<Wallet key = "16"/>}/>
+          <Route path = "/mainProducts" element = {<MainProducts key = "16" selectedProductsFunction={selectedProductsFunction}/>}/>
+          <Route path = "/register" element = {<Register key = "16" setEmailFunction={setEmailFunction} setOtpFunction={setOtpFunction}/>}/>
+          <Route path = "/otp/signUp" element = {<OtpSignUp key = "17" email={email} otpApp={otpApp}/>}/>
+          <Route path = "/reset" element = {<Reset key = "18" email = {email} otpApp={otpApp}/>}/>
+          <Route path = "/myprofile" element = {<MyProfile key = "19"/>}/>
+
         </Routes>
       </BrowserRouter>
     </>

@@ -2,64 +2,23 @@ import "../css/bootstrap.min.css";
 import "../css/fontawesome.min.css";
 import "../css/templatemo-style.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import NavbarAdmin from "./NavbarAdmin";
+
 export default function EditProd() {
+  const adminLogin = localStorage.getItem('adminToken');
+  let navigate = useNavigate();
+  
+  useEffect(()=>{
+    if(!adminLogin){
+      navigate("/admin_log", { replace: true });
+    }
+  },[]);
   return (
     <>
        <div clas="container">
-    <nav className="navbar navbar-expand-xl navbar-dark" style={{"backgroundColor":"#0e511e"}}>
-      <div className="container h-100">
-      <Link to="/dashboard"><a className="navbar-brand">
-          <h1 className="tm-site-title mb-0">Admin Dashboard</h1>
-        </a></Link>
-        <button
-          className="navbar-toggler ml-auto mr-0"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <i className="fas fa-bars tm-nav-icon"></i>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mx-auto h-100">
-              <li className="nav-item">
-              <Link to="/dashboard"><a className="nav-link">
-                  <i className="fas fa-tachometer-alt"></i> Dashboard
-                  <span className="sr-only">(current)</span>
-                </a></Link>
-              </li>
-              <li className="nav-item">
-              <Link to="/products"><a className="nav-link active">
-                  <i className="fas fa-shopping-cart"></i> Products
-                </a></Link>
-              </li>
-  
-              <li className="nav-item">
-              <Link to="/accounts"><a className="nav-link">
-                  <i className="far fa-user"></i> Accounts
-                </a></Link>
-              </li>
-              <li className="nav-item">
-              <Link to="/settings"><a
-                  className="nav-link"
-                  >
-                  <i className="fas fa-cog"></i>
-                  <span> Settings </span>
-                </a></Link>
-              </li>
-            </ul>
-            <ul className="navbar-nav">
-              <li className="nav-item">
-              <Link to="/login"><a className="nav-link d-block">
-                  <h6>Logout</h6>
-                </a></Link>
-              </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <NavbarAdmin/>
   </div>
   <div className="d-flex" style={{"backgroundImage":"url('./img/bg.jpeg')", "backgroundSize":"60% 100%"}}>
     <div className="container tm-mt-small tm-mb-big">

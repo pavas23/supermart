@@ -3,81 +3,25 @@ import "../css/bootstrap-grid.css";
 import "../css/fontawesome.min.css";
 import "../css/templatemo-style.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import NavbarAdmin from "./NavbarAdmin";
 
 export default function Accounts() {
+
+  const adminLogin = localStorage.getItem('adminToken');
+  let navigate = useNavigate();
+
+  useEffect(()=>{
+    if(!adminLogin){
+      navigate("/admin_log", { replace: true });
+    }
+  },[]);
+  
   return (
     <>
    <div className="" id="home">
-      <nav className="navbar navbar-expand-xl">
-        <div className="container h-100">
-          <Link to="/dashboard"><a className="navbar-brand">
-            <h1 className="tm-site-title mb-0">Product Admin</h1>
-          </a></Link>
-          <button
-            className="navbar-toggler ml-auto mr-0"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i className="fas fa-bars tm-nav-icon"></i>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mx-auto h-100">
-              <li className="nav-item">
-              <Link to="/dashboard"><a className="nav-link">
-                  <i className="fas fa-tachometer-alt"></i> Dashboard
-                  <span className="sr-only">(current)</span>
-                </a></Link>
-              </li>
-              <li className="nav-item dropdown">
-              
-                
-              </li>
-              <li className="nav-item">
-              <Link to="/products"><a className="nav-link">
-                  <i className="fas fa-shopping-cart"></i> Products
-                </a></Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to="/accounts"><a className="nav-link active">
-                  <i className="far fa-user"></i> Accounts
-                </a></Link>
-              </li>
-              <li className="nav-item dropdown">
-                <Link to="/settings"><a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i className="fas fa-cog"></i>
-                  <span> Settings <i className="fas fa-angle-down"></i> </span>
-                </a></Link>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">Profile</a>
-                  <a className="dropdown-item" href="#">Billing</a>
-                  <a className="dropdown-item" href="#">Customize</a>
-                </div>
-              </li>
-            </ul>
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link to="/login"><a className="nav-link d-block">
-                  <b>Logout</b>
-                </a></Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <NavbarAdmin/>
       <div className="container mt-5" style={{"display": "flex",
       "flexDirection": "column",
       "justifyContent": "center",

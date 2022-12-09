@@ -1,0 +1,22 @@
+#home-cards{
+    margin-top: 11vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+}
+.one-card{
+    width: 25%;
+    margin: 3%;
+    padding-left: 3vw;
+    border: 2px solid black;
+    opacity: 1;
+    background-color: white !important;
+}
+.one-card:hover{
+    transform: scale(1.07);
+    opacity: 0.8;
+}
+
