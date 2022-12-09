@@ -31,10 +31,6 @@ customers can register and order items.
 ## Overview
 https://prezi.com/view/sFuMp9wlno5v0vB5dnL5/
 
-## Screenshots
-<img width="1423" alt="Screenshot 2022-11-14 at 2 36 36 AM" src="https://user-images.githubusercontent.com/97559428/201544597-22a3d7b3-3ec4-4f4c-8b81-79405c28c6da.png">
-
-
 ## Installation
 
 Install my-project with npm for frontend part
