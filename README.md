@@ -41,13 +41,3 @@ Install my-project with npm for frontend part
   npm start
 ```
 
-    
-## Tech Stack
-- HTML
-- CSS
-- JavaScript
-- ReactJS
-- Java
-- SpringBoot
-- MySQL
-- JDBC
