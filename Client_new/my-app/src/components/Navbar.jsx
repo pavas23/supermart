@@ -25,7 +25,7 @@ export default function Navbar(props) {
                 </nav>
 
                 <div className="icons">
-                    <div className="fas fa-search" id="search-btn"></div>
+                    <Link to="/mainProducts"><div className="fas fa-search" id="search-btn"></div></Link>
                     <Link to="/checkout"><div className="fas fa-shopping-cart" id="cart-btn"></div></Link>
                     {adminLogin ? (
                         <Link to="/products"><div className="fas fa-plus" id="login-btn"></div></Link>
@@ -55,3 +55,4 @@ export default function Navbar(props) {
         </>
     );
 }
+

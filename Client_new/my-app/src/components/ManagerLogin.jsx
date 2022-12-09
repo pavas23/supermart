@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 export default function ManagerLogin(){
     var pass_t = document.getElementById("pass");
@@ -13,8 +14,9 @@ export default function ManagerLogin(){
     }
     return(
         <>
+        <Navbar/>
         <div class="login_page4">
-        <div class="form-box4">
+        <div class="form-box4" style={{ marginTop: "20vh" }}>
             <div class="button-box1">
                 <div id="btn1"></div>
                 <button type="button" class="toggle-btn1" onclick="login()">Log in</button>

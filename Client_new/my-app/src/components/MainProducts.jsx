@@ -25,21 +25,36 @@ export default function MainProduct(props) {
         getProducts();
     },[]);
 
-
-  const userLogin = localStorage.getItem('token');
-  let navigate = useNavigate();
+    const userLogin = localStorage.getItem('token');
+    let navigate = useNavigate();
 
     if(!userLogin){
       navigate("/login", { replace: true });
     }
 
+    var url1 = "http://127.0.0.1:9001/customer/setCart";
+
+    async function setCart(){
+        var response = await fetch(url1,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(selectedProducts),
+        });
+    }
 
     const[selectedProducts,setSelectedProducts] = useState([]);
 
     const setSelectedProductsFunction = (selectedProdcutsFromCard)=>{
         setSelectedProducts(selectedProdcutsFromCard);
         props.selectedProductsFunction(selectedProducts);
+        for(var i=0;i<selectedProducts.length;i++){
+            selectedProducts[i].customerID = parseInt(localStorage.getItem("token"));
+        }
+        console.log(localStorage.getItem("token"));
         console.log(selectedProducts);
+        setCart();
     }
 
     return (
@@ -49,7 +64,9 @@ export default function MainProduct(props) {
             <div id="home-cards">
                 {items.map((item) => {
                     return <div className="one-card"> <Card
+                        src = {item.src}
                         key={item.id}
+                        productID={item.id}
                         price={item.price}
                         name={item.name}
                         quantity = {item.quantity}

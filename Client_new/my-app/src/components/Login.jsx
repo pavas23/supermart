@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import Navbar from "./Navbar";
 
-export default function Login() {
+export default function Login(props) {
 
     let navigate = useNavigate();
 
@@ -38,7 +38,7 @@ export default function Login() {
         // const authtoken = jwt.sign(data,JWTsecret);
         console.log(json.verify);
         if (json.verify) {
-            localStorage.setItem("token", "!@!@#123131231231212312dfdsfsfsds");
+            localStorage.setItem("token", json.id);
             navigate("/", { replace: true });
             // TODO: AUTHTOKEN
         }

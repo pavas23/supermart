@@ -39,15 +39,16 @@ export default function Card(props) {
             name:props.name,
             price:props.price,
             quantity:qty,
+            productID:props.productID,
         });
         props.setSelectedProductsFunction(props.selectedProducts);
     }
     return (
         <>
-<div key={props.key} className="group relative">
+<div key={props.key} className="group relative" id={props.name}>
               <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                 <img
-                  src={ require("../image/cat-1.png") }
+                  src={props.src}
                 //   alt={product.imageAlt}
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />

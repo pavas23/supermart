@@ -32,17 +32,12 @@ export default function NavbarAdmin(){
                 </a></Link>
               </li>
   
-              <li className="nav-item">
-              <Link to="/accounts"><a className="nav-link">
-                  <i className="far fa-user"></i> Accounts
-                </a></Link>
-              </li>
+              
               <li className="nav-item">
               <Link to="/settings"><a
                   className="nav-link"
                   >
-                  <i className="fas fa-cog"></i>
-                  <span> Settings </span>
+                  <i className="fas fa-cog"></i>Settings
                 </a></Link>
               </li>
             </ul>

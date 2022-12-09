@@ -3,37 +3,128 @@ import { useContext, useEffect, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router";
-//import "../css/bootstrap.min.css";
+
 
 export default function (props) {
 
   const [shipping, setShipping] = useState(0);
-  const products = props.selectedProducts;
-  localStorage.setItem("cartArray",products);
+  const [products, setProducts] = useState([]);
+  const [custArray, setCust] = useState([]);
 
   const userLogin = localStorage.getItem('token');
   let navigate = useNavigate();
 
-  useEffect(()=>{
-    if(!userLogin){
-      navigate("/login", { replace: true });
-    }
-  });
-  
-  function totalcost() {
-    var total_price = 0;
-    products.forEach((element) => {
-      total_price += element.price * element.quantity;
+  const url = "http://127.0.0.1:9001/customer/getCart";
+
+  async function getCart() {
+    var productArray = await fetch(url, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(parseInt(localStorage.getItem("token"))),
     });
 
-    // setTotal(total_price);
+    productArray = await productArray.json();
+    setProducts(productArray);
+    console.log(productArray);
+  };
+
+  async function getCust(){
+    var customer = await fetch("http://127.0.0.1:9001/customer/getCustomer", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({id:parseInt(localStorage.getItem("token"))}),
+    });
+    customer = await customer.json();
+    setCust([customer.name,customer.email]);
+  }
+ 
+  async function placeOrder(newArr){
+    var response = await fetch("http://127.0.0.1:9001/customer/placeOrder", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newArr),
+    });
+    response = await response.json();
+    console.log(response);
+    // if(response){
+    //   navigate("/", { replace: true });
+    // }
+    // else{
+    //   navigate("/checkout", { replace: true });
+    // }
+  }
+
+function handleFormSubmit(event){
+  console.log(products);
+    event.prevetDefault();
+    var newArr = [];
+    var sizeOfArr = products.length;
+    for(var i=0;i<sizeOfArr;i++){
+      newArr[i] = products[i];
+    }
+    for(var i=0;i<sizeOfArr;i++){
+      newArr[i].address = credentials.address;
+      newArr[i].express = credentials.express;
+    }
+    setProducts(newArr);
+    console.log(products);
+    placeOrder(newArr);
+  }
+
+  useEffect(() => {
+    async function checkout() {
+      if (!userLogin) {
+        navigate("/login", { replace: true });
+      }
+      else {
+        getCart();
+        getCust();
+      }
+    }
+    checkout();
+  }, []);
+
+  const [credentials,setCredentials] = useState({
+    address:"",
+    express:false,
+});
+
+
+  const onChange = (event)=>{
+    setCredentials({
+        ...credentials,
+        [event.target.name]:event.target.value,
+    });
+}
+
+  const [total, setTotal] = useState(0);
+
+  function totalcost() {
+    var total_price = 0;
+    for (let i = 0; i < products.length; i++) {
+      total_price += products[i].price * products[i].quantity;
+    }
     return total_price;
   }
-  const [total, setTotal] = useState(totalcost());
   return (
     <>
-<Navbar/>
-      <div style={{ background: "white",marginTop:"11vh" }}>
+      <Navbar />
+      <div style={{ background: "white", marginTop: "11vh" }}>
         <div
           class="mt-20 text-black"
           style={{ color: "black", "margin-top": "20px" }}
@@ -79,8 +170,8 @@ export default function (props) {
               </h2>
               <form
                 class="justify-center w-full mx-auto text-black"
-                method="post"
-                action
+                method="POST"
+                onSubmit={handleFormSubmit}
                 style={{ justifyContent: "center", width: "100%" }}
               >
                 <div class="">
@@ -99,12 +190,13 @@ export default function (props) {
                           fontSize: "medium",
                         }}
                       >
-                        First Name
+                        Name
                       </label>
                       <input
+                      disabled
                         name="firstName"
                         type="text"
-                        placeholder="First Name"
+                        placeholder={custArray[0]}
                         class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                         style={{
                           width: "100%",
@@ -122,57 +214,36 @@ export default function (props) {
                     </div>
                     <div class="w-full" style={{ width: "100%" }}>
                       <label
-                        for="lastName"
+                        for="firstName"
                         class="block mb-3 text-sm font-semibold text-gray-500"
                         style={{
                           display: "block",
                           marginBottom: "3px",
                           fontWeight: "bold",
                           fontSize: "medium",
-                          paddingTop: "4px",
                         }}
                       >
-                        Last Name
+                        Email
                       </label>
                       <input
-                        name="lastName"
+                      disabled
+                        name="firstName"
                         type="text"
-                        placeholder="Last Name"
+                        placeholder={custArray[1]}
                         class="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
                         style={{
                           width: "100%",
                           "padding-left": "0px",
                           "padding-right": "0px",
+                          marginBottom: "4px",
                           border: "solid",
                           borderColor: "gray300",
+                          marginBottom: "4px",
+                          paddingTop: "2px",
+                          paddingBottom: "2px",
                           paddingLeft: "10px",
                         }}
                       />
-                    </div>
-                  </div>
-                  <div class="mt-2">
-                    <div class="w-full">
-                      <label
-                        for="Email"
-                        class="block mb-10 text-sm font-semibold text-gray-500"
-                      >
-                        Email
-                      </label>
-                      <p
-                        className="border-gray-300 rounded"
-                        style={{
-                          border: "2px",
-                          "--tw-border-opacity": "1",
-                          "border-color":
-                            "rgb(209 213 219 / var(--tw-border-opacity))",
-                          "border-style": "solid",
-                          padding: "14px",
-                          "font-size": "15px",
-                        }}
-                      >
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Optio, molestias vero. Nulla.
-                      </p>
                     </div>
                   </div>
                   <div
@@ -187,28 +258,6 @@ export default function (props) {
                         class="flex items-center text-sm group text-heading mt-3 mb-3"
                         style={{ display: "flex", alignContent: "center" }}
                       >
-                        <input
-                          type="checkbox"
-                          class="w-5 h-5 border border-gray-300 rounded focus:outline-none focus:ring-1"
-                          style={{
-                            width: "10px",
-                            height: "10px",
-                            borderColor: "gray",
-                            borderRadius: "1000px",
-                            "background-color": "white",
-                            padding: "5px",
-                          }}
-                        />
-                        <p
-                          class="ml-2 text-lg font-semibold"
-                          style={{
-                            color: "black",
-                            marginLeft: "5px",
-                            paddingLeft: "2px",
-                          }}
-                        >
-                          Use saved Address
-                        </p>
                       </label>
                       <label
                         for="Address"
@@ -223,6 +272,9 @@ export default function (props) {
                         cols="20"
                         rows="4"
                         placeholder="Address"
+                        value={credentials.email}
+                        onChange={onChange}
+                        required
                         style={{
                           width: "100%",
                           "padding-left": "0px",
@@ -262,6 +314,7 @@ export default function (props) {
                         onClick={() => {
                           setShipping(0);
                           console.log(shipping);
+                          credentials.express = false;
                           setTotal(totalcost());
                         }}
                         style={{
@@ -316,6 +369,7 @@ export default function (props) {
                         onClick={() => {
                           setShipping(100);
                           console.log(shipping);
+                          credentials.express = true;
                           setTotal(totalcost() + 100);
                         }}
                         style={{
@@ -360,19 +414,21 @@ export default function (props) {
                       justifyContent: "center",
                     }}
                   >
-                    <button
-                      class="w-full px-6 py-2 text-white-900 bg-indigo-700 hover:bg-indigo-500 mr-2 rounded-full"
-                      style={{
-                        color: "white",
-                        color: "white",
-                        width: "50%",
-                        background: "#1d9e2a",
-                        border: "black",
-                        borderRadius: "1000px",
-                      }}
-                    >
-                      Pay With Wallet
-                    </button>
+                      <button
+                      type = "submit"
+                        // onClick={window.alert("Order Placed Successfull")}
+                        class="w-full px-6 py-2 text-white-900 bg-indigo-700 hover:bg-indigo-500 mr-2 rounded-full"
+                        style={{
+                          color: "white",
+                          color: "white",
+                          width: "200%",
+                          background: "#1d9e2a",
+                          border: "black",
+                          borderRadius: "1000px",
+                        }}
+                      >
+                        Place Order
+                      </button>
                   </div>
                 </div>
               </form>
@@ -416,10 +472,10 @@ export default function (props) {
                         d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v3"
                       />
                     </svg>
-                    {/* <h5 class="mb-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
-Your Wallet
+                    <h5 class="mb-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+                      Your Wallet
 
-</h5> */}
+                    </h5>
 
                     <h2
                       className="mt-2 mr-2 text-xl font-semibold tracking-tight text-black dark:text-white"
@@ -463,10 +519,10 @@ Your Wallet
                       borderColor:
                         "rgb(209 213 219 / var(--tw-border-opacity))",
                       borderBottomWidth: "1px",
-                      borderBottomStyle:'solid',
+                      borderBottomStyle: 'solid',
                       justifyContent: 'space-between',
-                      fontWeight:'bold'
-                  
+                      fontWeight: 'bold'
+
 
                     }}
                   >
@@ -485,9 +541,9 @@ Your Wallet
                       borderColor:
                         "rgb(209 213 219 / var(--tw-border-opacity))",
                       borderBottomWidth: "1px",
-                      borderBottomStyle:'solid',
+                      borderBottomStyle: 'solid',
                       justifyContent: 'space-between',
-                      fontWeight:'bold'
+                      fontWeight: 'bold'
 
 
                     }}
@@ -505,14 +561,14 @@ Your Wallet
                       borderColor:
                         "rgb(209 213 219 / var(--tw-border-opacity))",
                       borderBottomWidth: "1px",
-                      borderBottomStyle:'solid',
+                      borderBottomStyle: 'solid',
                       justifyContent: 'space-between',
-                      fontWeight:'bold'
+                      fontWeight: 'bold'
 
                     }}
                   >
-                    
-                   <p> Total</p><p class="ml-2 text-black">&#8377;{total}</p>
+
+                    <p> Total</p><p class="ml-2 text-black">&#8377;{total}</p>
                   </div>
                   <div
                     class="flex flex-col space-y-7 overflow-y-auto"
@@ -526,7 +582,7 @@ Your Wallet
                       borderColor:
                         "black",
                       borderBottomWidth: "1px",
-                      borderBottomStyle:'solid'
+                      borderBottomStyle: 'solid'
                     }}
                   >
                     {products.map((element) => (
@@ -562,6 +618,15 @@ Your Wallet
                           <p class="text-red-600 text-black">
                             Price &#8377;{element.price}
                           </p>
+                          <p class="text-red-600 text-black">
+                            <button onClick={() => {
+                              console.log("clicked");
+                              fetch('http://localhost:9001/customer/deleteCartOne', { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(element) }).then(() => { console.log('Customer Deleted'); })
+                            }
+
+                            }>Delete</button>
+                          </p>
+
                         </div>
                         <div>
                           <svg

@@ -41,6 +41,12 @@ export default function App() {
   const setOtpFunction= (OtpArg) =>{
     setOtp(OtpArg);
   }
+
+  // const[customerID,setCustomerID] = useState("");
+  // const setCustomerIDFunction =  (customerid)=>{
+  //   setCustomerIDFunction(customerid);
+  // }
+
   return (
     <>
       <BrowserRouter>
@@ -58,8 +64,8 @@ export default function App() {
           <Route path = "/admin_log" element = {<AdminLogin key = "11"/>}/>
           <Route path = "/review" element = {<Review key = "12"/>}/>
           <Route path = "/profile" element = {<Profile key = "13"/>}/>
-          <Route path = "/pay" element = {<Payment key = "14"/>}/>
-          <Route path = "/checkout" element = {<Checkout key = "15" selectedProducts={selectedProducts}/>}/>
+          {/* <Route path = "/pay" element = {<Payment key = "14"/>}/> */}
+          <Route path = "/checkout" element = {<Checkout key = "15"/>}/>
           <Route path = "/wallet" element = {<Wallet key = "16"/>}/>
           <Route path = "/mainProducts" element = {<MainProducts key = "16" selectedProductsFunction={selectedProductsFunction}/>}/>
           <Route path = "/register" element = {<Register key = "16" setEmailFunction={setEmailFunction} setOtpFunction={setOtpFunction}/>}/>
