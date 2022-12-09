@@ -54,4 +54,4 @@ Install my-project with npm for frontend part
 - Java
 - SpringBoot
 - MySQL
-- JDBS
+- JDBC
