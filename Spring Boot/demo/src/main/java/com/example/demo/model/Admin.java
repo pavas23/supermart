@@ -10,7 +10,8 @@ public class Admin extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-       
+      
+
     
     public int getId() {
         return id;

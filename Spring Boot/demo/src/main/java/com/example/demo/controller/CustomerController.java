@@ -11,10 +11,11 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.Service.CartService;
+
 import com.example.demo.Service.CustomerService;
 import com.example.demo.Service.HistoryService;
 import com.example.demo.Service.OrderService;
+import com.example.demo.Service.PlacedOrderService;
 import com.example.demo.Service.ProductService;
 import com.example.demo.model.Cart;
 import com.example.demo.model.Customer;
@@ -23,6 +24,7 @@ import com.example.demo.model.History;
 import com.example.demo.model.Order;
 import com.example.demo.model.OrderList;
 import com.example.demo.model.Product;
+import com.example.demo.model.placedOrder;
 import com.example.demo.springmail.EmailDetails;
 import com.example.demo.springmail.EmailService;
 class Reset{
@@ -47,7 +49,7 @@ public class CustomerController {
 	@Autowired
 	private OrderService orderService;
 	@Autowired
-	private CartService cartService;
+	private PlacedOrderService POService;
 		@PostMapping("/add")
 	public boolean add(@RequestBody Customer customer) {
 	return	customerService.saveCustomer(customer);
@@ -86,6 +88,7 @@ public class CustomerController {
 	public List<History> getHistory(@RequestBody Customer customer){
 	    return historyService.getCustomerHistory(customer.getId());
 	}
+	
 	@PostMapping(value = "/placeOrder" )
 	public boolean placeOrder(@RequestBody List<Order> list) {
 	    LocalDateTime ldt = LocalDateTime.now();
@@ -215,25 +218,77 @@ public boolean resetPassword(@RequestBody Customer customer) {
 	    customerService.updateCustomer(c);
 	}
 	@PostMapping("/getCart")
-public List<Cart> getCartElements(@RequestBody Integer id){
-        return cartService.getCart(id);
+public List<placedOrder> getCartElements(@RequestBody Integer id){
+			
+        return POService.getCart(id);
 }
 	@DeleteMapping("/deleteCart")
 	public String deleteCart() {
-	        cartService.deleteCart();
+	        POService.deleteCart();
 			return "deleted products";
 	        
 	}
 	@PostMapping("/setCart")
-	public String setCart(@RequestBody List<Cart> list) {
-	    cartService.setCart(list);
+	public String setCart(@RequestBody List<placedOrder> list) {
+	    POService.setCart(list);
 		return "product added to cart";
 	}
 	@PostMapping("/deleteCartOne")
-	public String deleteCartById(@RequestBody Cart cart) {
+	public String deleteCartById(@RequestBody placedOrder PO) {
 		// TODO Auto-generated method stub
-		cartService.deleteOneItem(cart);
+		POService.deleteOneItem(PO);
 		return "Deleted";
+	}
+	
+	@PostMapping("/sendOrder")
+	public boolean sendOrder(@RequestBody placedOrder PO) {
+		String orders = "";
+		 LocalDateTime ldt = LocalDateTime.now();
+		    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+		int customerCredit = customerService.getCustomer(PO.getCustomerID()).getCredit();
+		int total_cost = PO.getTotalCost();
+		if(PO.isExpress()) total_cost+=100;
+		if(total_cost-customerCredit>0) return false;
+		Customer updatedCustomer = customerService.getCustomer(PO.getCustomerID());
+		
+        updatedCustomer.setId(PO.getCustomerID());
+        updatedCustomer.setCredit((customerService.getCustomer(PO.getCustomerID()).getCredit()-total_cost));
+        customerService.updateCustomer(updatedCustomer);
+		List <History> historyList = new ArrayList<>();
+		for(Product obj : PO.getProductList()) {
+			History history = new History();
+			history.setCustomerID(PO.getCustomerID());
+			history.setProductID(obj.getId());
+			history.express = PO.isExpress();
+			history.setAddress(PO.getAddress());
+			history.setDate(ldt.format(myFormatObj));
+			history.setQuantity(obj.getquantity());
+			history.setPrice(obj.getPrice());
+			history.setTotalCost(obj.getPrice()*obj.getquantity());
+			orders += "Product: "+ obj.getName()+" Price: \u20B9"+obj.getPrice()+" Quantity Ordered: "+obj.getquantity()+"\n";
+			 Product p = productService.getProduct(obj.getId());
+		        
+		        p.setquantity(p.getquantity()-obj.getquantity());
+		        p.setUnits_sold(obj.getquantity());
+		        productService.saveProduct(p);
+			if(PO.isExpress()) history.setExpected_date(ldt.plusHours(1).format(myFormatObj));
+			else history.setExpected_date(ldt.plusHours(3).format(myFormatObj));
+			historyList.add(history);
+		}
+		historyService.addList(historyList);
+		EmailDetails ed = new EmailDetails();
+	    ed.setRecipient(updatedCustomer.getEmail());
+	    if(PO.isExpress()) {
+	        ed.setMsgBody("Thank you for shopping with BBB SuperMart.\n\nYour Order summary is as follows\n\n"+orders+"\n\nTotal Bill Amount: \u20B9"+total_cost+"\n\nShipping Type: Express Shipping (+\u20B9100) \n\nExpected Delivery Date: "+historyList.get(0).getExpected_date()+"\n\nDelivery Address: "+historyList.get(0).getAddress());
+	    }else {
+	        ed.setMsgBody("Thank you for shopping with BBB SuperMart.\n\nYour Order summary is as follows\n\n"+orders+"\n\nTotal Bill Amount: \u20B9"+total_cost+"\n\nShipping Type: Regular Shipping\\n\\nExpected Delivery Date: "+historyList.get(0).getExpected_date()+"\n\nDelivery Address: "+historyList.get(0).getAddress());
+	        
+	    }
+	   
+	    ed.setSubject("Tax invoice for "+ historyList.get(0).getDate());
+				emailService.sendSimpleMail(ed);
+		
+		return true;
 	}
 	
 }

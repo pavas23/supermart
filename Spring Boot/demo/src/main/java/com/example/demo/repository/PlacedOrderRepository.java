@@ -9,16 +9,17 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.Cart;
 import com.example.demo.model.History;
+import com.example.demo.model.placedOrder;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart,Integer>{
+public interface PlacedOrderRepository extends JpaRepository<placedOrder,Integer>{
     @Query(
-            value ="SELECT * FROM Cart where CustomerID = :CustomerId",
+            value ="SELECT * FROM placedOrder where CustomerID = :CustomerId",
             nativeQuery= true
             )
-    public List<Cart> getbyCustomerID(@Param("CustomerId") int id);
+    public List<placedOrder> getbyCustomerID(@Param("CustomerId") int id);
     @Query(
-            value ="DELETE FROM cats\r\n WHERE id= :CustomerId",
+            value ="DELETE FROM placedOrder WHERE id= :CustomerId",
                     
             nativeQuery= true
             )

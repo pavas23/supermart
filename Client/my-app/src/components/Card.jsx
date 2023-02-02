@@ -25,7 +25,7 @@ export default function Card(props) {
                 // means the products is already in the array
                 if(qty == 0)
                 {
-                    props.selectedProducts[i] = null;
+                    props.selectedProducts[i] = {};
                     return;
                 }
                 props.selectedProducts[i].quantity = qty;
@@ -61,9 +61,9 @@ export default function Card(props) {
                       {props.name}
                     </a>
                   </h3>
-                  <p className="mt-1 text-sm text-black">Qty:{qty}</p>
+                  <p className="mt-1 text-sm text-black">Selected Quantity : {qty}</p>
                 </div>
-                <p className="text-sm font-medium text-black">{props.price}FA</p>
+                <p className="text-sm font-medium text-black">&#8377;{props.price}</p>
                 <div>
                 <div className="fas fa-plus" id="add-btn" onClick={handleAddProduct} style={{"borderStyle":"solid",
                 "borderWidth":"0.5px","width":"25px","paddingLeft":"0.2%","float":"left","height":"22px","lineHeight":"22px"}} ></div>
