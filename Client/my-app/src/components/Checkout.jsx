@@ -6,35 +6,43 @@ import { useNavigate } from "react-router";
 
 
 export default function (props) {
+  //  function deleteItem (id){
+  //   let varcart_string = localStorage.getItem("cart");
+  //   var varcart = JSON.parse(varcart_string);
+  //   for()
 
+  // }
   const [shipping, setShipping] = useState(0);
   const [products, setProducts] = useState([]);
   const [custArray, setCust] = useState([]);
-
+  const [wallet,setWallet] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [address,setAddress] = useState("");
   const userLogin = localStorage.getItem('token');
   let navigate = useNavigate();
 
   const url = "http://127.0.0.1:9001/customer/getCart";
+  let localCart = localStorage.getItem("cart");
+  // async function getCart() {
+  //   var productArray = await fetch(url, {
+  //     method: "POST",
+  //     mode: "cors",
+  //     cache: "no-cache",
+  //     credentials: "same-origin",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(parseInt(localStorage.getItem("token"))),
+  //   });
 
-  async function getCart() {
-    var productArray = await fetch(url, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(parseInt(localStorage.getItem("token"))),
-    });
+  //   productArray = await productArray.json();
+  //   setProducts(productArray);
+  //   console.log(productArray);
+  // };
 
-    productArray = await productArray.json();
-    setProducts(productArray);
-    console.log(productArray);
-  };
 
   async function getCust(){
-    var customer = await fetch("http://127.0.0.1:9001/customer/getCustomer", {
+    var customer = await fetch("http://127.0.0.1:8080/customer/getCustomer", {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -46,10 +54,12 @@ export default function (props) {
     });
     customer = await customer.json();
     setCust([customer.name,customer.email]);
+    setWallet(customer.credit);
+    console.log(customer.credit);
   }
  
   async function placeOrder(newArr){
-    var response = await fetch("http://127.0.0.1:9001/customer/placeOrder", {
+    var response = await fetch("http://127.0.0.1:8080/customer/sendOrder", {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -70,20 +80,32 @@ export default function (props) {
   }
 
 function handleFormSubmit(event){
+  
   console.log(products);
-    event.prevetDefault();
-    var newArr = [];
-    var sizeOfArr = products.length;
-    for(var i=0;i<sizeOfArr;i++){
-      newArr[i] = products[i];
+    event.preventDefault();
+    var placedorder = {
+      "customerID" : parseInt(localStorage.getItem("token")),
+      "express" : (shipping!=0) ? true : false,
+      "productList" : JSON.parse(localStorage.getItem("cart")),
+      "totalCost" : (shipping) ? totalcost()+100:totalcost(),
+      "address" : address
+
     }
-    for(var i=0;i<sizeOfArr;i++){
-      newArr[i].address = credentials.address;
-      newArr[i].express = credentials.express;
-    }
-    setProducts(newArr);
-    console.log(products);
-    placeOrder(newArr);
+    // var newArr = [];
+    // var sizeOfArr = products.length;
+    // for(var i=0;i<sizeOfArr;i++){
+    //   newArr[i] = products[i];
+    // }
+    // for(var i=0;i<sizeOfArr;i++){
+    //   newArr[i].address = credentials.address;
+    //   newArr[i].express = credentials.express;
+    // }
+    // setProducts(newArr);
+    // console.log(products);
+    console.log(placedorder);
+     if(placeOrder(placedorder))
+     window.alert("Order Placed Successfull")
+    console.log("order placed");
   }
 
   useEffect(() => {
@@ -92,18 +114,23 @@ function handleFormSubmit(event){
         navigate("/login", { replace: true });
       }
       else {
-        getCart();
+        setProducts(JSON.parse(localCart));
         getCust();
       }
     }
     checkout();
+    setTotal(totalcost());
   }, []);
 
   const [credentials,setCredentials] = useState({
     address:"",
     express:false,
 });
-
+const handleAddressChange = event => {
+  
+  setAddress(event.target.value);
+  
+};
 
   const onChange = (event)=>{
     setCredentials({
@@ -112,11 +139,13 @@ function handleFormSubmit(event){
     });
 }
 
-  const [total, setTotal] = useState(0);
+
 
   function totalcost() {
+    
     var total_price = 0;
     for (let i = 0; i < products.length; i++) {
+      if(products[i].id!=-1)
       total_price += products[i].price * products[i].quantity;
     }
     return total_price;
@@ -272,8 +301,8 @@ function handleFormSubmit(event){
                         cols="20"
                         rows="4"
                         placeholder="Address"
-                        value={credentials.email}
-                        onChange={onChange}
+                        value={address}
+                        onChange={handleAddressChange}
                         required
                         style={{
                           width: "100%",
@@ -370,7 +399,7 @@ function handleFormSubmit(event){
                           setShipping(100);
                           console.log(shipping);
                           credentials.express = true;
-                          setTotal(totalcost() + 100);
+                          setTotal(total + 100);
                         }}
                         style={{
                           width: "20px",
@@ -416,7 +445,8 @@ function handleFormSubmit(event){
                   >
                       <button
                       type = "submit"
-                        // onClick={window.alert("Order Placed Successfull")}
+                      //   onClick={window.alert("Order Placed Successfull")}
+                    //  onClick={handleFormSubmit}
                         class="w-full px-6 py-2 text-white-900 bg-indigo-700 hover:bg-indigo-500 mr-2 rounded-full"
                         style={{
                           color: "white",
@@ -481,7 +511,7 @@ function handleFormSubmit(event){
                       className="mt-2 mr-2 text-xl font-semibold tracking-tight text-black dark:text-white"
                       style={{ fontSize: "larger", fontWeight: "600" }}
                     >
-                      Available Balance : &#8377;0000
+                      Available Balance : &#8377;{wallet}
                     </h2>
                   </div>
 
@@ -568,7 +598,7 @@ function handleFormSubmit(event){
                     }}
                   >
 
-                    <p> Total</p><p class="ml-2 text-black">&#8377;{total}</p>
+                    <p> Total</p><p class="ml-2 text-black">&#8377;{(shipping ?totalcost()+100 :  totalcost())}</p>
                   </div>
                   <div
                     class="flex flex-col space-y-7 overflow-y-auto"
@@ -586,65 +616,77 @@ function handleFormSubmit(event){
                     }}
                   >
                     {products.map((element) => (
+                      (element.id!=-1)  ?<div
+                      class="flex space-x-4"
+                      style={{ display: "flex", marginLeft: "16px" }}
+                    >
                       <div
-                        class="flex space-x-4"
-                        style={{ display: "flex", marginLeft: "16px" }}
+                        style={{
+                          width: "4.5rem",
+                          height: "150px",
+                          marginRight: "2rem",
+                          marginBottom: "1rem",
+                        }}
                       >
-                        <div
-                          style={{
-                            width: "4.5rem",
-                            height: "150px",
-                            marginRight: "2rem",
-                            marginBottom: "1rem",
-                          }}
-                        >
-                          <img
-                            src={element.imageAddr}
-                            alt="image"
-                            class="w-10"
-                            style={{ width: "100%", height: "100%" }}
-                          />
-                        </div>
-                        <div className="text-black">
-                          <h2
-                            class="text-xl font-bold text-black"
-                            style={{ fontSize: "20px", fontWeight: "700" }}
-                          >
-                            {element.name}
-                          </h2>
-                          <p class="text-sm text-black">
-                            Quantity : {element.quantity}
-                          </p>
-                          <p class="text-red-600 text-black">
-                            Price &#8377;{element.price}
-                          </p>
-                          <p class="text-red-600 text-black">
-                            <button onClick={() => {
-                              console.log("clicked");
-                              fetch('http://localhost:9001/customer/deleteCartOne', { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(element) }).then(() => { console.log('Customer Deleted'); })
-                            }
-
-                            }>Delete</button>
-                          </p>
-
-                        </div>
-                        <div>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="w-6 h-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
-                        </div>
+                        <img
+                          src={element.imageAddr}
+                          alt="image"
+                          class="w-10"
+                          style={{ width: "100%", height: "100%" }}
+                        />
                       </div>
+                      <div className="text-black">
+                        <h2
+                          class="text-xl font-bold text-black"
+                          style={{ fontSize: "20px", fontWeight: "700" }}
+                        >
+                          {element.name}
+                        </h2>
+                        <p class="text-sm text-black">
+                          Quantity : {element.quantity}
+                        </p>
+                        <p class="text-red-600 text-black">
+                          Price &#8377;{element.price}
+                        </p>
+                        <p class="text-red-600 text-black">
+                          <button onClick={() => {
+                            var arr_string = localStorage.getItem('cart');
+                            var arr = JSON.parse(arr_string);
+                            for(var i=0;i<arr.length;i++){
+                              if(arr[i].id == element.id){
+                                arr[i] = {"id" : -1, "price" : 0};
+                              }
+                            }
+                           setProducts(arr);
+                          console.log(arr);
+                          let x = JSON.stringify(arr);
+                            localStorage.setItem("cart",x);
+                             console.log("clicked");
+                             setTotal(totalcost());
+                            // fetch('http://localhost:8080/customer/deleteCartOne', { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(element) }).then(() => { console.log('Customer Deleted'); })
+                          }
+
+                          }>Delete</button>
+                        </p>
+
+                      </div>
+                      <div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-6 h-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </div>
+                    </div> : <></>
                     ))}
                   </div>
                 </div>

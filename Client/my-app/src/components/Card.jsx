@@ -39,7 +39,7 @@ export default function Card(props) {
             name:props.name,
             price:props.price,
             quantity:qty,
-            productID:props.productID,
+            id:props.productID,
         });
         props.setSelectedProductsFunction(props.selectedProducts);
     }

@@ -6,8 +6,10 @@ import Navbar from './Navbar';
 import { useNavigate } from "react-router";
 
 export default function MainProduct(props) {
-    const url = "http://127.0.0.1:9001/product/getAll" // url for getting all the products available
+    const url = "http://localhost:8080/product/getAll" // url for getting all the products available
     const[items,setItems] = useState([]);
+    const[selectedProducts,setSelectedProducts] = useState([]);
+    let cartItems =localStorage.getItem("cart");
     useEffect(()=>{
         async function getProducts(){
             var response = await fetch(url, {
@@ -21,6 +23,10 @@ export default function MainProduct(props) {
               });
               response = await response.json();
               setItems(response);
+             
+            //   let getItem = JSON.parse(cartItems);
+            //   if(getItem)setSelectedProducts(getItem);
+
         };
         getProducts();
     },[]);
@@ -44,17 +50,18 @@ export default function MainProduct(props) {
         });
     }
 
-    const[selectedProducts,setSelectedProducts] = useState([]);
+
 
     const setSelectedProductsFunction = (selectedProdcutsFromCard)=>{
         setSelectedProducts(selectedProdcutsFromCard);
         props.selectedProductsFunction(selectedProducts);
-        for(var i=0;i<selectedProducts.length;i++){
-            selectedProducts[i].customerID = parseInt(localStorage.getItem("token"));
-        }
+        let stringCart = JSON.stringify(selectedProducts);
+              
+        localStorage.setItem("cart" , stringCart);
+
         console.log(localStorage.getItem("token"));
         console.log(selectedProducts);
-        setCart();
+       // setCart();
     }
 
     return (
