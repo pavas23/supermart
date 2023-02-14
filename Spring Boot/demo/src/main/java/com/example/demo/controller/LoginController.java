@@ -9,6 +9,7 @@ import com.example.demo.Service.LoginAuthService;
 import com.example.demo.model.Admin;
 import com.example.demo.model.Customer;
 import com.example.demo.model.Manager;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -28,5 +29,9 @@ public class LoginController {
     public Admin auth(@RequestBody Admin admin) {
               return loginAuthService.verifyAdmin(admin);
     }
-    
+
+    @PostMapping("/auth/customer/getID")
+    public int auth(@RequestBody Map<String,String> authToken){
+        return loginAuthService.getCustomerID(authToken);
+    }
 }
