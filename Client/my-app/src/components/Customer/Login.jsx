@@ -29,13 +29,10 @@ export default function Login(props) {
 
     const json = await response.json();
     console.log(json);
-    console.log(json.verify);
-    if (json.verify) {
-      localStorage.setItem("token", json.id);
+    if (json != null) {
+      localStorage.setItem("token", json.authToken);
       navigate("/", { replace: true });
-      // TODO: AUTHTOKEN
     } else {
-      console.log("hello");
       navigate("/login", { replace: true });
       window.alert("Invalid Credentials");
     }

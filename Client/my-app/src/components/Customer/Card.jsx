@@ -49,10 +49,10 @@ export default function Card1(props) {
       <div key={props.key} className="group relative" id={props.name}>
         <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
           <img
-            src="https://cdn.pixabay.com/photo/2016/10/07/13/36/tangerines-1721590__480.jpg"
+            src={props.src}
             alt={props.name}
             className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-            style={{ height: "100%", width: "100%" }}
+            style={{ height: "30vh", width: "100%" }}
           />
         </div>
         <div

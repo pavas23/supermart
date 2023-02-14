@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/img-redundant-alt */
+// f20210182@hyderabad.bits-pilani.ac.in
 import { Link } from "react-router-dom";
 import {useEffect, useState } from "react";
 import Navbar from "./Navbar";
@@ -15,30 +16,13 @@ export default function Checkout() {
   const [wallet, setWallet] = useState(0);
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState("");
+  const[customerID,setCustomerID] = useState(-1);
   const userLogin = localStorage.getItem('token');
   let navigate = useNavigate();
 
-  // const url = "http://127.0.0.1:9001/customer/getCart";
   let localCart = localStorage.getItem("cart");
-  // async function getCart() {
-  //   var productArray = await fetch(url, {
-  //     method: "POST",
-  //     mode: "cors",
-  //     cache: "no-cache",
-  //     credentials: "same-origin",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(parseInt(localStorage.getItem("token"))),
-  //   });
 
-  //   productArray = await productArray.json();
-  //   setProducts(productArray);
-  //   console.log(productArray);
-  // };
-
-
-  async function getCust() {
+  async function getCust(id) {
     var customer = await fetch("http://127.0.0.1:9001/customer/getCustomer", {
       method: "POST",
       mode: "cors",
@@ -47,7 +31,7 @@ export default function Checkout() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: parseInt(localStorage.getItem("token")) }),
+      body: JSON.stringify({ id: id }),
     });
     customer = await customer.json();
     setCust([customer.name, customer.email]);
@@ -68,37 +52,38 @@ export default function Checkout() {
     });
     response = await response.json();
     console.log(response);
-    // if(response){
-    //   navigate("/", { replace: true });
-    // }
-    // else{
-    //   navigate("/checkout", { replace: true });
-    // }
   }
+
+  async function getCustomerID(authTokenObj){
+    console.log("hello");
+    var response = await fetch("http://127.0.0.1:9001/login/auth/customer/getID",{
+      method:"POST",
+      mode:"cors",
+      cache:"no-cache",
+      credentials:"same-origin",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify(authTokenObj),
+    });
+    response = await response.json();
+    console.log(response);
+    setCustomerID(response);
+  }
+
 
   function handleFormSubmit(event) {
 
     console.log(products);
     event.preventDefault();
     var placedorder = {
-      "customerID": parseInt(localStorage.getItem("token")),
+      "customerID": customerID,
       "express": (shipping !== 0) ? true : false,
       "productList": JSON.parse(localStorage.getItem("cart")),
       "totalCost": (shipping) ? totalcost() + 100 : totalcost(),
       "address": address
 
     }
-    // var newArr = [];
-    // var sizeOfArr = products.length;
-    // for(var i=0;i<sizeOfArr;i++){
-    //   newArr[i] = products[i];
-    // }
-    // for(var i=0;i<sizeOfArr;i++){
-    //   newArr[i].address = credentials.address;
-    //   newArr[i].express = credentials.express;
-    // }
-    // setProducts(newArr);
-    // console.log(products);
     console.log(placedorder);
     if (placeOrder(placedorder))
       window.alert("Order Placed Successfull")
@@ -112,12 +97,13 @@ export default function Checkout() {
       }
       else {
         setProducts(JSON.parse(localCart));
-        getCust();
+        getCustomerID({"authToken":localStorage.getItem("token")});
+        getCust(customerID);
       }
     }
     checkout();
     setTotal(totalcost());
-  });
+  },[]);
 
   const [credentials, setCredentials] = useState({
     address: "",
