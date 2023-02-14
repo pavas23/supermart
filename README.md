@@ -35,13 +35,16 @@ customers can register and order items.
 ## Overview
 https://prezi.com/view/sFuMp9wlno5v0vB5dnL5/
 
-## Installation
+## Run Locally
 
 Install my-project with npm for frontend part
 
 ```bash
-  npm install
   cd my-app
+  npm install
   npm start
+```
+```bash
+Load all Maven Dependencies for Spring Boot and run java application
 ```
 
