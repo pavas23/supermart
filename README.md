@@ -28,6 +28,10 @@ customers can register and order items.
 ### Other functionality
   - Admin user should be able to generate reports like – items sold on a date, customer order details(summary) for a month, item stock status etc.
   - Any user can generate his order history (summary) for a given month.
+  
+### ScreenShots
+<img width="1440" alt="Screenshot 2023-02-14 at 10 26 04 PM" src="https://user-images.githubusercontent.com/97559428/218805103-346e3df6-f027-415c-931b-1d90a3d49833.png">
+
 ## Overview
 https://prezi.com/view/sFuMp9wlno5v0vB5dnL5/
 
