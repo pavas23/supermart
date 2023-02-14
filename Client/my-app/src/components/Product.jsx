@@ -18,7 +18,7 @@ export default function Product() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-     fetch('http://localhost:9001/manager/getAllProducts')
+     fetch('http://localhost:8080/manager/getAllProducts')
         .then((res) => res.json())
         .then((data) => {
            console.log(data);
@@ -45,16 +45,28 @@ export default function Product() {
           backgroundSize: "70% 100%",
         }}
       >
-        <div className="container mt-5" >
-          <div className="row tm-content-row" style={{"justify-content":"space-around"}}>
+       
+        <div className="" style={{marginTop: '9rem'}} >
+          <div className="row tm-content-row" style={{justifyContent: 'space-around',
+width: '275%'}}>
             <div className="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+              <div style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}>
+                <h2>
+                  Products in Stock
+                </h2>
+              </div>
               <div
                 className="tm-bg-primary-dark tm-block tm-block-products"
                 style={{ backgroundColor: "white" }}
               >
-                <div className="tm-product-table-container">
+                <div className="tm-product-table-container" style={{overflowY: 'auto'}}>
                   <table className="table table-hover tm-table-small tm-product-table">
-                    <thead>
+                    <thead style={{backgroundColor: 'rgb(189 224 255)',
+color: 'blue'}}>
                       <tr>
                       
                         <th scope="col">PRODUCT NAME</th>
@@ -68,7 +80,9 @@ export default function Product() {
                     <tbody>
                      {
                         products.map((element)=>(
-                          <tr style={{fontSize : '17px'}}> 
+                          <tr style={{fontSize: '17px',
+                          color: 'black',
+                          backgroundColor: 'aliceblue'}}> 
                           
                           <td className="tm-product-name">
                            {element.name}
@@ -81,10 +95,13 @@ export default function Product() {
                             <a href="#" className="tm-product-delete-link" onClick={
                               ()=>{
                                 
-                                fetch('http://localhost:9001/manager/deleteProduct',{method:"DELETE",headers: { "Content-Type": "application/json" },body:JSON.stringify(element)}).then(()=>{console.log('Prodcut Deleted');})
+                                fetch('http://localhost:8080/manager/deleteProduct',{method:"DELETE",headers: { "Content-Type": "application/json" },body:JSON.stringify(element)}).then(()=>{console.log('Prodcut Deleted');})
                               }   
 
-                            }>
+                            }
+                            
+                            style ={{backgroundColor: '#d90000'}}
+                            >
                               <i className="far fa-trash-alt tm-product-delete-icon"></i>
                             </a>
                           </td>
@@ -95,11 +112,23 @@ export default function Product() {
                     </tbody>
                   </table>
                 </div>
+                <div style = {{display: 'flex',
+justifyContent: 'space-evenly',
+flexDirection: 'row'}}>
                 <Link to="/add_prod"><a
                   className="btn btn-primary btn-block text-uppercase mb-3"
+                 //style={{backgroundColor : '#5783db',borderColo :'5783db'}}
                 >
                   Add new product
                 </a></Link>
+                <Link to="/add_prod"><a
+                  className="btn btn-primary btn-block text-uppercase mb-3"
+                  
+                >
+                  Update Product
+                </a></Link>
+                </div>
+                
                
               </div>
             </div>

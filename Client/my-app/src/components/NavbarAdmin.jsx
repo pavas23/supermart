@@ -1,56 +1,44 @@
 import { Link } from "react-router-dom";
 
 export default function NavbarAdmin(){
-
+  var adminLogin = localStorage.getItem('adminToken');
     const handleLogout = () =>{
         localStorage.removeItem("adminToken");
     }
 
     return(
         <>
-            <nav className="navbar navbar-expand-xl">
-            <div className="container h-100">
-            <Link to="/dashboard"><a className="navbar-brand">
-                    <h1 className="tm-site-title mb-0">Product Admin</h1>
-                </a></Link>
-                <button className="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i className="fas fa-bars tm-nav-icon"></i>
-                </button>
+            <header className="header2">
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mx-auto h-100">
-              <li className="nav-item">
-              <Link to="/dashboard"><a className="nav-link active">
-                  <i className="fas fa-tachometer-alt"></i> Dashboard
-                  <span className="sr-only">(current)</span>
-                </a></Link>
-              </li>
-              <li className="nav-item">
-              <Link to="/products"><a className="nav-link">
-                  <i className="fas fa-shopping-cart"></i> Products
-                </a></Link>
-              </li>
-  
-              
-              <li className="nav-item">
-              <Link to="/settings"><a
-                  className="nav-link"
-                  >
-                  <i className="fas fa-cog"></i>Settings
-                </a></Link>
-              </li>
-            </ul>
-            <ul className="navbar-nav">
-              <li className="nav-item">
-              <Link to="/login" onClick={handleLogout}><a className="nav-link d-block">
-                  <h6>Logout</h6>
-                </a></Link>
-              </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<Link to="/" className="logo"> <i className="fas fa-shopping-basket"></i> BBB </Link>
+
+<nav className="navbar2">
+    <Link to="/products">Products</Link>
+    <Link to="/dashboard">Orders</Link>
+    <Link to="/settings">Users</Link>
+    
+</nav>
+
+<div className="icons">
+    <Link to="/mainProducts"><div className="fas fa-search" id="search-btn"></div></Link>
+    <Link to="/checkout"><div className="fas fa-shopping-cart" id="cart-btn"></div></Link>
+    {adminLogin ? (
+        <Link to="/products"><div className="fas fa-plus" id="login-btn"></div></Link>
+    ) : ("")}
+    
+</div>
+
+<form action="" className="search-form">
+    <input type="search" id="search-box" placeholder="search here..." />
+    <label htmlFor="search-box" className="fas fa-search"></label>
+</form>
+
+<div className="shopping-cart">
+    <div className="box2">
+        <i className="fas fa-trash"></i>
+    </div>
+</div>
+</header>
         </>
     )
 }

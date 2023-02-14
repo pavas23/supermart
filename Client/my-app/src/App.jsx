@@ -22,6 +22,8 @@ import { useState } from "react";
 import OtpSignUp from "./components/OtpSignUp";
 import Reset from "./components/Reset";
 import MyProfile from "./components/MyProfile";
+import AdminDashBoard from "./components/AdminDashBoard";
+
 
 export default function App() {
 
@@ -72,7 +74,7 @@ export default function App() {
           <Route path = "/otp/signUp" element = {<OtpSignUp key = "17" email={email} otpApp={otpApp}/>}/>
           <Route path = "/reset" element = {<Reset key = "18" email = {email} otpApp={otpApp}/>}/>
           <Route path = "/myprofile" element = {<MyProfile key = "19"/>}/>
-
+          <Route path="/admindashboard" element ={<AdminDashBoard key="20"/>}/>
         </Routes>
       </BrowserRouter>
     </>
