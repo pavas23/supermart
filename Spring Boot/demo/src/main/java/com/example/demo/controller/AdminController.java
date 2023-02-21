@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +133,12 @@ public class AdminController {
     }
     @GetMapping("/orders")
     public List<OrderList> getOrders(){
-        return orderService.getAllOrders();
+       
+        List<OrderList> list =  orderService.getAllOrders();
+        System.out.println(list.toString());
+        Collections.reverse(list);
+        return list;
+        
+        
     }
 }

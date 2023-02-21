@@ -33,21 +33,27 @@ export default function Dashboard() {
     <>
       <div className="" id="home">
         <NavbarAdmin />
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <p className="text-black mt-5 mb-5">
-                Welcome back, <b>Admin</b>
-              </p>
-            </div>
-          </div>
+        <div
+          className=""
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "nowrap",
+            alignContent: "flex-start",
+            alignItems: "flex-end",
+          }}
+        >
+          
           <div id="select-div">
             <div
               className="row tm-content-row"
               style={{ justifyContent: "space-around", width: "275%" }}
             ></div>
 
-            <div className="col-12 tm-block-col" style={{ paddingLeft: "0" }}>
+            <div
+              className="col-12 tm-block-col"
+              style={{ paddingLeft: "0px", marginTop: "7rem" }}
+            >
               <div
                 style={{
                   display: "flex",
@@ -89,7 +95,7 @@ export default function Dashboard() {
                           }}
                         >
                           <th scope="row">
-                            <b>{i++}</b>
+                            <b>{element.id}</b>
                           </th>
                           <td>
                             {element.express ? (

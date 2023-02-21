@@ -22,6 +22,7 @@ public class ManagerController {
     @PostMapping("/addProduct")
     public String addProduct(@RequestBody Product product) {
         if(product.getquantity()<=0 || product.getPrice()<=0) return "Cant enter negative value";
+       
         productService.saveProduct(product);
         return "Product added";
          }

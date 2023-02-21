@@ -276,6 +276,17 @@ public List<placedOrder> getCartElements(@RequestBody Integer id){
 			historyList.add(history);
 		}
 		historyService.addList(historyList);
+
+		OrderList order = new OrderList();
+	    order.setAddress(PO.getAddress());
+	    order.setCustomerID(PO.getCustomerID());
+	    order.setDate(ldt.format(myFormatObj));
+	    order.setExpress(PO.isExpress());
+	    order.setTotal_cost(total_cost);
+	    order.setExpected_date(ldt.plusHours(4).format(myFormatObj));
+	    order.setName(customerService.getCustomer(PO.getCustomerID()).getName());
+	    
+	    orderService.saveOrder(order);
 		EmailDetails ed = new EmailDetails();
 	    ed.setRecipient(updatedCustomer.getEmail());
 	    if(PO.isExpress()) {

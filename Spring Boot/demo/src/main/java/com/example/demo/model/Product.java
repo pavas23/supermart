@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,7 @@ public class Product {
     private String name;
     private String src;
     private int units_sold;
+   // private Date date_added;
     public Product(){
         price = 0;
         quantity = 0;
@@ -58,4 +61,10 @@ public class Product {
     public void setUnits_sold(int units_sold) {
         this.units_sold = units_sold;
     }
+    // public Date getDateAdded(){
+    //     return this.date_added;
+    // }
+    // public void setDateAdded(Date date_added){
+    //     this.date_added = date_added;
+    // }
 }

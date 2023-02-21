@@ -68,7 +68,8 @@ export default function Checkout() {
     });
     response = await response.json();
     console.log(response);
-    setCustomerID(response);
+   setCustomerID(response);
+   getCust(response);
   }
 
 
@@ -98,7 +99,7 @@ export default function Checkout() {
       else {
         setProducts(JSON.parse(localCart));
         getCustomerID({"authToken":localStorage.getItem("token")});
-        getCust(customerID);
+       
       }
     }
     checkout();
