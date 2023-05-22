@@ -10,32 +10,32 @@ import NavbarAdmin from "./NavbarAdmin";
 export default function Settings() {
   const adminLogin = localStorage.getItem("adminToken");
   let navigate = useNavigate();
-  const [managers,setManagers] = useState([]);
-  const [customers,setCustomers] = useState([]);
+  const [managers, setManagers] = useState([]);
+  const [customers, setCustomers] = useState([]);
   useEffect(() => {
     if (!adminLogin) {
       navigate("/admin_log", { replace: true });
-    }else{
+    } else {
       fetch("http://localhost:9001/admin/allManagers")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setManagers(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setManagers(data);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
       fetch("http://localhost:9001/admin/allCustomers")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setCustomers(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setCustomers(data);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     }
-  },[]);
+  }, []);
 
   return (
     <>
@@ -45,19 +45,21 @@ export default function Settings() {
       <div
         className=""
         style={{
-          backgroundSize: '70% 100%',
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginTop: '7rem'
-
+          backgroundSize: "70% 100%",
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "7rem",
         }}
       >
-        <div className="" style={{ marginTop: "7rem !important",width:'100%' }}>
-          <div className="row tm-content-row" style={{flexWrap:"nowrap"}}>
+        <div
+          className=""
+          style={{ marginTop: "7rem !important", width: "100%" }}
+        >
+          <div className="row tm-content-row" style={{ flexWrap: "nowrap" }}>
             <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
               <div
                 className="tm-bg-primary-dark tm-block tm-block-products"
-                style={{ backgroundColor: "white",marginLeft:'1rem'}} 
+                style={{ backgroundColor: "white", marginLeft: "1rem" }}
               >
                 <h2
                   className="tm-block-title"
@@ -89,26 +91,24 @@ export default function Settings() {
                         backgroundColor: "aliceblue",
                       }}
                     >
-                     {managers.map((element)=>(
-                       <tr>
-                       <td className="tm-product-name">
-                        {element.id}
-                       </td>
-                       <td>{element.name}</td>
-                       <td>{element.salary}</td>
-                       <td>{element.mobileNumber}</td>
-                       <td>{element.email}</td>
-                       <td>
-                         <a
-                           href="#"
-                           className="tm-product-delete-link"
-                           style={{ backgroundColor: "rgb(217, 0, 0)" }}
-                         >
-                           <i className="far fa-trash-alt tm-product-delete-icon"></i>
-                         </a>
-                       </td>
-                     </tr>
-                     ))}
+                      {managers.map((element) => (
+                        <tr>
+                          <td className="tm-product-name">{element.id}</td>
+                          <td>{element.name}</td>
+                          <td>{element.salary}</td>
+                          <td>{element.mobileNumber}</td>
+                          <td>{element.email}</td>
+                          <td>
+                            <a
+                              href="#"
+                              className="tm-product-delete-link"
+                              style={{ backgroundColor: "rgb(217, 0, 0)" }}
+                            >
+                              <i className="far fa-trash-alt tm-product-delete-icon"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -120,11 +120,13 @@ export default function Settings() {
                 </a>
               </div>
             </div>
-            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col" style={{marginRight: '1rem'}}>
+            <div
+              className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col"
+              style={{ marginRight: "1rem" }}
+            >
               <div
                 className="tm-bg-primary-dark tm-block tm-block-products"
-                style={{ backgroundColor: 'white',
-                marginRight: '1rem' }}
+                style={{ backgroundColor: "white", marginRight: "1rem" }}
               >
                 <h2
                   className="tm-block-title"
@@ -156,26 +158,24 @@ export default function Settings() {
                         backgroundColor: "aliceblue",
                       }}
                     >
-                     {customers.map((element)=>(
-                       <tr>
-                       <td className="tm-product-name">
-                        {element.id}
-                       </td>
-                       <td>{element.name}</td>
-                       <td>{element.credit}</td>
-                       <td>{element.mobileNumber}</td>
-                       <td>{element.email}</td>
-                       <td>
-                         <a
-                           href="#"
-                           className="tm-product-delete-link"
-                           style={{ backgroundColor: "rgb(217, 0, 0)" }}
-                         >
-                           <i className="far fa-trash-alt tm-product-delete-icon"></i>
-                         </a>
-                       </td>
-                     </tr>
-                     ))}
+                      {customers.map((element) => (
+                        <tr>
+                          <td className="tm-product-name">{element.id}</td>
+                          <td>{element.name}</td>
+                          <td>{element.credit}</td>
+                          <td>{element.mobileNumber}</td>
+                          <td>{element.email}</td>
+                          <td>
+                            <a
+                              href="#"
+                              className="tm-product-delete-link"
+                              style={{ backgroundColor: "rgb(217, 0, 0)" }}
+                            >
+                              <i className="far fa-trash-alt tm-product-delete-icon"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

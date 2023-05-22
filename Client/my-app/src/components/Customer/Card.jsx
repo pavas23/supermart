@@ -24,7 +24,6 @@ export default function Card1(props) {
   const addToArray = () => {
     for (var i = 0; i < props.selectedProducts.length; i++) {
       if (props.selectedProducts[i].name === props.name) {
-        // means the products is already in the array
         if (qty === 0) {
           props.selectedProducts[i] = {};
           return;

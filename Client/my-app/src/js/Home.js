@@ -1,4 +1,4 @@
-import { Swiper} from 'swiper/react';
+import { Swiper } from 'swiper/react';
 import 'swiper/css';
 
 let searchForm = document.querySelector('.search-form');
@@ -21,11 +21,9 @@ document.querySelector('#cart-btn').onclick = () => {
 
 let loginForm = document.querySelector('.login-form');
 
-//to do for Pavas
 var logged = false;
 document.querySelector('#login-btn').onclick = () => {
     if (logged) {
-        //To do for Pavas
         window.location.href = "file:///C:/Users/vashi/OneDrive/Desktop/OOP/pages/profile.html";
     }
     else {
