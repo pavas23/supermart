@@ -91,10 +91,10 @@ export default function App() {
               path="/otp/signUp"
               element={<OtpSignUp key="17" email={email} otpApp={otpApp} />}
             />
-            {/* <Route
+            <Route
               path="/reset"
               element={<Reset key="18" email={email} otpApp={otpApp} />}
-            /> */}
+            />
             <Route path="/myprofile" element={<MyProfile key="19" />} />
         </Routes>
       </BrowserRouter>
