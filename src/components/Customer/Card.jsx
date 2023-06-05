@@ -108,27 +108,29 @@ export default function Card1(props) {
           >
             <div className="product-buttons">
               <div
-                className="fas fa-plus"
+                className="fas fa-plus fa-2x"
                 id="add-btn"
                 onClick={handleAddProduct}
                 style={{
-                  width: "25px",
+                  width: "50px",
                   paddingLeft: "0.2%",
                   float: "left",
                   height: "22px",
                   lineHeight: "22px",
+                  color: "#1ac756",
                 }}
               ></div>
               <div
-                className="fas fa-minus"
+                className="fas fa-minus fa-2x"
                 id="add-btn"
                 onClick={handleSubProduct}
                 style={{
-                  width: "25px",
+                  width: "30px",
                   paddingLeft: "0.3%",
                   float: "left",
                   height: "22px",
                   lineHeight: "22px",
+                  color: "#ec4141",
                 }}
               ></div>
             </div>
@@ -139,6 +141,7 @@ export default function Card1(props) {
                 backgroundColor: "lightseagreen",
                 cursor: "pointer",
                 width: "7vw",
+                border: "10px",
               }}
               onClick={addToArray}
             >

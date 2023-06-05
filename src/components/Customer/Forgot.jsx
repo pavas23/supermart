@@ -26,7 +26,6 @@ export default function Forgot(props) {
       }
     );
     responseOtp = await responseOtp.json();
-    console.log(responseOtp);
     props.setOtpFunction(responseOtp);
     props.setEmailFunction(credentials.email);
   }

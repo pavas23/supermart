@@ -44,7 +44,6 @@ export default function Login(props) {
         }
       );
       responseOtp = await responseOtp.json();
-      console.log(responseOtp);
       props.setOtpFunction(responseOtp);
     }
 

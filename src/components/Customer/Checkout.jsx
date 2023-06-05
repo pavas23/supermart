@@ -22,7 +22,6 @@ export default function Checkout() {
   let navigate = useNavigate();
 
   let localCart = localStorage.getItem("cart");
-  console.log(localCart);
 
   async function getCust(id) {
     var customer = await fetch(`${REACT_APP_APIURL}/customer/getCustomer`, {
@@ -83,13 +82,11 @@ export default function Checkout() {
       }
     );
     response = await response.json();
-    console.log(response);
     setCustomerID(response);
     getCust(response);
   }
 
   function handleFormSubmit(event) {
-    console.log(products);
     event.preventDefault();
     var placedorder = {
       customerID: customerID,
@@ -317,7 +314,6 @@ export default function Checkout() {
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600"
                         onClick={() => {
                           setShipping(0);
-                          console.log(shipping);
                           credentials.express = false;
                           setTotal(totalcost());
                         }}
@@ -372,7 +368,6 @@ export default function Checkout() {
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
                         onClick={() => {
                           setShipping(100);
-                          console.log(shipping);
                           credentials.express = true;
                           setTotal(total + 100);
                         }}
@@ -642,7 +637,6 @@ export default function Checkout() {
                                     }
                                   }
                                   setProducts(arr);
-                                  console.log(arr);
                                   let x = JSON.stringify(arr);
                                   localStorage.setItem("cart", x);
                                   setTotal(totalcost());

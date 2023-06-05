@@ -41,7 +41,6 @@ export default function Review() {
   };
 
   const onChange = (event) => {
-    console.log(review);
     setReview(event.target.value);
   };
 

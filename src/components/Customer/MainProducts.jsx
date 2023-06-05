@@ -1,15 +1,18 @@
 import Card from "./Card";
 import "../../css/MainProducts.css";
 import { useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import NavbarProducts from "./NavbarProducts";
 import { useNavigate } from "react-router";
+import Fuse from "fuse.js";
 
 export default function MainProduct(props) {
   const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
   const url = `${REACT_APP_APIURL}/product/getAll`;
 
   const [items, setItems] = useState([]);
+  const [fuseItems, setFuseItems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [display, setDisplay] = useState(false);
 
   useEffect(() => {
     async function getProducts() {
@@ -24,10 +27,11 @@ export default function MainProduct(props) {
       });
       response = await response.json();
       setItems(response);
+      setFuseItems(response);
     }
     getProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [display]);
 
   const userLogin = localStorage.getItem("token");
   let navigate = useNavigate();
@@ -41,13 +45,67 @@ export default function MainProduct(props) {
     props.selectedProductsFunction(selectedProducts);
     let stringCart = JSON.stringify(selectedProducts);
     localStorage.setItem("cart", stringCart);
-    console.log(localStorage.getItem("token"));
-    console.log(selectedProducts);
   };
 
-  return (
-    <>
-      <Navbar features={false} />
+  const fuse = new Fuse(fuseItems, {
+    keys: ["name", "price"],
+    includeScore: true,
+  });
+
+  const displayNoProductsAvailable = () => {
+    setDisplay(true);
+  };
+
+  const onChange = (event) => {
+    var query = event.target.value.trim().toLowerCase();
+    if (query.length === 0) {
+      setDisplay(false);
+      setItems(fuseItems);
+    } else {
+      query = query.charAt(0).toUpperCase() + query.slice(1);
+      const results = fuse.search(query);
+      if (results.length === 0) {
+        setItems([]);
+        if (display === false) {
+          displayNoProductsAvailable();
+        }
+      } else {
+        setDisplay(false);
+        const searchedItems = results.map((result) => result.item);
+        setItems(searchedItems);
+      }
+    }
+  };
+
+  var page;
+  if (display === true) {
+    page = (
+      <>
+        <div>
+          <h1
+            style={{
+              marginTop: "25vh",
+              textAlign: "center",
+            }}
+          >
+            Oops !
+          </h1>
+          <img
+            src={require("../../img/productNotFound.webp")}
+            alt="No Product Found"
+            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+            style={{
+              height: "50vh",
+              width: "50vw",
+              marginTop: "3vh",
+              marginLeft: "25vw",
+            }}
+          />
+        </div>
+      </>
+    );
+  } else {
+    page = (
       <div id="home-cards">
         {items.map((item) => {
           return (
@@ -77,6 +135,13 @@ export default function MainProduct(props) {
           );
         })}
       </div>
+    );
+  }
+
+  return (
+    <>
+      <NavbarProducts onChangeHandler={onChange} />
+      {page}
     </>
   );
 }

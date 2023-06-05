@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
-  var features = props.features;
   var adminLogin = localStorage.getItem("adminToken");
   var userLogin = localStorage.getItem("token");
 
@@ -17,7 +16,12 @@ export default function Navbar(props) {
           <i className="fas fa-shopping-basket"></i> BBB{" "}
         </Link>
 
-        <nav className="navbar2">
+        <nav
+          className="navbar2"
+          style={{
+            marginRight: "-8vw",
+          }}
+        >
           <Link to="/">Home</Link>
           <Link
             to="/mainProducts"
@@ -43,10 +47,23 @@ export default function Navbar(props) {
           >
             Review
           </Link>
-          {/* <a href="#features">{`${features ? "Features" : ""}`}</a> */}
         </nav>
 
         <div className="icons">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={props.onChangeHandler}
+            style={{
+              height: "35px",
+              border: "8px",
+              backgroundColor: "#f4f4f4",
+              color: "black",
+            }}
+          />
+          {/* <div className="fas fa-search" id="search-btn"></div> */}
           <Link
             to="/checkout"
             onClick={

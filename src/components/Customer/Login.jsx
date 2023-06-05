@@ -30,7 +30,6 @@ export default function Login(props) {
     });
 
     const json = await response.json();
-    console.log(json);
     if (json != null) {
       localStorage.setItem("token", json.authToken);
       navigate("/", { replace: true });
