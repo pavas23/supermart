@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# supermart-frontend
+This is a web based application for an online supermarket. Through which customers can register and order items made using React JS.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### User Management
+  - A user can be admin, manager or customer
+  - Admin is the super user with all permissions.
+  - Users (customer, admin and manager) will have information such as- user name, a user
+  - Users (customer, admin and manager) will have information such as user name, user id etc.
+  - id (unique across the system), phone number, and email id, and address.
+  - An existing user should log into the system with user id and password.
+  - New customers are permitted to register.
+  - Manager/admin can add or delete items, modify details about the items (price/qty/offers etc.)
+  - A user can withdraw himself from the Application.
+  - Password change (reset) facility is required.
 
-## Available Scripts
+### Admin/Manager publishing item details
+  - Manager or admin users should be allowed to publish the details of the items made available for sale. Details needed are item_name, item_code, price, offer if any, qty available, delivery time etc.
+  - A manager or admin can delete the published item whenever required.
 
-In the project directory, you can run:
+### Customer order management
+  - A customer should be allowed to view/search the items published/available for sale.
+  - Select items to the cart.
+  - Customers can register and order items.
+  - Confirm order and make payment
+  - User should get a confirmation message with expected delivery date.
+  - User will have a Wallet from where payments will be made, and user can top-up the wallet if necessary. But at the time of registration must start with minimum of 1000/-.
+  - User can add review about the website.
 
-### `npm start`
+### Other functionality
+  - Admin user should be able to generate reports like – items sold on a date, customer order details(summary) for a month, item stock status etc.
+  - Any user can generate his order history (summary) for a given month.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### ScreenShots
 
-### `npm test`
+<img width="1153" alt="SS" src="https://github.com/pavas23/supermart-frontend/assets/97559428/0b9963b8-6e5a-4a25-80ec-ca9d2b9273fa">
+<br/><br/>
+<!-- <img width="1440" alt="Screenshot 2023-02-14 at 10 26 04 PM" src="https://user-images.githubusercontent.com/97559428/218805103-346e3df6-f027-415c-931b-1d90a3d49833.png"> -->
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Overview
+https://prezi.com/view/sFuMp9wlno5v0vB5dnL5/
 
-### `npm run build`
+## Run Locally
+Install my-project with npm
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  cd my-app
+  npm install
+  npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Link to Backend Repo
+https://github.com/pavas23/supermart-backend
