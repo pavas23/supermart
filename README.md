@@ -31,11 +31,8 @@ This is a web based application for an online supermarket. Through which custome
   - Any user can generate his order history (summary) for a given month.
 
 
-### ScreenShots
-
-<img width="1153" alt="SS" src="https://github.com/pavas23/supermart-frontend/assets/97559428/0b9963b8-6e5a-4a25-80ec-ca9d2b9273fa">
-<br/><br/>
-<!-- <img width="1440" alt="Screenshot 2023-02-14 at 10 26 04 PM" src="https://user-images.githubusercontent.com/97559428/218805103-346e3df6-f027-415c-931b-1d90a3d49833.png"> -->
+## Preview
+![supermart](https://github.com/pavas23/supermart-frontend/assets/97559428/80431fd0-6826-452b-a2d4-de83463462b6)
 
 ## Overview
 https://prezi.com/view/sFuMp9wlno5v0vB5dnL5/
