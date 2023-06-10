@@ -34,8 +34,6 @@ This is a web based application for an online supermarket. Through which custome
 ## Preview
 ![supermart](https://github.com/pavas23/supermart-frontend/assets/97559428/80431fd0-6826-452b-a2d4-de83463462b6)
 
-## Overview
-https://prezi.com/view/sFuMp9wlno5v0vB5dnL5/
 
 ## Run Locally
 Install my-project with npm
@@ -46,5 +44,12 @@ Install my-project with npm
   npm start
 ```
 
+## Tech Stack
+- HTML
+- CSS
+- JavaScript
+- Tailwind CSS
+- React JS
+
 ### Link to Backend Repo
-https://github.com/pavas23/supermart-backend
+<a href = "https://github.com/pavas23/supermart-backend">Backend Repo</a>
