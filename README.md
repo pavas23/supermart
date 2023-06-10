@@ -1,4 +1,11 @@
 # supermart-frontend
+[![License: MIT](https://img.shields.io/bower/l/bootstrap)](https://github.com/pavas23/supermart-frontend)
+[![Github Repo Size](https://img.shields.io/github/repo-size/pavas23/supermart-frontend)](https://github.com/pavas23/supermart-frontend)
+[![npm version](https://img.shields.io/npm/v/npm)](https://github.com/pavas23/supermart-frontend)
+[![last commit](https://img.shields.io/github/last-commit/pavas23/supermart-frontend)](https://github.com/pavas23/supermart-frontend)
+[![contributors](https://img.shields.io/github/contributors/pavas23/supermart-frontend)](https://github.com/pavas23/supermart-frontend)
+
+
 This is a web based application for an online supermarket. Through which customers can register and order items made using React JS.
 
 ### User Management
