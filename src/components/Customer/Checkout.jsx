@@ -12,7 +12,7 @@ export default function Checkout() {
   const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
 
   const [shipping, setShipping] = useState(0);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([{}]);
   const [custArray, setCust] = useState([]);
   const [wallet, setWallet] = useState(0);
   const [total, setTotal] = useState(0);
@@ -20,8 +20,6 @@ export default function Checkout() {
   const [customerID, setCustomerID] = useState(-1);
   const userLogin = localStorage.getItem("token");
   let navigate = useNavigate();
-
-  let localCart = localStorage.getItem("cart");
 
   async function getCust(id) {
     var customer = await fetch(`${REACT_APP_APIURL}/customer/getCustomer`, {
@@ -105,6 +103,7 @@ export default function Checkout() {
       if (!userLogin) {
         navigate("/login", { replace: true });
       } else {
+        let localCart = localStorage.getItem("cart");
         setProducts(JSON.parse(localCart));
         getCustomerID({ authToken: localStorage.getItem("token") });
       }
@@ -633,7 +632,7 @@ export default function Checkout() {
                                   var arr = JSON.parse(arr_string);
                                   for (var i = 0; i < arr.length; i++) {
                                     if (arr[i].id === element.id) {
-                                      arr[i] = { id: -1, price: 0 };
+                                      arr.splice(i,1);
                                     }
                                   }
                                   setProducts(arr);

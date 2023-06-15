@@ -30,11 +30,13 @@ export default function Login(props) {
     });
 
     const json = await response.json();
-    if (json != null) {
+    if (json.email != null) {
       localStorage.setItem("token", json.authToken);
       navigate("/", { replace: true });
     } else {
       navigate("/login", { replace: true });
+      credentials.email = "";
+      credentials.password = "";
       window.alert("Invalid Credentials");
     }
   };

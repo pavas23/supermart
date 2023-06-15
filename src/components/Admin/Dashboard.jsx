@@ -4,31 +4,42 @@ import "../../css/templatemo-style.css";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import adminContext from "../../context/admin/AdminContext";
 import NavbarAdmin from "./NavbarAdmin";
 
 export default function Dashboard() {
-  const adminLogin = localStorage.getItem("adminToken");
   let navigate = useNavigate();
-
-  useEffect(() => {
-    if (!adminLogin) {
-      navigate("/admin_log", { replace: true });
-    }
-  }, []);
+  var adminContextResponse = useContext(adminContext);
+  const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
 
   const [history, setHistory] = useState([]);
-  var i = 1;
+
+  const orderHistory = async () => {
+    var response = await fetch(`${REACT_APP_APIURL}/admin/orders`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    response = await response.json();
+    setHistory(response);
+  };
+
   useEffect(() => {
-    fetch("http://localhost:9001/admin/orders")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setHistory(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+    orderHistory();
+    adminContextResponse.getAdminID({
+      adminToken: localStorage.getItem("adminToken"),
+    });
+    if (!adminContextResponse.validSession) {
+      navigate("/admin_log", { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adminContextResponse.validSession]);
+
   return (
     <>
       <div className="" id="home">
@@ -58,13 +69,21 @@ export default function Dashboard() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
+                  justifyContent: "center",
+                  marginLeft: "6vw",
+                  marginRight: "7vw",
+                  marginTop: "16vh",
                 }}
               >
-                <h2 className="" style={{ fontSize: "2.6rem" }}>
-                  Orders List
+                <h2
+                  className=""
+                  style={{ fontSize: "3rem", textAlign: "center" }}
+                >
+                  Order List
                 </h2>
+                <br />
                 <div
-                  className="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll"
+                  className="tm-bg-primary-dark tm-block tm-block-taller"
                   style={{ maxHeight: "fit-content" }}
                 >
                   <table className="table">
@@ -72,6 +91,7 @@ export default function Dashboard() {
                       style={{
                         backgroundColor: "rgb(189 224 255)",
                         color: "blue",
+                        textAlign: "center",
                       }}
                     >
                       <tr>
@@ -91,6 +111,7 @@ export default function Dashboard() {
                             fontSize: "17px",
                             color: "black",
                             backgroundColor: "aliceblue",
+                            textAlign: "center",
                           }}
                         >
                           <th scope="row">
@@ -98,11 +119,9 @@ export default function Dashboard() {
                           </th>
                           <td>
                             {element.express ? (
-                              <p style={{ fontWeight: "bold" }}>
-                                Express Delivery
-                              </p>
+                              <>Express Delivery</>
                             ) : (
-                              <p>Normal Delivery</p>
+                              <>Normal Delivery</>
                             )}
                           </td>
                           <td>

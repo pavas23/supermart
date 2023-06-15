@@ -11,6 +11,7 @@ export default function Card1(props) {
     }
     setQty(currQty + 1);
   };
+
   const handleSubProduct = () => {
     var currQty = qty;
     if (currQty >= props.quantity) {
@@ -21,14 +22,18 @@ export default function Card1(props) {
     }
     setQty(currQty - 1);
   };
+
   const addToArray = () => {
+    console.log(props.selectedProducts);
     for (var i = 0; i < props.selectedProducts.length; i++) {
       if (props.selectedProducts[i].name === props.name) {
         if (qty === 0) {
           props.selectedProducts[i] = {};
+          props.setSelectedProductsFunction(props.selectedProducts);
           return;
         }
-        props.selectedProducts[i].quantity = qty;
+        props.selectedProducts[i].quantity += qty;
+        props.setSelectedProductsFunction(props.selectedProducts);
         return;
       }
     }
@@ -44,6 +49,7 @@ export default function Card1(props) {
     });
     props.setSelectedProductsFunction(props.selectedProducts);
   };
+  
   return (
     <>
       <div key={props.key} className="group relative" id={props.name}>

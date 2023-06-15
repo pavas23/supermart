@@ -6,36 +6,71 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import NavbarAdmin from "./NavbarAdmin";
+import { useContext } from "react";
+import adminContext from "../../context/admin/AdminContext";
 
 export default function Settings() {
-  const adminLogin = localStorage.getItem("adminToken");
   let navigate = useNavigate();
+  var adminContextResponse = useContext(adminContext);
+  const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
+
   const [managers, setManagers] = useState([]);
   const [customers, setCustomers] = useState([]);
+
+  const getAllCustomers = async () => {
+    var response = await fetch(`${REACT_APP_APIURL}/admin/allCustomers`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    response = await response.json();
+    setCustomers(response);
+  };
+
+  const getAllManagers = async () => {
+    var response = await fetch(`${REACT_APP_APIURL}/admin/allManagers`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    response = await response.json();
+    setManagers(response);
+  };
+
+  const deleteCustomer = async (customer) => {
+    await fetch(`${REACT_APP_APIURL}/admin/deleteCustomer`, {
+      method: "DELETE",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(customer),
+    });
+    window.alert("Customer has been deleted !!");
+    getAllCustomers();
+  };
+
   useEffect(() => {
-    if (!adminLogin) {
+    getAllCustomers();
+    getAllManagers();
+    adminContextResponse.getAdminID({
+      adminToken: localStorage.getItem("adminToken"),
+    });
+    if (!adminContextResponse.validSession) {
       navigate("/admin_log", { replace: true });
-    } else {
-      fetch("http://localhost:9001/admin/allManagers")
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setManagers(data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-      fetch("http://localhost:9001/admin/allCustomers")
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setCustomers(data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adminContextResponse.validSession]);
 
   return (
     <>
@@ -80,7 +115,7 @@ export default function Settings() {
                         <th scope="col">NAME</th>
                         <th scope="col">SALARY</th>
                         <th scope="col">CONTACT NUMBER</th>
-                        <th scope="col">E-mail</th>
+                        <th scope="col">EMAIL</th>
                         <th scope="col">&nbsp;</th>
                       </tr>
                     </thead>
@@ -144,10 +179,10 @@ export default function Settings() {
                     >
                       <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Wallet Balance</th>
-                        <th scope="col">Mobile Number</th>
-                        <th scope="col">E-mail</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">WALLET BALANCE</th>
+                        <th scope="col">MOBILE NUMBER</th>
+                        <th scope="col">EMAIL</th>
                         <th scope="col">&nbsp;</th>
                       </tr>
                     </thead>
@@ -166,13 +201,14 @@ export default function Settings() {
                           <td>{element.mobileNumber}</td>
                           <td>{element.email}</td>
                           <td>
-                            <a
-                              href="#"
-                              className="tm-product-delete-link"
-                              style={{ backgroundColor: "rgb(217, 0, 0)" }}
-                            >
-                              <i className="far fa-trash-alt tm-product-delete-icon"></i>
-                            </a>
+                            <i
+                              className="far fa-trash-alt tm-product-delete-icon tm-product-delete-link"
+                              onClick={() => deleteCustomer(element)}
+                              style={{
+                                backgroundColor: "#d90000",
+                                cursor: "pointer",
+                              }}
+                            ></i>
                           </td>
                         </tr>
                       ))}

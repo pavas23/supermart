@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
-  var features = props.features;
   var adminLogin = localStorage.getItem("adminToken");
   var userLogin = localStorage.getItem("token");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("adminToken");
   };
 
   return (
@@ -70,12 +70,14 @@ export default function Navbar(props) {
             <Link to="/myprofile">
               <div className="fas fa-user" id="login-btn"></div>
             </Link>
-          ) : (
+          ) : !adminLogin ? (
             <Link to="/login">
               <div className="fas fa-user" id="login-btn"></div>
             </Link>
+          ) : (
+            " "
           )}
-          {userLogin ? (
+          {userLogin || adminLogin ? (
             <Link to="/login" onClick={handleLogout}>
               <div className="fas fa-user-minus" id="login-btn"></div>
             </Link>

@@ -28,6 +28,7 @@ export default function MainProduct(props) {
       response = await response.json();
       setItems(response);
       setFuseItems(response);
+      setSelectedProducts(JSON.parse(localStorage.getItem("cart")));
     }
     getProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps

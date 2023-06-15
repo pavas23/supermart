@@ -14,22 +14,17 @@ export default function NavbarAdmin() {
           <i className="fas fa-shopping-basket"></i> BBB{" "}
         </Link>
 
-        <nav className="navbar2">
+        <nav className="navbar2" style={{"marginLeft":"-10vw"}}>
           <Link to="/products">Products</Link>
           <Link to="/dashboard">Orders</Link>
+          <Link to="/orderAnalytics">Order Analytics</Link>
           <Link to="/settings">Users</Link>
         </nav>
 
         <div className="icons">
-          <Link to="/mainProducts">
-            <div className="fas fa-search" id="search-btn"></div>
-          </Link>
-          <Link to="/checkout">
-            <div className="fas fa-shopping-cart" id="cart-btn"></div>
-          </Link>
           {adminLogin ? (
-            <Link to="/products">
-              <div className="fas fa-plus" id="login-btn"></div>
+            <Link to="/admin_log" onClick={handleLogout}>
+              <div className="fas fa-user-minus" id="login-btn"></div>
             </Link>
           ) : (
             ""

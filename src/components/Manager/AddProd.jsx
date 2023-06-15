@@ -2,33 +2,58 @@ import "../../css/bootstrap.min.css";
 import "../../css/fontawesome.min.css";
 import "../../css/templatemo-style.css";
 import { useNavigate } from "react-router";
-
 import { useEffect, useState } from "react";
 import NavbarAdmin from "../Admin/NavbarAdmin";
+import { useContext } from "react";
+import adminContext from "../../context/admin/AdminContext";
+
 export default function AddProd() {
-  const adminLogin = localStorage.getItem("adminToken");
   let navigate = useNavigate();
+  var adminContextResponse = useContext(adminContext);
+  const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
+
+  const [product, setProduct] = useState({
+    name: "",
+    price: 0,
+    quantity: 0,
+    src: "",
+  });
 
   useEffect(() => {
-    if (!adminLogin) {
+    adminContextResponse.getAdminID({
+      adminToken: localStorage.getItem("adminToken"),
+    });
+    if (!adminContextResponse.validSession) {
       navigate("/admin_log", { replace: true });
     }
-  });
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [quantity, setQuantity] = useState(0);
-  const handleClick = (e) => {
-    e.preventDefault();
-    const product = { name, price, quantity };
-    console.log(product);
-    fetch("http://localhost:9001/manager/addProduct", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(product),
-    }).then(() => {
-      console.log("Product Added");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [adminContextResponse.validSession]);
+
+  const onChange = (event) => {
+    setProduct({
+      ...product,
+      [event.target.name]: event.target.value,
     });
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await fetch(`${REACT_APP_APIURL}/manager/addProduct`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+    setProduct({
+      name: "",
+      price: 0,
+      quantity: 0,
+      src: "",
+    });
+    window.alert("Product added successfully !!");
+  };
+
   return (
     <>
       <div clas="container">
@@ -47,23 +72,30 @@ export default function AddProd() {
               <div
                 className="tm-bg-primary-light tm-block tm-block-h-auto"
                 style={{
-                  backgroundColor: "#2e613a",
+                  backgroundColor: "rgb(189 224 255)",
                   opacity: "0.94",
-                  "margin-left": "12vh",
+                  "margin-left": "8vh",
+                  "margin-top": "15vh",
                 }}
               >
-                <div className="row">
+                <div className="row" style={{ textAlign: "center" }}>
                   <div className="col-12">
-                    <h2 className="tm-block-title d-inline-block">
+                    <h2 className="tm-block-title d-inline-block" style={{color:"black"}}>
                       Add Product
                     </h2>
                   </div>
                 </div>
                 <div className="row tm-edit-product-row">
                   <div className="col-xl-6 col-lg-6 col-md-12">
-                    <form action="" className="tm-edit-product-form">
+                    <form
+                      method="POST"
+                      onSubmit={handleSubmit}
+                      autoComplete="off"
+                      id="login-form"
+                      className="tm-edit-product-form"
+                    >
                       <div className="form-group mb-3">
-                        <label htmlFor="name" style={{ "margin-left": "22vh" }}>
+                        <label htmlFor="name" style={{ "margin-left": "22vh",color:"black" }}>
                           Product Name
                         </label>
                         <input
@@ -76,17 +108,15 @@ export default function AddProd() {
                           name="name"
                           type="text"
                           className="form-control validate"
-                          onChange={(e) => {
-                            setName(e.target.value);
-                          }}
-                          value={name}
+                          onChange={onChange}
+                          value={product.name}
                           required
                         />
                       </div>
                       <div className="form-group mb-3">
                         <label
                           htmlFor="price"
-                          style={{ "margin-left": "22vh" }}
+                          style={{ "margin-left": "22vh",color:"black"}}
                         >
                           Price
                         </label>
@@ -101,17 +131,16 @@ export default function AddProd() {
                           name="price"
                           type="number"
                           className="form-control validate"
-                          onChange={(e) => {
-                            setPrice(e.target.value);
-                          }}
-                          value={price}
+                          min={1}
+                          onChange={onChange}
+                          value={product.price}
                           required
                         />
                       </div>
                       <div className="form-group mb-3">
                         <label
                           htmlFor="category"
-                          style={{ "margin-left": "22vh" }}
+                          style={{ "margin-left": "22vh",color:"black" }}
                         >
                           Image URL
                         </label>
@@ -122,20 +151,23 @@ export default function AddProd() {
                             color: "black",
                             "margin-left": "22vh",
                           }}
-                          id="expire_date"
-                          name="expire_date"
+                          id="src"
+                          name="src"
                           type="text"
                           className="form-control validate"
                           data-large-mode="true"
+                          onChange={onChange}
+                          value={product.src}
+                          required
                         />
                       </div>
                       <div className="row">
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <label
                             htmlFor="expire_date"
-                            style={{ "margin-left": "22vh" }}
+                            style={{ "margin-left": "22vh",color:"black" }}
                           >
-                            Expiry Date
+                            Expiry
                           </label>
                           <input
                             style={{
@@ -153,7 +185,7 @@ export default function AddProd() {
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <label
                             htmlFor="stock"
-                            style={{ "margin-left": "22vh" }}
+                            style={{ "margin-left": "22vh",color:"black" }}
                           >
                             Quantity
                           </label>
@@ -163,30 +195,25 @@ export default function AddProd() {
                               color: "black",
                               "margin-left": "22vh",
                             }}
-                            id="stock"
-                            name="stock"
+                            id="quantity"
+                            name="quantity"
                             type="number"
+                            min={1}
                             className="form-control validate"
-                            onChange={(e) => {
-                              setQuantity(e.target.value);
-                            }}
-                            value={quantity}
+                            onChange={onChange}
+                            value={product.quantity}
                             required
                           />
                         </div>
                       </div>
 
                       <div className="col-12">
-                        <button
+                        <input
                           type="submit"
                           className="btn btn-primary btn-block text-uppercase"
                           style={{ "margin-left": "22vh" }}
-                          onClick={(e) => {
-                            handleClick(e);
-                          }}
-                        >
-                          Add Product Now
-                        </button>
+                          value="Add Product Now"
+                        />
                       </div>
                     </form>
                   </div>

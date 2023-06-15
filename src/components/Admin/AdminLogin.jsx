@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import Navbar from "../Customer/Navbar";
+import { useEffect } from "react";
 
 export default function AdminLogin() {
+  const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
+  const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
   let navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
@@ -12,17 +17,45 @@ export default function AdminLogin() {
     password: "",
   });
 
+  const addAdmin = async () => {
+    await fetch(`${REACT_APP_APIURL}/admin/add`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Admin",
+        email: ADMIN_EMAIL,
+        password: ADMIN_PASSWORD,
+      }),
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (
-      credentials.email === "bbbsupermart@gmail.com" &&
-      credentials.password === "adminpass"
-    ) {
-      localStorage.setItem("adminToken", "ddwd12312312");
-      navigate("/", { replace: true });
+    const response = await fetch(`${REACT_APP_APIURL}/login/auth/admin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    });
+
+    const json = await response.json();
+    if (json.email !== null) {
+      localStorage.setItem("adminToken", json.authToken);
+      navigate("/products", { replace: true });
     } else {
-      window.alert("Wrong Admin ID!");
-      return;
+      window.alert("Invalid Admin Credentials");
+      credentials.email = "";
+      credentials.password = "";
+      navigate("/admin_log", { replace: true });
     }
   };
 
@@ -32,6 +65,11 @@ export default function AdminLogin() {
       [event.target.name]: event.target.value,
     });
   };
+
+  useEffect(() => {
+    addAdmin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -130,14 +168,6 @@ export default function AdminLogin() {
               }}
             />
           </form>
-          <Link to="/forgot">
-            <a
-              class="forgot4"
-              style={{ marginLeft: "200px", marginBottom: "30px" }}
-            >
-              Forgot password?
-            </a>
-          </Link>
           <Link to="/login">
             <a
               class="user_log4"
