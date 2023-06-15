@@ -1,4 +1,3 @@
-INSERT INTO Pavas.customer VALUES (2,'ABC','ABC@GMAil.com',12323,'ada','wdwd','',10000,'','')
 # supermart-frontend
 [![License: MIT](https://img.shields.io/bower/l/bootstrap)](https://github.com/pavas23/supermart-frontend)
 [![Github Repo Size](https://img.shields.io/github/repo-size/pavas23/supermart-frontend)](https://github.com/pavas23/supermart-frontend)
