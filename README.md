@@ -11,14 +11,13 @@ This is a web based application for an online supermarket. Through which custome
 ### User Management
   - A user can be ```admin, manager or customer```
   - Admin is the super user with all permissions.
-  - Users (customer, admin and manager) will have information such as- user name, a user
   - Users (customer, admin and manager) will have information such as user name, user id etc.
   - ```id (unique across the system)```, phone number, and email id, and address.
   - An existing user should log into the system with user id and password.
   - New customers are permitted to register.
   - Manager/admin can add or delete items, modify details about the items (price/qty/offers etc.)
-  - A user can ```withdraw``` himself from the Application.
-  - Password change (reset) facility is required.
+  - A user can ```withdraw``` from the Application.
+  - Password change (reset) facility is provided.
 
 ### Admin/Manager publishing item details
   - Manager or admin users should be allowed to publish the details of the items made available for sale. Details needed are item_name, item_code, price, offer if any, qty available, delivery time etc.
