@@ -19,11 +19,11 @@ This is a web based application for an online supermarket. Through which custome
   - A user can ```withdraw``` from the Application.
   - Password change (reset) facility is provided.
 
-### Admin/Manager publishing item details
+### Admin/Manager Publishing Item Details
   - Manager or admin users should be allowed to publish the details of the items made available for sale. Details needed are item_name, item_code, price, offer if any, qty available, delivery time etc.
   - A manager or admin can delete the published item whenever required.
 
-### Customer order management
+### Customer Order Management
   - A customer should be allowed to ```view/search the items``` published/available for sale.
   - Select items to the cart.
   - Customers can register and order items.
@@ -32,7 +32,7 @@ This is a web based application for an online supermarket. Through which custome
   - User will have a Wallet from where payments will be made, and user can ```top-up the wallet``` if necessary. But at the time of registration must start with minimum of 1000/-.
   - User can add review about the website.
 
-### Other functionality
+### Other Functionality
   - Admin user should be able to generate reports like – items sold on a date, customer order details(summary) for a month, item stock status etc.
   - Any user can generate his/her ```order history``` (summary) for a given month.
 
@@ -42,13 +42,21 @@ This is a web based application for an online supermarket. Through which custome
 
 
 ## Run Locally
-Install my-project with npm
 
-```bash
-  cd my-app
-  npm install
-  npm start
+1. clone this git repo <br/>
+2. ```cd``` into project directory <br/>
+3. ```cd my-app```
+4. install my-project with npm <br/>
+5. install all dependencies with ```npm install``` <br/>
+6. create a ```.env``` file in ```my-app``` directory
+7. Add the following lines in ```.env``` file
+```js
+REACT_APP_APIURL=
+ADMIN_EMAIL=
+ADMIN_PASSWORD=
 ```
+8. now to start the react app use ```npm start``` <br/>
+
 
 ## Tech Stack
 - HTML
