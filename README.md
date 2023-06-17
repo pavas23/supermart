@@ -55,6 +55,7 @@ Install my-project with npm
 - CSS
 - JavaScript
 - Tailwind CSS
+- Bootstrap
 - React JS
 
 ### Link to Backend Repo
