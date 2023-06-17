@@ -57,8 +57,35 @@ ADMIN_PASSWORD=
 ```
 8. now to start the react app use ```npm start``` <br/>
 
-## Directory Structure
+## Directory Tree
 
+### Top Level Structure
+```jsx
+├── README.md
+├── package-lock.json
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── icon.png
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+└── src
+    ├── App.jsx
+    ├── App.test.js
+    ├── components
+    ├── context
+    ├── css
+    ├── image
+    ├── img
+    ├── index.js
+    ├── js
+    ├── reportWebVitals.js
+    ├── setupTests.js
+    └── webfonts
+```
+
+### ```cd src```
 ```jsx
   components
 ├── Admin
