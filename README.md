@@ -20,8 +20,8 @@ This is a web based application for an online supermarket. Through which custome
   - Password change (reset) facility is provided.
 
 ### Admin/Manager Publishing Item Details
-  - Manager or admin users should be allowed to publish the details of the items made available for sale. Details needed are item_name, item_code, price, offer if any, qty available, delivery time etc.
-  - A manager or admin can delete the published item whenever required.
+  - Manager or admin users should be allowed to ```publish the details of the items``` made available for sale. Details needed are item_name, item_code, price, offer if any, qty available, delivery time etc.
+  - A manager or admin can ```delete the published item``` whenever required.
 
 ### Customer Order Management
   - A customer should be allowed to ```view/search the items``` published/available for sale.
@@ -46,7 +46,7 @@ This is a web based application for an online supermarket. Through which custome
 1. clone this git repo <br/>
 2. ```cd``` into project directory <br/>
 3. ```cd my-app```
-4. install my-project with npm <br/>
+4. install this project with npm <br/>
 5. install all dependencies with ```npm install``` <br/>
 6. create a ```.env``` file in ```my-app``` directory
 7. Add the following lines in ```.env``` file
@@ -57,6 +57,61 @@ ADMIN_PASSWORD=
 ```
 8. now to start the react app use ```npm start``` <br/>
 
+## Directory Structure
+
+```jsx
+  components
+├── Admin
+│   ├── AddManager.jsx
+│   ├── AdminLogin.jsx
+│   ├── Dashboard.jsx
+│   ├── EditProd.jsx
+│   ├── NavbarAdmin.jsx
+│   ├── OrderAnalytics.jsx
+│   └── Settings.jsx
+├── Customer
+│   ├── Accounts.jsx
+│   ├── Card.jsx
+│   ├── Checkout.jsx
+│   ├── Forgot.jsx
+│   ├── Home.jsx
+│   ├── Login.jsx
+│   ├── MainProducts.jsx
+│   ├── MyProfile.jsx
+│   ├── Navbar.jsx
+│   ├── NavbarProducts.jsx
+│   ├── OtpSignUp.jsx
+│   ├── Payment.jsx
+│   ├── Profile.jsx
+│   ├── Register.jsx
+│   ├── Reset.jsx
+│   ├── Review.jsx
+│   └── Wallet.jsx
+└── Manager
+    ├── AddProd.jsx
+    ├── ManagerLogin.jsx
+    ├── Product.jsx
+    └── UpdateProduct.jsx
+context
+├── admin
+│   ├── AdminContext.jsx
+│   └── AdminState.jsx
+├── customer
+│   ├── CustomerContext.jsx
+│   └── CustomerState.jsx
+└── product
+    ├── ProductContext.jsx
+    └── ProductState.jsx
+css
+├── Home.css
+├── MainProducts.css
+├── Product.css
+├── bootstrap-grid.css
+├── bootstrap.min.css
+├── card.css
+├── fontawesome.min.css
+└── templatemo-style.css
+```
 
 ## Tech Stack
 - HTML
@@ -67,4 +122,4 @@ ADMIN_PASSWORD=
 - React JS
 
 ### Link to Backend Repo
-<a href = "https://github.com/pavas23/supermart-backend">Backend Repo</a>
+  - <a href = "https://github.com/pavas23/supermart-backend">Backend Repo</a>
