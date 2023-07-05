@@ -50,6 +50,9 @@ export default function Login(props) {
     async function addCustomer() {
       var response = await fetch(`${REACT_APP_APIURL}/customer/add`, {
         method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
         },
