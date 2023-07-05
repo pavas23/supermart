@@ -48,6 +48,7 @@ export default function Login(props) {
     }
 
     async function addCustomer() {
+      console.log(${REACT_APP_APIURL});
       var response = await fetch(`${REACT_APP_APIURL}/customer/add`, {
         method: "POST",
         headers: {
