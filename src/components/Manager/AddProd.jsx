@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 import NavbarAdmin from "../Admin/NavbarAdmin";
 import { useContext } from "react";
 import adminContext from "../../context/admin/AdminContext";
+import managerContext from "../../context/manager/ManagerContext";
 
 export default function AddProd() {
   let navigate = useNavigate();
   var adminContextResponse = useContext(adminContext);
+  var managerContextResponse = useContext(managerContext);
   const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
 
   const [product, setProduct] = useState({
@@ -23,11 +25,17 @@ export default function AddProd() {
     adminContextResponse.getAdminID({
       adminToken: localStorage.getItem("adminToken"),
     });
-    if (!adminContextResponse.validSession) {
+    managerContextResponse.getManagerID({
+      managerToken: localStorage.getItem("managerToken"),
+    });
+    if (
+      !adminContextResponse.validSession &&
+      !managerContextResponse.validSession
+    ) {
       navigate("/admin_log", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [adminContextResponse.validSession]);
+  }, [adminContextResponse.validSession, managerContextResponse.validSession]);
 
   const onChange = (event) => {
     setProduct({
@@ -80,7 +88,10 @@ export default function AddProd() {
               >
                 <div className="row" style={{ textAlign: "center" }}>
                   <div className="col-12">
-                    <h2 className="tm-block-title d-inline-block" style={{color:"black"}}>
+                    <h2
+                      className="tm-block-title d-inline-block"
+                      style={{ color: "black" }}
+                    >
                       Add Product
                     </h2>
                   </div>
@@ -95,7 +106,10 @@ export default function AddProd() {
                       className="tm-edit-product-form"
                     >
                       <div className="form-group mb-3">
-                        <label htmlFor="name" style={{ "margin-left": "22vh",color:"black" }}>
+                        <label
+                          htmlFor="name"
+                          style={{ "margin-left": "22vh", color: "black" }}
+                        >
                           Product Name
                         </label>
                         <input
@@ -116,7 +130,7 @@ export default function AddProd() {
                       <div className="form-group mb-3">
                         <label
                           htmlFor="price"
-                          style={{ "margin-left": "22vh",color:"black"}}
+                          style={{ "margin-left": "22vh", color: "black" }}
                         >
                           Price
                         </label>
@@ -140,7 +154,7 @@ export default function AddProd() {
                       <div className="form-group mb-3">
                         <label
                           htmlFor="category"
-                          style={{ "margin-left": "22vh",color:"black" }}
+                          style={{ "margin-left": "22vh", color: "black" }}
                         >
                           Image URL
                         </label>
@@ -165,7 +179,7 @@ export default function AddProd() {
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <label
                             htmlFor="expire_date"
-                            style={{ "margin-left": "22vh",color:"black" }}
+                            style={{ "margin-left": "22vh", color: "black" }}
                           >
                             Expiry
                           </label>
@@ -185,7 +199,7 @@ export default function AddProd() {
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
                           <label
                             htmlFor="stock"
-                            style={{ "margin-left": "22vh",color:"black" }}
+                            style={{ "margin-left": "22vh", color: "black" }}
                           >
                             Quantity
                           </label>

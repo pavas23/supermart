@@ -7,10 +7,12 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import NavbarAdmin from "./NavbarAdmin";
 import { Colors } from "chart.js";
+import managerContext from "../../context/manager/ManagerContext";
 
 export default function Analytics(props) {
   let navigate = useNavigate();
   var adminContextResponse = useContext(adminContext);
+  var managerContextResponse = useContext(managerContext);
   const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
   ChartJS.register(Colors);
 
@@ -146,11 +148,17 @@ export default function Analytics(props) {
     adminContextResponse.getAdminID({
       adminToken: localStorage.getItem("adminToken"),
     });
-    if (!adminContextResponse.validSession) {
+    managerContextResponse.getManagerID({
+      managerToken: localStorage.getItem("managerToken"),
+    });
+    if (
+      !adminContextResponse.validSession &&
+      !managerContextResponse.validSession
+    ) {
       navigate("/admin_log", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [adminContextResponse.validSession]);
+  }, [adminContextResponse.validSession, managerContextResponse.validSession]);
 
   return (
     <>

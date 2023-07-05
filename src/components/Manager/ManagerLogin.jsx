@@ -2,8 +2,50 @@
 /* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import Navbar from "../Customer/Navbar";
+import { useNavigate } from "react-router";
+import { useState } from "react";
 
 export default function ManagerLogin() {
+  const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
+  let navigate = useNavigate();
+
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await fetch(`${REACT_APP_APIURL}/login/auth/manager`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+      }),
+    });
+
+    const json = await response.json();
+    if (json.email !== null) {
+      localStorage.setItem("managerToken", json.authToken);
+      navigate("/products", { replace: true });
+    } else {
+      window.alert("Invalid Manager Credentials");
+      credentials.email = "";
+      credentials.password = "";
+      navigate("/admin_log", { replace: true });
+    }
+  };
+
+  const onChange = (event) => {
+    setCredentials({
+      ...credentials,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   return (
     <>
       <Navbar />
@@ -23,8 +65,7 @@ export default function ManagerLogin() {
                 background: "linear-gradient(to right, #22db15, #fbff00)",
                 "border-radius": "30px",
                 transition: "0.5s",
-                marginLeft:"-1vw",
-
+                marginLeft: "-1vw",
               }}
             >
               Log in as Manager
@@ -35,11 +76,18 @@ export default function ManagerLogin() {
               onclick="login()"
             ></button>
           </div>
-          <form method="POST" autoComplete="off" id="login-form">
+          <form
+            method="POST"
+            onSubmit={handleSubmit}
+            autoComplete="off"
+            id="login-form"
+          >
             <input
               type="email"
               name="email"
               id="input_email"
+              value={credentials.email}
+              onChange={onChange}
               required
               placeholder="Enter Manager ID"
               style={{
@@ -61,6 +109,8 @@ export default function ManagerLogin() {
               type="password"
               name="password"
               id="input_password"
+              value={credentials.password}
+              onChange={onChange}
               required
               placeholder="Enter your password"
               style={{
@@ -94,14 +144,6 @@ export default function ManagerLogin() {
               }}
             />
           </form>
-          <Link to="/forgot">
-            <a
-              class="forgot4"
-              style={{ marginLeft: "200px", marginBottom: "30px" }}
-            >
-              Forgot password?
-            </a>
-          </Link>
           <Link to="/login">
             <a
               class="user_log4"

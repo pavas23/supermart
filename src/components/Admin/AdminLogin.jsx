@@ -52,10 +52,10 @@ export default function AdminLogin() {
       localStorage.setItem("adminToken", json.authToken);
       navigate("/products", { replace: true });
     } else {
-      window.alert("Invalid Admin Credentials");
+      window.alert("Invalid Manager Credentials");
       credentials.email = "";
       credentials.password = "";
-      navigate("/admin_log", { replace: true });
+      navigate("/man_log", { replace: true });
     }
   };
 

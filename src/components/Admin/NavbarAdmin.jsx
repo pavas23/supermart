@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
 export default function NavbarAdmin() {
-  var adminLogin = localStorage.getItem("adminToken");
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
+    localStorage.removeItem("managerToken");
   };
 
   return (
@@ -14,21 +14,21 @@ export default function NavbarAdmin() {
           <i className="fas fa-shopping-basket"></i> BBB{" "}
         </Link>
 
-        <nav className="navbar2" style={{"marginLeft":"-10vw"}}>
+        <nav className="navbar2" style={{ marginLeft: "-10vw" }}>
           <Link to="/products">Products</Link>
           <Link to="/dashboard">Orders</Link>
           <Link to="/orderAnalytics">Order Analytics</Link>
-          <Link to="/settings">Users</Link>
+          {localStorage.getItem("adminToken") ? (
+            <Link to="/settings">Users</Link>
+          ) : (
+            " "
+          )}
         </nav>
 
         <div className="icons">
-          {adminLogin ? (
-            <Link to="/admin_log" onClick={handleLogout}>
-              <div className="fas fa-user-minus" id="login-btn"></div>
-            </Link>
-          ) : (
-            ""
-          )}
+          <Link to="/admin_log" onClick={handleLogout}>
+            <div className="fas fa-user-minus" id="login-btn"></div>
+          </Link>
         </div>
 
         <form action="" className="search-form">

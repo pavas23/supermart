@@ -6,63 +6,59 @@ import { useEffect, useState } from "react";
 import NavbarAdmin from "../Admin/NavbarAdmin";
 import { useContext } from "react";
 import adminContext from "../../context/admin/AdminContext";
-import managerContext from "../../context/manager/ManagerContext";
 
-export default function UpdateProduct() {
+export default function AddManager() {
   let navigate = useNavigate();
   var adminContextResponse = useContext(adminContext);
-  var managerContextResponse = useContext(managerContext);
   const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
 
-  const [product, setProduct] = useState({
+  const [manager, setManager] = useState({
     name: "",
-    price: 0,
-    quantity: 0,
-    src: "",
-    id: "",
+    email: "",
+    password: "",
+    address: "",
+    mobileNumber: "",
+    salary: 1000,
   });
 
-  const handleUpdateProduct = async (event) => {
-    event.preventDefault();
-    await fetch(`${REACT_APP_APIURL}/manager/updateProduct`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(product),
-    });
-    window.alert("Product updated successfully!!");
-    navigate("/products", { replace: true });
-  };
-
-  const setDetails = () => {
-    setProduct(JSON.parse(localStorage.getItem("updateProduct")));
-  };
-
   useEffect(() => {
-    setDetails();
     adminContextResponse.getAdminID({
       adminToken: localStorage.getItem("adminToken"),
     });
-    managerContextResponse.getManagerID({
-      managerToken: localStorage.getItem("managerToken"),
-    });
-    if (
-      !adminContextResponse.validSession &&
-      !managerContextResponse.validSession
-    ) {
+    if (!adminContextResponse.validSession) {
       navigate("/admin_log", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [adminContextResponse.validSession, managerContextResponse.validSession]);
+  }, [adminContextResponse.validSession]);
 
   const onChange = (event) => {
-    setProduct({
-      ...product,
+    setManager({
+      ...manager,
       [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await fetch(`${REACT_APP_APIURL}/admin/addManager`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(manager),
+    });
+    if (response) {
+      window.alert("Manager Added Successfully !!");
+    } else {
+      window.alert("Manager Not Added !!");
+    }
+    setManager({
+      name: "",
+      email: "",
+      password: "",
+      address: "",
+      salary: 0,
+      mobileNumber: "",
     });
   };
 
@@ -96,7 +92,7 @@ export default function UpdateProduct() {
                       className="tm-block-title d-inline-block"
                       style={{ color: "black" }}
                     >
-                      Update Product
+                      Add Manager
                     </h2>
                   </div>
                 </div>
@@ -104,7 +100,7 @@ export default function UpdateProduct() {
                   <div className="col-xl-6 col-lg-6 col-md-12">
                     <form
                       method="POST"
-                      onSubmit={handleUpdateProduct}
+                      onSubmit={handleSubmit}
                       autoComplete="off"
                       id="login-form"
                       className="tm-edit-product-form"
@@ -114,7 +110,7 @@ export default function UpdateProduct() {
                           htmlFor="name"
                           style={{ "margin-left": "22vh", color: "black" }}
                         >
-                          Product Name
+                          Manager Name
                         </label>
                         <input
                           style={{
@@ -125,10 +121,9 @@ export default function UpdateProduct() {
                           id="name"
                           name="name"
                           type="text"
-                          placeholder={product.name}
                           className="form-control validate"
                           onChange={onChange}
-                          value={product.name}
+                          value={manager.name}
                           required
                         />
                       </div>
@@ -137,7 +132,7 @@ export default function UpdateProduct() {
                           htmlFor="price"
                           style={{ "margin-left": "22vh", color: "black" }}
                         >
-                          Price
+                          Email
                         </label>
 
                         <input
@@ -146,14 +141,12 @@ export default function UpdateProduct() {
                             color: "black",
                             "margin-left": "22vh",
                           }}
-                          id="price"
-                          name="price"
-                          type="number"
+                          id="manager-email"
+                          name="email"
+                          type="email"
                           className="form-control validate"
-                          placeholder={product.price}
-                          min={1}
                           onChange={onChange}
-                          value={product.price}
+                          value={manager.email}
                           required
                         />
                       </div>
@@ -162,7 +155,7 @@ export default function UpdateProduct() {
                           htmlFor="category"
                           style={{ "margin-left": "22vh", color: "black" }}
                         >
-                          Image URL
+                          Password
                         </label>
 
                         <input
@@ -172,13 +165,36 @@ export default function UpdateProduct() {
                             "margin-left": "22vh",
                           }}
                           id="src"
-                          name="src"
+                          name="password"
+                          type="password"
+                          className="form-control validate"
+                          data-large-mode="true"
+                          onChange={onChange}
+                          value={manager.password}
+                          required
+                        />
+                      </div>
+                      <div className="form-group mb-3">
+                        <label
+                          htmlFor="category"
+                          style={{ "margin-left": "22vh", color: "black" }}
+                        >
+                          Contact Number
+                        </label>
+
+                        <input
+                          style={{
+                            backgroundColor: "rgb(244, 243, 243)",
+                            color: "black",
+                            "margin-left": "22vh",
+                          }}
+                          id="mobileNumber"
+                          name="mobileNumber"
                           type="text"
                           className="form-control validate"
                           data-large-mode="true"
-                          placeholder={product.src}
                           onChange={onChange}
-                          value={product.src}
+                          value={manager.mobileNumber}
                           required
                         />
                       </div>
@@ -188,7 +204,7 @@ export default function UpdateProduct() {
                             htmlFor="expire_date"
                             style={{ "margin-left": "22vh", color: "black" }}
                           >
-                            Expiry
+                            Salary
                           </label>
                           <input
                             style={{
@@ -196,11 +212,15 @@ export default function UpdateProduct() {
                               color: "black",
                               "margin-left": "22vh",
                             }}
-                            id="expire_date"
-                            name="expire_date"
-                            type="text"
+                            id="salary"
+                            name="salary"
+                            type="number"
+                            min={100}
                             className="form-control validate"
                             data-large-mode="true"
+                            onChange={onChange}
+                            value={manager.salary}
+                            required
                           />
                         </div>
                         <div className="form-group mb-3 col-xs-12 col-sm-6">
@@ -208,7 +228,7 @@ export default function UpdateProduct() {
                             htmlFor="stock"
                             style={{ "margin-left": "22vh", color: "black" }}
                           >
-                            Quantity
+                            Address
                           </label>
                           <input
                             style={{
@@ -216,14 +236,12 @@ export default function UpdateProduct() {
                               color: "black",
                               "margin-left": "22vh",
                             }}
-                            id="quantity"
-                            name="quantity"
-                            type="number"
-                            min={1}
-                            placeholder={product.quantity}
+                            id="address"
+                            name="address"
+                            type="text"
                             className="form-control validate"
                             onChange={onChange}
-                            value={product.quantity}
+                            value={manager.address}
                             required
                           />
                         </div>
@@ -234,7 +252,7 @@ export default function UpdateProduct() {
                           type="submit"
                           className="btn btn-primary btn-block text-uppercase"
                           style={{ "margin-left": "22vh" }}
-                          value="Update Product"
+                          value="Add Manager"
                         />
                       </div>
                     </form>

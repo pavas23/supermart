@@ -9,10 +9,12 @@ import { useContext } from "react";
 import adminContext from "../../context/admin/AdminContext";
 import productContext from "../../context/product/ProductContext";
 import NavbarAdmin from "../Admin/NavbarAdmin";
+import managerContext from "../../context/manager/ManagerContext";
 
 export default function Product() {
   let navigate = useNavigate();
   var adminContextResponse = useContext(adminContext);
+  var managerContextResponse = useContext(managerContext);
   var productContextResponse = useContext(productContext);
   const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
 
@@ -54,11 +56,21 @@ export default function Product() {
     adminContextResponse.getAdminID({
       adminToken: localStorage.getItem("adminToken"),
     });
-    if (!adminContextResponse.validSession) {
+    managerContextResponse.getManagerID({
+      managerToken: localStorage.getItem("managerToken"),
+    });
+    if (
+      !adminContextResponse.validSession &&
+      !managerContextResponse.validSession
+    ) {
       navigate("/admin_log", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [adminContextResponse.validSession, reloadOnDelete]);
+  }, [
+    adminContextResponse.validSession,
+    managerContextResponse.validSession,
+    reloadOnDelete,
+  ]);
 
   return (
     <>

@@ -24,7 +24,6 @@ export default function Card1(props) {
   };
 
   const addToArray = () => {
-    console.log(props.selectedProducts);
     for (var i = 0; i < props.selectedProducts.length; i++) {
       if (props.selectedProducts[i].name === props.name) {
         if (qty === 0) {
@@ -49,7 +48,7 @@ export default function Card1(props) {
     });
     props.setSelectedProductsFunction(props.selectedProducts);
   };
-  
+
   return (
     <>
       <div key={props.key} className="group relative" id={props.name}>

@@ -5,7 +5,7 @@ const AdminState = (props) => {
   const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
 
   const [admin, setAdmin] = useState({});
-  const [validSession,setValidSession] = useState(true);
+  const [validSession, setValidSession] = useState(true);
 
   // get adminID from adminToken
   const getAdminID = async (authTokenObj) => {
@@ -20,15 +20,15 @@ const AdminState = (props) => {
       body: JSON.stringify(authTokenObj),
     });
     response = await response.json();
-    if(response !== -1){
+    if (response !== -1) {
       setValidSession(true);
       getAdmin(response);
-    }else{
+    } else {
       setValidSession(false);
       setAdmin({
-        name:"",
-        email:"",
-      })
+        name: "",
+        email: "",
+      });
     }
   };
 
@@ -47,13 +47,13 @@ const AdminState = (props) => {
     admin = await admin.json();
     setAdmin(admin);
   }
-  
+
   return (
     <adminContext.Provider
       value={{
         getAdminID: getAdminID,
         admin: admin,
-        validSession:validSession
+        validSession: validSession,
       }}
     >
       {props.children}

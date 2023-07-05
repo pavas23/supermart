@@ -632,7 +632,7 @@ export default function Checkout() {
                                   var arr = JSON.parse(arr_string);
                                   for (var i = 0; i < arr.length; i++) {
                                     if (arr[i].id === element.id) {
-                                      arr.splice(i,1);
+                                      arr.splice(i, 1);
                                     }
                                   }
                                   setProducts(arr);

@@ -60,6 +60,21 @@ export default function Settings() {
     getAllCustomers();
   };
 
+  const deleteManager = async (manager) => {
+    await fetch(`${REACT_APP_APIURL}/admin/deleteManager`, {
+      method: "DELETE",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(manager),
+    });
+    window.alert("Manager has been deleted !!");
+    getAllManagers();
+  };
+
   useEffect(() => {
     getAllCustomers();
     getAllManagers();
@@ -134,25 +149,26 @@ export default function Settings() {
                           <td>{element.mobileNumber}</td>
                           <td>{element.email}</td>
                           <td>
-                            <a
-                              href="#"
-                              className="tm-product-delete-link"
-                              style={{ backgroundColor: "rgb(217, 0, 0)" }}
-                            >
-                              <i className="far fa-trash-alt tm-product-delete-icon"></i>
-                            </a>
+                            <i
+                              className="far fa-trash-alt tm-product-delete-icon tm-product-delete-link"
+                              onClick={() => deleteManager(element)}
+                              style={{
+                                backgroundColor: "#d90000",
+                                cursor: "pointer",
+                              }}
+                            ></i>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                <a
-                  href="add-manager.html"
+                <Link
+                  to="/addManager"
                   className="btn btn-primary btn-block text-uppercase mb-3"
                 >
                   Add New Manager
-                </a>
+                </Link>
               </div>
             </div>
             <div

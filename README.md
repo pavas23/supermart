@@ -65,11 +65,11 @@ ADMIN_PASSWORD=
 ├── package-lock.json
 ├── package.json
 ├── public
-│   ├── favicon.ico
-│   ├── icon.png
-│   ├── index.html
-│   ├── manifest.json
-│   └── robots.txt
+│   ├── favicon.ico
+│   ├── icon.png
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
 └── src
     ├── App.jsx
     ├── App.test.js
@@ -89,31 +89,31 @@ ADMIN_PASSWORD=
 ```jsx
   components
 ├── Admin
-│   ├── AddManager.jsx
-│   ├── AdminLogin.jsx
-│   ├── Dashboard.jsx
-│   ├── EditProd.jsx
-│   ├── NavbarAdmin.jsx
-│   ├── OrderAnalytics.jsx
-│   └── Settings.jsx
+│   ├── AddManager.jsx
+│   ├── AdminLogin.jsx
+│   ├── Dashboard.jsx
+│   ├── EditProd.jsx
+│   ├── NavbarAdmin.jsx
+│   ├── OrderAnalytics.jsx
+│   └── Settings.jsx
 ├── Customer
-│   ├── Accounts.jsx
-│   ├── Card.jsx
-│   ├── Checkout.jsx
-│   ├── Forgot.jsx
-│   ├── Home.jsx
-│   ├── Login.jsx
-│   ├── MainProducts.jsx
-│   ├── MyProfile.jsx
-│   ├── Navbar.jsx
-│   ├── NavbarProducts.jsx
-│   ├── OtpSignUp.jsx
-│   ├── Payment.jsx
-│   ├── Profile.jsx
-│   ├── Register.jsx
-│   ├── Reset.jsx
-│   ├── Review.jsx
-│   └── Wallet.jsx
+│   ├── Accounts.jsx
+│   ├── Card.jsx
+│   ├── Checkout.jsx
+│   ├── Forgot.jsx
+│   ├── Home.jsx
+│   ├── Login.jsx
+│   ├── MainProducts.jsx
+│   ├── MyProfile.jsx
+│   ├── Navbar.jsx
+│   ├── NavbarProducts.jsx
+│   ├── OtpSignUp.jsx
+│   ├── Payment.jsx
+│   ├── Profile.jsx
+│   ├── Register.jsx
+│   ├── Reset.jsx
+│   ├── Review.jsx
+│   └── Wallet.jsx
 └── Manager
     ├── AddProd.jsx
     ├── ManagerLogin.jsx
@@ -121,11 +121,11 @@ ADMIN_PASSWORD=
     └── UpdateProduct.jsx
 context
 ├── admin
-│   ├── AdminContext.jsx
-│   └── AdminState.jsx
+│   ├── AdminContext.jsx
+│   └── AdminState.jsx
 ├── customer
-│   ├── CustomerContext.jsx
-│   └── CustomerState.jsx
+│   ├── CustomerContext.jsx
+│   └── CustomerState.jsx
 └── product
     ├── ProductContext.jsx
     └── ProductState.jsx

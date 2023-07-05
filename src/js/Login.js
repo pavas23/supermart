@@ -15,7 +15,7 @@ function login() {
 }
 
 function toggle() {
-    if (pass_t.type == "password") {
+    if (pass_t.type === "password") {
         pass_t.type = "text";
     }
     else {
@@ -24,7 +24,7 @@ function toggle() {
 }
 
 function toggle1() {
-    if (pass_t1.type == "password") {
+    if (pass_t1.type === "password") {
         pass_t1.type = "text";
     }
     else {

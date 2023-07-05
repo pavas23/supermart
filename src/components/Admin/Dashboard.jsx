@@ -6,11 +6,13 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useContext } from "react";
 import adminContext from "../../context/admin/AdminContext";
+import managerContext from "../../context/manager/ManagerContext";
 import NavbarAdmin from "./NavbarAdmin";
 
 export default function Dashboard() {
   let navigate = useNavigate();
   var adminContextResponse = useContext(adminContext);
+  var managerContextResponse = useContext(managerContext);
   const REACT_APP_APIURL = process.env.REACT_APP_APIURL;
 
   const [history, setHistory] = useState([]);
@@ -34,11 +36,17 @@ export default function Dashboard() {
     adminContextResponse.getAdminID({
       adminToken: localStorage.getItem("adminToken"),
     });
-    if (!adminContextResponse.validSession) {
+    managerContextResponse.getManagerID({
+      managerToken: localStorage.getItem("managerToken"),
+    });
+    if (
+      !adminContextResponse.validSession &&
+      !managerContextResponse.validSession
+    ) {
       navigate("/admin_log", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [adminContextResponse.validSession]);
+  }, [adminContextResponse.validSession, managerContextResponse.validSession]);
 
   return (
     <>

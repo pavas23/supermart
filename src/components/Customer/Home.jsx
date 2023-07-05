@@ -234,12 +234,12 @@ export default function Home() {
             </a>
             <a href="#" className="links">
               {" "}
-              <i className="fas fa-envelope"></i>{" "}
-              bbbsupermartone@gmail.com{" "}
+              <i className="fas fa-envelope"></i> bbbsupermartone@gmail.com{" "}
             </a>
             <a href="#" className="links">
               {" "}
-              <i className="fas fa-map-marker-alt"></i> BITS Pilani, Hyderabad Campus{" "}
+              <i className="fas fa-map-marker-alt"></i> BITS Pilani, Hyderabad
+              Campus{" "}
             </a>
           </div>
 
