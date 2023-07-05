@@ -69,6 +69,7 @@ export default function AdminLogin() {
   useEffect(() => {
     console.log(ADMIN_EMAIL);
     console.log(ADMIN_PASSWORD);
+    console.log(REACT_APP_APIURL);
     addAdmin();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
