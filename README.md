@@ -38,7 +38,13 @@ This is a web based application for an online supermarket. Through which custome
 
 
 ## Preview
-![supermart](https://github.com/pavas23/supermart-frontend/assets/97559428/80431fd0-6826-452b-a2d4-de83463462b6)
+<!-- ![supermart](https://github.com/pavas23/supermart-frontend/assets/97559428/80431fd0-6826-452b-a2d4-de83463462b6) -->
+<img width="1145" alt="MainPage" src="https://github.com/pavas23/supermart-frontend/assets/97559428/f11eedbe-6ead-4f6f-8b89-2f3ff7afc162">
+</br> </br>
+<img width="1149" alt="Products" src="https://github.com/pavas23/supermart-frontend/assets/97559428/0b3312ff-5792-4417-859b-bcc0da93bb49">
+</br> </br>
+<img width="1145" alt="orderAnalytics" src="https://github.com/pavas23/supermart-frontend/assets/97559428/10be7178-6221-477d-a7f2-c8ff44910b17">
+</br> </br>
 
 
 ## Run Locally
@@ -59,61 +65,35 @@ ADMIN_PASSWORD=
 
 ## Directory Tree
 
-### Top Level Structure
-```jsx
-├── README.md
-├── package-lock.json
-├── package.json
-├── public
-│   ├── favicon.ico
-│   ├── icon.png
-│   ├── index.html
-│   ├── manifest.json
-│   └── robots.txt
-└── src
-    ├── App.jsx
-    ├── App.test.js
-    ├── components
-    ├── context
-    ├── css
-    ├── image
-    ├── img
-    ├── index.js
-    ├── js
-    ├── reportWebVitals.js
-    ├── setupTests.js
-    └── webfonts
-```
-
 ### ```cd src```
 ```jsx
-  components
+components
 ├── Admin
-│   ├── AddManager.jsx
-│   ├── AdminLogin.jsx
-│   ├── Dashboard.jsx
-│   ├── EditProd.jsx
-│   ├── NavbarAdmin.jsx
-│   ├── OrderAnalytics.jsx
-│   └── Settings.jsx
+│   ├── AddManager.jsx
+│   ├── AdminLogin.jsx
+│   ├── Dashboard.jsx
+│   ├── EditProd.jsx
+│   ├── NavbarAdmin.jsx
+│   ├── OrderAnalytics.jsx
+│   └── Settings.jsx
 ├── Customer
-│   ├── Accounts.jsx
-│   ├── Card.jsx
-│   ├── Checkout.jsx
-│   ├── Forgot.jsx
-│   ├── Home.jsx
-│   ├── Login.jsx
-│   ├── MainProducts.jsx
-│   ├── MyProfile.jsx
-│   ├── Navbar.jsx
-│   ├── NavbarProducts.jsx
-│   ├── OtpSignUp.jsx
-│   ├── Payment.jsx
-│   ├── Profile.jsx
-│   ├── Register.jsx
-│   ├── Reset.jsx
-│   ├── Review.jsx
-│   └── Wallet.jsx
+│   ├── Accounts.jsx
+│   ├── Card.jsx
+│   ├── Checkout.jsx
+│   ├── Forgot.jsx
+│   ├── Home.jsx
+│   ├── Login.jsx
+│   ├── MainProducts.jsx
+│   ├── MyProfile.jsx
+│   ├── Navbar.jsx
+│   ├── NavbarProducts.jsx
+│   ├── OtpSignUp.jsx
+│   ├── Payment.jsx
+│   ├── Profile.jsx
+│   ├── Register.jsx
+│   ├── Reset.jsx
+│   ├── Review.jsx
+│   └── Wallet.jsx
 └── Manager
     ├── AddProd.jsx
     ├── ManagerLogin.jsx
@@ -121,24 +101,19 @@ ADMIN_PASSWORD=
     └── UpdateProduct.jsx
 context
 ├── admin
-│   ├── AdminContext.jsx
-│   └── AdminState.jsx
+│   ├── AdminContext.jsx
+│   └── AdminState.jsx
 ├── customer
-│   ├── CustomerContext.jsx
-│   └── CustomerState.jsx
+│   ├── CustomerContext.jsx
+│   └── CustomerState.jsx
+├── manager
+│   ├── ManagerContext.jsx
+│   └── ManagerState.jsx
 └── product
     ├── ProductContext.jsx
     └── ProductState.jsx
-css
-├── Home.css
-├── MainProducts.css
-├── Product.css
-├── bootstrap-grid.css
-├── bootstrap.min.css
-├── card.css
-├── fontawesome.min.css
-└── templatemo-style.css
 ```
+
 
 ## Tech Stack
 - HTML
