@@ -44,7 +44,7 @@ export default function MainProduct(props) {
   const setSelectedProductsFunction = (selectedProdcutsFromCard) => {
     setSelectedProducts(selectedProdcutsFromCard);
     props.selectedProductsFunction(selectedProducts);
-    let stringCart = JSON.stringify(selectedProducts);
+    let stringCart = JSON.parse(selectedProducts);
     localStorage.setItem("cart", stringCart);
   };
 
